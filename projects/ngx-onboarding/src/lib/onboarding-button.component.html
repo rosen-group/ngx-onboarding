@@ -1,0 +1,19 @@
+<div class="onboarding-button-container">
+    <mat-menu #onboardingMenu="matMenu">
+        <button mat-menu-item (click)="enableOnboarding()" *ngIf="!isOnboardingEnabled()"
+                class="onboarding-menu-button">
+            {{'ONBOARDING_ENABLE'}}
+        </button>
+        <button mat-menu-item (click)="disableOnboarding()" *ngIf="isOnboardingEnabled()"
+                class="onboarding-menu-button">
+            {{'ONBOARDING_DISABLE'}}
+        </button>
+        <button mat-menu-item (click)="clearOnboarding()" class="onboarding-menu-button">
+            {{'ONBOARDING_CLEAR'}}
+        </button>
+    </mat-menu>
+    <button mat-icon-button [matMenuTriggerFor]="onboardingMenu" class="onboarding-button">
+        <span class="oicon oicon-onboarding_white"></span>
+    </button>
+    <div class="onboarding-button-counter" *ngIf="showOnboardingItemCount">{{onboardingItemCount}}</div>
+</div>

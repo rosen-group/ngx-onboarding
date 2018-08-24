@@ -1,0 +1,23 @@
+<div class="onboarding-component-container" *ngIf="onboardingService.isEnabled() && items && items.length > 0">
+    <div class="onboarding-header" *ngIf="onboardingService.isEnabled() && items && items.length > 0">
+        <span class="oicon oicon-onboarding_black"></span>
+        {{'ONBOARDING_UPPER_CASE'}}
+    </div>
+    <div class="onboarding-dark-background"></div>
+    <div class="onboarding-spotlight" *ngFor="let item of items"
+         [class.onboarding-spotlight-transparent]="isSpotlightTransparent(item.item)"
+         [ngStyle]="getPositionStyle(item.ele)"></div>
+    <div class="onboarding-items">
+        <div *ngFor="let item of items">
+            <rosen-onboarding-item [item]="item"></rosen-onboarding-item>
+        </div>
+    </div>
+    <div class="onboarding-overlay" (click)="hide()"></div>
+    <div class="onboarding-buttons">
+        <button class="btn btn-danger" *ngIf="onboardingService.isEnabled() && items && items.length > 0" (click)="disable()">{{'ONBOARDING_DO_NOT_SHOW_AGAIN_MSG'}}</button>
+        <button class="btn btn-primary" *ngIf="onboardingService.isEnabled() && items && items.length > 0" (click)="hide()">
+            <span *ngIf="!hasNext">{{'ONBOARDING_GOT_IT_MSG'}}</span>
+            <span *ngIf="hasNext">{{'ONBOARDING_NEXT_MSG'}}</span>
+        </button>
+    </div>
+</div>

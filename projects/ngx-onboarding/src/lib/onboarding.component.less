@@ -1,0 +1,84 @@
+@import "variables.less";
+
+.onboarding-component-container{
+  .onboarding-dark-background{
+    position: fixed;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background-color: @default-color;
+    opacity: 0.7;
+    z-index: @onboarding-component-bg-zindex;
+  }
+  .onboarding-spotlight{
+    -webkit-box-shadow: 0 0 8px 8px @default-bg;
+    -moz-box-shadow: 0 0 8px 8px @default-bg;
+    box-shadow: 0 0 8px 8px @default-bg;
+    background: white;
+    z-index: @onboarding-component-spotlight-zindex;
+  }
+  .onboarding-spotlight-transparent {
+    background: transparent;
+  }
+  .onboarding-items{
+    position: fixed;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    z-index: @onboarding-component-infos-zindex;
+  }
+  .onboarding-overlay{
+    position: fixed;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    z-index: @onboarding-component-overlay-zindex;
+  }
+  .onboarding-buttons{
+    position: fixed;
+    bottom: 100px;
+    right: 50px;
+    z-index: @onboarding-component-buttons-zindex;
+    clear: both;
+    & > button{
+      float: right;
+    }
+  }
+  .onboarding-header{
+    position: fixed;
+    top: 4px;
+    bottom: 0;
+    left: 4px;
+    right: 0;
+    z-index: @onboarding-component-overlay-zindex;
+    font-size: 24px;
+    color: darken(@colorname-text-extralight, 15%);
+    font-family: @font-onboarding;
+    & > span{
+      font-size: 24px;
+    }
+  }
+}
+
+.onboarding-highlighted {
+  z-index: @onboarding-component-elements-zindex !important;
+  & *{
+    z-index: @onboarding-component-elements-zindex !important;
+    &.glyphicon{
+      color: @default-color !important;
+    }
+  }
+  & a{
+    color: @default-color !important;
+  }
+}
+a.onboarding-highlighted{
+  color: @default-color !important;
+}
+.onboarding-highlighted-on-static{
+  position: relative;
+}
+

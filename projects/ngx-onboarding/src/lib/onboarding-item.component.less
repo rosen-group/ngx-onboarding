@@ -1,0 +1,89 @@
+@import "variables.less";
+
+.onboarding-item {
+  position: absolute;
+  .onboarding-item-header {
+    font-size: 24px;
+    font-family: @font-onboarding;
+    color: @default-bg;
+    text-align: center;
+  }
+  .onboarding-item-details {
+    font-size: 14px;
+    font-family: @font-regular;
+    color: @default-bg;
+    text-align: center;
+  }
+
+
+  .animated {
+    -webkit-animation-fill-mode: both;
+    -moz-animation-fill-mode: both;
+    -ms-animation-fill-mode: both;
+    -o-animation-fill-mode: both;
+    animation-fill-mode: both;
+    -webkit-animation-duration: 1s;
+    -moz-animation-duration: 1s;
+    -ms-animation-duration: 1s;
+    -o-animation-duration: 1s;
+    animation-duration: 1s
+  }
+
+  .fade-in-right {
+    -webkit-animation-name: fadeInRight;
+    -moz-animation-name: fadeInRight;
+    -o-animation-name: fadeInRight;
+    animation-name: fadeInRight
+  }
+
+  @-webkit-keyframes fadeInRight {
+    0% {
+      opacity: 0;
+      -webkit-transform: translateX(-20px)
+    }
+
+    100% {
+      opacity: 1;
+      -webkit-transform: translateX(0)
+    }
+  }
+
+  @-moz-keyframes fadeInRight {
+    0% {
+      opacity: 0;
+      -moz-transform: translateX(-20px)
+    }
+
+    100% {
+      opacity: 1;
+      -moz-transform: translateX(0)
+    }
+  }
+
+  @-o-keyframes fadeInRight {
+    0% {
+      opacity: 0;
+      -o-transform: translateX(-20px)
+    }
+
+    100% {
+      opacity: 1;
+      -o-transform: translateX(0)
+    }
+  }
+
+  @keyframes fadeInRight {
+    0% {
+      opacity: 0;
+      transform: translateX(-20px)
+    }
+
+    100% {
+      opacity: 1;
+      transform: translateX(0)
+    }
+  }
+
+
+
+}
