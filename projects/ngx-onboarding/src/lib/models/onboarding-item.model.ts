@@ -4,6 +4,7 @@ export class OnboardingItem {
     public selector: string;
     public headline: string;
     public details: string;
+    public textAlign?: 'center' | 'left' | 'right';
     public position: string;
     public group: string;
     public descriptions: Array<OnboardingItemDescription>;

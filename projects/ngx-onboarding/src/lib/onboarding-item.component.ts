@@ -1,7 +1,8 @@
-import {Component, ElementRef, Inject, Input, LOCALE_ID, ViewChild, ViewEncapsulation} from '@angular/core';
-import { VisibleOnboardingItem } from './models/visible-onboarding-item.model';
+import { Component, ElementRef, Inject, Input, LOCALE_ID, ViewChild, ViewEncapsulation } from '@angular/core';
+
 import * as _ from 'lodash';
-import { HtmlElementHelper } from './models/onboarding-html-helper';
+import { HtmlElementHelper, VisibleOnboardingItem } from './models';
+
 
 const TopPadding = 25;
 const RightPadding = 25;
@@ -34,6 +35,7 @@ export class OnboardingItemComponent {
     private container: ElementRef;
 
     constructor(@Inject(LOCALE_ID) private locale: string) {
+        this.locale = '';
     }
 
     /**
@@ -106,7 +108,7 @@ export class OnboardingItemComponent {
     }
 
     public getHeadline(): string {
-      const description = _.find(this.item.item.descriptions, d => d.language === this.locale); // TODO en-EN vs en
+        const description = _.find(this.item.item.descriptions, d => d.language === this.locale); // TODO en-EN vs en
         return description ? description.headline : this.item.item.headline;
     }
 
@@ -124,11 +126,24 @@ export class OnboardingItemComponent {
     }
 
     private getWindowScreenWidth(): number {
-        return window.screen.width;
+        return this.hasWindowObject() ? window.screen.width : 1024;
     }
 
     private getWindowScreenHeight(): number {
-        return window.screen.height;
+        return this.hasWindowObject() ? window.screen.height : 768;
+    }
+
+    private hasWindowObject() {
+        const win = typeof window === 'object' && window ? window : null;
+        // the above check is taken from angular material common-module.ts so it should be save
+        return win !== null;
+    }
+
+    private getTextAlignClass(): string {
+        const talign = this.item.item.textAlign;
+        // if textAlign is not set or textAlign is center we return empty string because "center" is the default from css
+        // only for left and right we return a css class
+        return (talign || talign === 'center') ? '' : `align-${talign}`;
     }
 
 

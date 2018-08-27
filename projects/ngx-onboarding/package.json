@@ -3,8 +3,7 @@
   "version": "0.0.1",
   "description": "Onboarding module for Angular applications",
   "homepage": "https://www.rosen-group.com",
-  "license": "TODO",
-
+  "license": "MIT",
   "peerDependencies": {
     "@angular/common": "^6.0.0-rc.0 || ^6.0.0",
     "@angular/core": "^6.0.0-rc.0 || ^6.0.0",
@@ -14,5 +13,8 @@
     "@angular/forms": "^6.1.0",
     "@angular/http": "^6.1.0",
     "@angular/material": "^6.4.6"
+  },
+    "dependencies": {
+        "lodash": "^4.17.11"
   }
 }

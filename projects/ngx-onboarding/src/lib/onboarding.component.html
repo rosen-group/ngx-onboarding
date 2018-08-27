@@ -1,7 +1,10 @@
+<span [innerHtml]="dynamicCss"></span>
+
 <div class="onboarding-component-container" *ngIf="onboardingService.isEnabled() && items && items.length > 0">
-    <div class="onboarding-header" *ngIf="onboardingService.isEnabled() && items && items.length > 0">
-        <span class="oicon oicon-onboarding_black"></span>
-        {{'ONBOARDING_UPPER_CASE'}}
+    <div class="onboarding-header script-font" *ngIf="onboardingService.isEnabled() && items && items.length > 0">
+        <mat-icon *ngIf="matIconName && !svgIcon && !fontSet">{{matIconName}}</mat-icon>
+        <mat-icon *ngIf="svgIcon || fontSet" [svgIcon]="svgIcon" [fontSet]="fontSet" [fontIcon]="fontIcon"></mat-icon>
+        {{'ONBOARDING' |translate|uppercase}}
     </div>
     <div class="onboarding-dark-background"></div>
     <div class="onboarding-spotlight" *ngFor="let item of items"
@@ -14,10 +17,13 @@
     </div>
     <div class="onboarding-overlay" (click)="hide()"></div>
     <div class="onboarding-buttons">
-        <button class="btn btn-danger" *ngIf="onboardingService.isEnabled() && items && items.length > 0" (click)="disable()">{{'ONBOARDING_DO_NOT_SHOW_AGAIN_MSG'}}</button>
-        <button class="btn btn-primary" *ngIf="onboardingService.isEnabled() && items && items.length > 0" (click)="hide()">
-            <span *ngIf="!hasNext">{{'ONBOARDING_GOT_IT_MSG'}}</span>
-            <span *ngIf="hasNext">{{'ONBOARDING_NEXT_MSG'}}</span>
+        <button *ngIf="onboardingService.isEnabled() && items && items.length > 0" mat-flat-button color="warn"
+                (click)="disable()">{{'ONBOARDING_DO_NOT_SHOW_AGAIN_MSG' |translate}}
+        </button>
+        <button *ngIf="onboardingService.isEnabled() && items && items.length > 0" mat-flat-button color="primary"
+                (click)="hide()">
+            <span *ngIf="!hasNext">{{'ONBOARDING_GOT_IT_MSG' |translate}}</span>
+            <span *ngIf="hasNext">{{'ONBOARDING_NEXT_MSG' | translate}}</span>
         </button>
     </div>
 </div>

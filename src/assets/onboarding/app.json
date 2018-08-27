@@ -1,0 +1,89 @@
+[
+    {
+        "selector": "#logo-img",
+        "group": "example0",
+        "position": "top",
+        "headline": "Angular Logo",
+        "details": "This is the angular logo",
+        "descriptions": [
+            {
+                "language": "de",
+                "headline": "html tag headline de",
+                "details": "htmp tag details de"
+            }
+        ]
+    },
+    {
+        "selector": "#button-that-needs-onboarding",
+        "group": "example1",
+        "position": "right",
+        "textAlign": "left",
+        "headline": "What is behind me?",
+        "details": "Your have to learn a lot about this button",
+        "descriptions": [
+            {
+                "language": "de",
+                "headline": "html tag headline de",
+                "details": "htmp tag details de"
+            }
+        ]
+    },
+    {
+        "selector": "#tour-of-heroes",
+        "group": "example2",
+        "position": "right",
+        "textAlign": "left",
+        "headline": "Tutorial: Tour of Heroes",
+        "details": "The Tour of Heroes tutorial covers the fundamentals of Angular. In this tutorial you will build an app that helps a staffing agency manage its stable of heroes.",
+        "descriptions": [
+            {
+                "language": "de",
+                "headline": "html tag headline de",
+                "details": "htmp tag details de"
+            }
+        ]
+    },
+    {
+        "selector": "#documentation",
+        "group": "example3",
+        "position": "right",
+        "textAlign": "left",
+        "headline": "Angular CLI Documentation",
+        "details": "The Angular CLI is a tool to initialize, develop, scaffold and maintain Angular applications",
+        "descriptions": [
+            {
+                "language": "de",
+                "headline": "html tag headline de",
+                "details": "htmp tag details de"
+            }
+        ]
+    },
+    {
+        "selector": "#angular-blog",
+        "group": "example4",
+        "position": "bottom",
+        "headline": "The Angular Blog",
+        "details": "News and Tips from the Angular Team",
+        "descriptions": [
+            {
+                "language": "de",
+                "headline": "id headline de",
+                "details": "id details de"
+            }
+        ]
+    },
+    {
+        "selector": ".home-button",
+        "group": "example",
+        "position": "right",
+        "headline": "Home Button",
+        "details": "Takes you home",
+        "descriptions": [
+            {
+                "language": "de",
+                "headline": "Nach Hause Knopf",
+                "details": "Bring dich nach Hause"
+            }
+        ]
+    }
+]

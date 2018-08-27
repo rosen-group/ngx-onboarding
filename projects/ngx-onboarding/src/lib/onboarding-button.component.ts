@@ -1,8 +1,9 @@
-import {Component, ViewEncapsulation} from '@angular/core';
-import {OnboardingService} from './onboarding.service';
+import { Component, ViewEncapsulation } from '@angular/core';
+import { OnboardingService } from './services';
+import { OnboardingIconConfiguration } from './models';
 
 /**
- * onboarding button (formerly the rocket) including context menu (see header.component in rolib/navigation)
+ * onboarding button including context menu (see header.component in rolib/navigation)
  */
 @Component({
     selector: 'rosen-onboarding-button',
@@ -12,7 +13,14 @@ import {OnboardingService} from './onboarding.service';
 })
 export class OnboardingButtonComponent {
 
+    /** used by template to apply the custimizations on icons */
+    public iconConfig: OnboardingIconConfiguration;
+
     constructor(private onboardingService: OnboardingService) {
+        const config = onboardingService.getConfiguration();
+        if (config) {
+            this.iconConfig = config.iconConfiguration;
+        }
     }
 
     /**
@@ -20,9 +28,9 @@ export class OnboardingButtonComponent {
      * is true, if the onboarding service is disabled and at least one onboarding item is visible
      */
     public get showOnboardingItemCount(): boolean {
-      return !this.onboardingService.isEnabled() &&
-        this.onboardingService.visibleItems &&
-        this.onboardingService.visibleItems.totalLength > 0;
+        return !this.onboardingService.isEnabled() &&
+            this.onboardingService.visibleItems &&
+            this.onboardingService.visibleItems.totalLength > 0;
     }
 
     /**

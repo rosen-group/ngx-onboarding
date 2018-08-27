@@ -2,18 +2,32 @@
     <mat-menu #onboardingMenu="matMenu">
         <button mat-menu-item (click)="enableOnboarding()" *ngIf="!isOnboardingEnabled()"
                 class="onboarding-menu-button">
-            {{'ONBOARDING_ENABLE'}}
+            <mat-icon>add_alert</mat-icon>
+            {{'ONBOARDING_ENABLE'|translate}}
         </button>
         <button mat-menu-item (click)="disableOnboarding()" *ngIf="isOnboardingEnabled()"
                 class="onboarding-menu-button">
-            {{'ONBOARDING_DISABLE'}}
+            <mat-icon>notifications_off</mat-icon>
+            {{'ONBOARDING_DISABLE'|translate}}
         </button>
         <button mat-menu-item (click)="clearOnboarding()" class="onboarding-menu-button">
-            {{'ONBOARDING_CLEAR'}}
+            <mat-icon>undo</mat-icon>
+            {{'ONBOARDING_CLEAR'|translate}}
         </button>
     </mat-menu>
-    <button mat-icon-button [matMenuTriggerFor]="onboardingMenu" class="onboarding-button">
-        <span class="oicon oicon-onboarding_white"></span>
+    <button *ngIf="iconConfig" mat-icon-button [matMenuTriggerFor]="onboardingMenu" class="onboarding-button">
+        <mat-icon *ngIf="iconConfig.matIconName && !iconConfig.svgIcon && !iconConfig.fontSet"
+                  [matBadgeColor]="iconConfig.matBadgeColor" [matBadge]="onboardingItemCount"
+                  [matBadgePosition]="iconConfig.matBadgePosition" [matBadgeSize]="iconConfig.matBadgeSize"
+                  [matBadgeOverlap]="true">{{iconConfig.matIconName}}
+        </mat-icon>
+        <mat-icon *ngIf="iconConfig.svgIcon || iconConfig.fontSet"
+                  [svgIcon]="iconConfig.svgIcon"
+                  [fontSet]="iconConfig.fontSet" [fontIcon]="iconConfig.fontIcon"
+                  [matBadgeColor]="iconConfig.matBadgeColor" [matBadge]="onboardingItemCount"
+                  [matBadgePosition]="iconConfig.matBadgePosition" [matBadgeSize]="iconConfig.matBadgeSize"
+                  [matBadgeOverlap]="true">
+        </mat-icon>
     </button>
-    <div class="onboarding-button-counter" *ngIf="showOnboardingItemCount">{{onboardingItemCount}}</div>
+    <!--<div class="onboarding-button-counter" *ngIf="showOnboardingItemCount">{{onboardingItemCount}}</div>-->
 </div>
