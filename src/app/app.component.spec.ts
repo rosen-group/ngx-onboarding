@@ -1,27 +1,25 @@
 import { TestBed, async } from '@angular/core/testing';
 import { AppComponent } from './app.component';
+import {OnboardingModule, OnboardingService} from '../../projects/ngx-onboarding/src';
+import {HttpClientTestingModule} from '@angular/common/http/testing';
+import {OnboardingServiceMock} from '../../projects/ngx-onboarding/src/lib/services/onboarding.service.mock';
+import {BrowserDOMSelectorService, PrimitiveTranslateService} from '../../projects/ngx-onboarding/src/lib/services';
 describe('AppComponent', () => {
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [
-        AppComponent
+        imports: [OnboardingModule, HttpClientTestingModule],
+        declarations: [
+            AppComponent
       ],
+        providers: [
+            {provide: OnboardingService, useClass: OnboardingServiceMock }
+            ]
     }).compileComponents();
   }));
   it('should create the app', async(() => {
-    const fixture = TestBed.createComponent(AppComponent);
+    // TODO fix test - Error: Timeout - Async callback was not invoked within timeout specified by jasmine.DEFAULT_TIMEOUT_INTERVAL.
+      const fixture = TestBed.createComponent(AppComponent);
     const app = fixture.debugElement.componentInstance;
     expect(app).toBeTruthy();
-  }));
-  it(`should have as title 'ngx-onboarding-app'`, async(() => {
-    const fixture = TestBed.createComponent(AppComponent);
-    const app = fixture.debugElement.componentInstance;
-    expect(app.title).toEqual('ngx-onboarding-app');
-  }));
-  it('should render title in a h1 tag', async(() => {
-    const fixture = TestBed.createComponent(AppComponent);
-    fixture.detectChanges();
-    const compiled = fixture.debugElement.nativeElement;
-    expect(compiled.querySelector('h1').textContent).toContain('Welcome to ngx-onboarding-app!');
   }));
 });
