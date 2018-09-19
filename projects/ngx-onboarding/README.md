@@ -26,7 +26,7 @@ Issues for makeing this a "conformant" library...
 
 - [done] Seems to work in IE now (was it missing lodash?) ~~Check why it does not work in IE currently (is it just animations or something else)~~
 - [done] FireFox..works as long not in intranet and using https and the same time
-- Edge
-- Will be answered after we checked all browsers above Are the onboarding-html-helper methods "compatible" across browsers (peek at jquery?)
+- [done] Edge works
+
 
 

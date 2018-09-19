@@ -7,6 +7,7 @@
 
 # dependencies
 /node_modules
+/projects/ngx-onboarding/node_modules
 
 # IDEs and editors
 /.idea

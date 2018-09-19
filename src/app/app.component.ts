@@ -26,7 +26,7 @@ export class AppComponent implements OnInit, OnDestroy {
             const arr = data as Array<OnboardingItem>;
             this.unregisterOnboarding = this.onboardingService.register(arr);
         }, (error) => {
-            this.infoMessage = 'Onboarding: ' + error ? error.toString() : 'Unknown Error';
+            this.infoMessage = `Onboarding: ${this.formatError(error)}`;
             console.error(error);
         });
         //
@@ -37,4 +37,23 @@ export class AppComponent implements OnInit, OnDestroy {
             this.unregisterOnboarding();
         }
     }
+
+    private formatError(error: any): string {
+        if (typeof error === 'string') {
+            return error;
+        }
+        if (typeof error === 'object') {
+            let res = '';
+            if (error.constructor && error.constructor.name) {
+                res += `[${error.constructor.name}] `;
+            }
+            if (error.message) {
+                res += error.message;
+            }
+
+            return res.length > 0 ? res : error;
+        }
+        return error;
+    }
+
 }
