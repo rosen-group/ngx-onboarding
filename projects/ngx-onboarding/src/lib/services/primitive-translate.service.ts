@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core';
+import {Injectable} from '@angular/core';
 
 
 @Injectable()
@@ -16,7 +16,7 @@ export class PrimitiveTranslateService {
         'ONBOARDING_CLEAR': 'Reset'
     };
 
-    translate(key): string {
+    public translate(key): string {
         const text = this.translations[key];
         if (typeof text === 'string') {
             return text;

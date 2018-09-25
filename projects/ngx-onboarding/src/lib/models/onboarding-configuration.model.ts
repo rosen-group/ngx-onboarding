@@ -1,7 +1,4 @@
 /**
- * @author RKlein@rosen-group.com
- */
-/**
  * global configuration parameters for onboarding
  * for icon configuration see: https://material.angular.io/components/icon/overview
  * because the properties below a derived from that behave exactly the same

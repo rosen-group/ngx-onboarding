@@ -1,6 +1,6 @@
-import { Component, OnDestroy, OnInit, ViewEncapsulation } from '@angular/core';
-import { OnboardingItem, OnboardingService } from '../../projects/ngx-onboarding/src';
-import { HttpClient } from '@angular/common/http';
+import {Component, ErrorHandler, OnDestroy, OnInit, ViewEncapsulation} from '@angular/core';
+import {OnboardingItem, OnboardingService} from '../../projects/ngx-onboarding/src';
+import {HttpClient} from '@angular/common/http';
 
 @Component({
     selector: 'app-root',
@@ -13,23 +13,23 @@ export class AppComponent implements OnInit, OnDestroy {
     infoMessage = '';
     private unregisterOnboarding: Function;
 
-    constructor(private onboardingService: OnboardingService, private httpClient: HttpClient) {
-
+    constructor(private onboardingService: OnboardingService,
+                private httpClient: HttpClient,
+                private errorHandler: ErrorHandler) {
     }
 
     ngOnInit() {
-        this.loadAndRegisterOnBoardingData();
+        this.loadAndRegisterOnboardingData();
     }
 
-    private loadAndRegisterOnBoardingData() {
+    private loadAndRegisterOnboardingData() {
         this.httpClient.get('assets/onboarding/app.json').subscribe((data) => {
             const arr = data as Array<OnboardingItem>;
             this.unregisterOnboarding = this.onboardingService.register(arr);
         }, (error) => {
             this.infoMessage = `Onboarding: ${this.formatError(error)}`;
-            console.error(error);
+            this.errorHandler.handleError(error);
         });
-        //
     }
 
     ngOnDestroy() {

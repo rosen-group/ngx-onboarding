@@ -1,7 +1,11 @@
-import {TestBed, async, inject} from '@angular/core/testing';
+import {async, inject, TestBed} from '@angular/core/testing';
 import {OnboardingService} from './onboarding.service';
 import {BrowserDOMSelectorService} from './browser-dom-selector.service';
 import {OnboardingItem} from '../models';
+import {SeenSelectorsBaseService} from './seen-selectors-base-service.model';
+import {MockLocalStorageSeenSelectorsService} from './local-storage-seen-selectors.service.mock';
+import {EnabledStatusBaseService} from './enabled-status-base-service.model';
+import {MockLocalStorageEnabledStatusService} from './local-storage-enabled-status.service.mock';
 
 describe('OnboardingService', () => {
     beforeEach(async(() => {
@@ -9,6 +13,8 @@ describe('OnboardingService', () => {
             providers: [
                 BrowserDOMSelectorService,
                 OnboardingService,
+                {provide: SeenSelectorsBaseService, useClass: MockLocalStorageSeenSelectorsService},
+                {provide: EnabledStatusBaseService, useClass: MockLocalStorageEnabledStatusService}
             ],
         });
     }));
@@ -20,37 +26,37 @@ describe('OnboardingService', () => {
     it('call check expects visibleItems.length to be 0',
         inject([OnboardingService, BrowserDOMSelectorService],
             (onboardingService: OnboardingService, browserDomSelectorService: BrowserDOMSelectorService) => {
-        spyOn(browserDomSelectorService, 'querySelectorAll').and.returnValue([]);
-        spyOn(onboardingService.visibleItemsChanged, 'emit');
-        onboardingService.register(getOnboardingItems());
-        onboardingService.visibleItems.clear();
-        onboardingService['enabled'] = true;
+                spyOn(browserDomSelectorService, 'querySelectorAll').and.returnValue([]);
+                spyOn(onboardingService.visibleItemsChanged, 'emit');
+                onboardingService.register(getOnboardingItems());
+                onboardingService.visibleItems.clear();
+                onboardingService['enabled'] = true;
 
-        onboardingService.check();
+                onboardingService.check();
 
-        expect(browserDomSelectorService.querySelectorAll).toHaveBeenCalledTimes(6);
-        expect(onboardingService.visibleItemsChanged.emit).toHaveBeenCalled();
-        expect(onboardingService.visibleItems.curLength).toBe(0);
-    }));
+                expect(browserDomSelectorService.querySelectorAll).toHaveBeenCalledTimes(6);
+                expect(onboardingService.visibleItemsChanged.emit).toHaveBeenCalled();
+                expect(onboardingService.visibleItems.currentLength).toBe(0);
+            }));
 
     it('call check expects visibleItems.length to be 2',
         inject([OnboardingService, BrowserDOMSelectorService],
             (onboardingService: OnboardingService, browserDomSelectorService: BrowserDOMSelectorService) => {
-        spyOn(browserDomSelectorService, 'querySelectorAll').and.callFake(() => {
-            return getHtmlElements(6);
-        });
-        onboardingService['items'] = getOnboardingItems();
-        onboardingService.visibleItems.clear();
-        expect(onboardingService.visibleItems.isEmpty).toBeTruthy();
-        onboardingService['seenSelectors'] = [];
-        onboardingService['enabled'] = true;
+                spyOn(browserDomSelectorService, 'querySelectorAll').and.callFake(() => {
+                    return getHtmlElements(6);
+                });
+                onboardingService['items'] = getOnboardingItems();
+                onboardingService.visibleItems.clear();
+                expect(onboardingService.visibleItems.isEmpty).toBeTruthy();
+                onboardingService['seenSelectors'] = [];
+                onboardingService['enabled'] = true;
 
-        onboardingService.check('group 2');
+                onboardingService.check('group 2');
 
-        expect(browserDomSelectorService.querySelectorAll).toHaveBeenCalledTimes(2);
-        expect(onboardingService.visibleItems.curLength).toBe(2);
-        expect(onboardingService.visibleItems.isEmpty).toBeFalsy();
-    }));
+                expect(browserDomSelectorService.querySelectorAll).toHaveBeenCalledTimes(2);
+                expect(onboardingService.visibleItems.currentLength).toBe(2);
+                expect(onboardingService.visibleItems.isEmpty).toBeFalsy();
+            }));
 
     it('call register expects items.lenght to be 6', inject([OnboardingService], (onboardingService: OnboardingService) => {
         const unregister = onboardingService.register(getOnboardingItems());
@@ -62,93 +68,93 @@ describe('OnboardingService', () => {
     it('call check expects visibleItems to contain 3x arrays with 2 items each when grouping sortOrder',
         inject([OnboardingService, BrowserDOMSelectorService],
             (onboardingService: OnboardingService, browserDomSelectorService: BrowserDOMSelectorService) => {
-        spyOn(browserDomSelectorService, 'querySelectorAll').and.callFake(() => {
-            return getHtmlElements(6);
-        });
-        onboardingService['items'] = getOnboardingItems(true);
-        onboardingService.visibleItems.clear();
-        onboardingService['seenSelectors'] = [];
-        onboardingService['enabled'] = true;
+                spyOn(browserDomSelectorService, 'querySelectorAll').and.callFake(() => {
+                    return getHtmlElements(6);
+                });
+                onboardingService['items'] = getOnboardingItems(true);
+                onboardingService.visibleItems.clear();
+                onboardingService['seenSelectors'] = [];
+                onboardingService['enabled'] = true;
 
-        onboardingService.check();
+                onboardingService.check();
 
-        expect(browserDomSelectorService.querySelectorAll).toHaveBeenCalledTimes(6);
+                expect(browserDomSelectorService.querySelectorAll).toHaveBeenCalledTimes(6);
 
-        expect(onboardingService.visibleItems.totalLength).toBe(6);
-        expect(onboardingService.visibleItems.curLength).toBe(2);
-        expect(onboardingService.visibleItems.hasNext).toBe(true);
+                expect(onboardingService.visibleItems.totalLength).toBe(6);
+                expect(onboardingService.visibleItems.currentLength).toBe(2);
+                expect(onboardingService.visibleItems.hasNext).toBe(true);
 
-        // go to next group
-        onboardingService.visibleItems.nextItems();
+                // go to next group
+                onboardingService.visibleItems.nextItems();
 
-        expect(onboardingService.visibleItems.totalLength).toBe(6);
-        expect(onboardingService.visibleItems.curLength).toBe(2);
-        expect(onboardingService.visibleItems.hasNext).toBe(true);
+                expect(onboardingService.visibleItems.totalLength).toBe(6);
+                expect(onboardingService.visibleItems.currentLength).toBe(2);
+                expect(onboardingService.visibleItems.hasNext).toBe(true);
 
-        // go to next group
-        onboardingService.visibleItems.nextItems();
+                // go to next group
+                onboardingService.visibleItems.nextItems();
 
-        expect(onboardingService.visibleItems.totalLength).toBe(6);
-        expect(onboardingService.visibleItems.curLength).toBe(2);
-        expect(onboardingService.visibleItems.hasNext).toBe(false);
+                expect(onboardingService.visibleItems.totalLength).toBe(6);
+                expect(onboardingService.visibleItems.currentLength).toBe(2);
+                expect(onboardingService.visibleItems.hasNext).toBe(false);
 
-        // go to next group
-        expect(onboardingService.visibleItems.nextItems().length).toBe(0);
+                // go to next group
+                expect(onboardingService.visibleItems.nextItems().length).toBe(0);
 
-    }));
+            }));
 
     it('call disable expects isEnabled to be false and enableChanged to have been called',
         inject([OnboardingService], (onboardingService: OnboardingService) => {
-        spyOn(onboardingService as any, 'enabledChanged');
-        onboardingService['enabled'] = true;
+            spyOn(onboardingService as any, 'enabledChanged');
+            onboardingService['enabled'] = true;
 
-        onboardingService.disable();
+            onboardingService.disable();
 
-        expect(onboardingService.isEnabled()).toBe(false);
-        expect(onboardingService['enabledChanged']).toHaveBeenCalled();
-    }));
+            expect(onboardingService.isEnabled()).toBe(false);
+            expect(onboardingService['enabledChanged']).toHaveBeenCalled();
+        }));
 
     it('call enable expects isEnabled to be false and enableChanged to have been called',
         inject([OnboardingService], (onboardingService: OnboardingService) => {
-        spyOn(onboardingService as any, 'enabledChanged');
-        onboardingService['enabled'] = false;
+            spyOn(onboardingService as any, 'enabledChanged');
+            onboardingService['enabled'] = false;
 
-        onboardingService.enable();
+            onboardingService.enable();
 
-        expect(onboardingService.isEnabled()).toBe(true);
-        expect(onboardingService['enabledChanged']).toHaveBeenCalled();
-    }));
+            expect(onboardingService.isEnabled()).toBe(true);
+            expect(onboardingService['enabledChanged']).toHaveBeenCalled();
+        }));
 
     it('call clearSeenSelectors expects seenSelectors.lenght to be 0 and seenSelectorsChanged to have been called',
         inject([OnboardingService], (onboardingService: OnboardingService) => {
-        spyOn(onboardingService as any, 'seenSelectorsChanged');
-        onboardingService['seenSelectors'] = ['.a', '.b'];
+            spyOn(onboardingService as any, 'seenSelectorsChanged');
+            onboardingService['seenSelectors'] = ['.a', '.b'];
 
-        onboardingService.clearSeenSelectors();
+            onboardingService.clearSeenSelectors();
 
-        expect(onboardingService['seenSelectors'].length).toBe(0);
-        expect(onboardingService['seenSelectorsChanged']).toHaveBeenCalled();
-    }));
+            expect(onboardingService['seenSelectors'].length).toBe(0);
+            expect(onboardingService['seenSelectorsChanged']).toHaveBeenCalled();
+        }));
 
     it('call addToSeenSelectors expects seenSelectors.lenght to be 3 and seenSelectorsChanged to have been called',
         inject([OnboardingService], (onboardingService: OnboardingService) => {
-        spyOn(onboardingService as any, 'seenSelectorsChanged');
-        onboardingService['seenSelectors'] = ['.a', '.b'];
+            spyOn(onboardingService as any, 'seenSelectorsChanged');
+            onboardingService['seenSelectors'] = ['.a', '.b'];
 
-        onboardingService['addToSeenSelectors']('.test-selector');
+            onboardingService['addToSeenSelectors']('.test-selector');
 
-        expect(onboardingService['seenSelectors'].length).toBe(3);
-        expect(onboardingService['seenSelectorsChanged']).toHaveBeenCalled();
-    }));
+            expect(onboardingService['seenSelectors'].length).toBe(3);
+            expect(onboardingService['seenSelectorsChanged']).toHaveBeenCalled();
+        }));
 
     it('call seenSelectorsChanged expects saveSeenSelectorsToUserSettings to have been called', done => {
         inject([OnboardingService], (onboardingService: OnboardingService) => {
-            spyOn(onboardingService as any, 'saveSeenSelectorsToUserSettings').and.stub();
+            const spy = spyOn(onboardingService as any, 'saveSeenSelectors').and.stub();
 
             onboardingService['seenSelectorsChanged']();
 
             setTimeout(() => {
-                expect(onboardingService['saveSeenSelectorsToUserSettings']).toHaveBeenCalled();
+                expect(spy).toHaveBeenCalled();
                 done();
             }, 1001);
 

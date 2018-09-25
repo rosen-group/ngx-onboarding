@@ -1,4 +1,5 @@
-import { OnboardingConfiguration, OnboardingItem } from '../models';
+import {OnboardingConfiguration, OnboardingItem, OnboardingItemContainer} from '../models';
+import {EventEmitter} from '@angular/core';
 
 /**
  * Mock implementation for OnboardingService
@@ -6,6 +7,10 @@ import { OnboardingConfiguration, OnboardingItem } from '../models';
  */
 
 export class OnboardingServiceMock {
+
+    public readonly visibleItems = new OnboardingItemContainer();
+    public visibleItemsChanged = new EventEmitter();
+    public readonly instanceId: string;
 
     public get registeredItemsCount(): number {
         return 1;

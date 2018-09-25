@@ -1,10 +1,10 @@
-import { VisibleOnboardingItem } from './visible-onboarding-item.model';
+import {VisibleOnboardingItem} from './visible-onboarding-item.model';
 
 /**
  * Container to pass visible onboarding elements from onboarding service
  * to onboarding component (which can be grouped by their "group" field).
  *
- * Current group of elements can be accessed via curItems(). Next group can be accessed via nextItems().
+ * Current group of elements can be accessed via currentItems(). Next group can be accessed via nextItems().
  *
  * Container does not have immediate access to grouping keys since elements are stored in jagged array.
  */
@@ -28,7 +28,7 @@ export class OnboardingItemContainer {
     /**
      * Return current group of visible onboarding items
      */
-    public get curItems(): Array<VisibleOnboardingItem> {
+    public get currentItems(): Array<VisibleOnboardingItem> {
         if (this.groupedItems && this.currentGroupIndex < this.groupedItems.length) {
             return this.groupedItems[this.currentGroupIndex];
         }
@@ -45,8 +45,8 @@ export class OnboardingItemContainer {
     /**
      * Return length of current group of items
      */
-    public get curLength(): number {
-        return this.curItems.length;
+    public get currentLength(): number {
+        return this.currentItems.length;
     }
 
     /**
@@ -62,7 +62,7 @@ export class OnboardingItemContainer {
     public nextItems(): Array<VisibleOnboardingItem> {
         if (this.hasNext) {
             this.currentGroupIndex++;
-            return this.curItems;
+            return this.currentItems;
         }
 
         return [];

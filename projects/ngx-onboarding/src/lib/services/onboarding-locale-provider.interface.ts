@@ -1,13 +1,11 @@
-/**
- * @author RKlein@rosen-group.com
- */
-import { Observable } from 'rxjs';
-import { TranslationsDictionary } from '../models';
+import {Observable} from 'rxjs';
 
 export interface OnboardingLocaleProvider {
+
     getCurrentLanguageId(): Observable<string>;
 
-    getCurrentranslations(): Observable<TranslationsDictionary>;
+    getCurrentTranslations(): Observable<{ [key: string]: string }>;
+
 }
 
 

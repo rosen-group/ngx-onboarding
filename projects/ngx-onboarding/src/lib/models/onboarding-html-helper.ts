@@ -4,9 +4,10 @@
 export class HtmlElementHelper {
 
     /**
-     * true if ele is visible in view (not scrolled out) or false if not
+     * true if element is visible in view (not scrolled out) or false if not
      */
     public static isVisibleInView(ele: HTMLElement): boolean {
+        console.log(ele.offsetParent);
         if (!ele || !ele.offsetParent) {
             return false;
         }
@@ -19,7 +20,7 @@ export class HtmlElementHelper {
     }
 
     /**
-     * true if ele and all parents are visible in view (not scrolled out) or false if not
+     * true if element and all parents are visible in view (not scrolled out) or false if not
      */
     public static isVisibleInViewWithParents(ele: HTMLElement): boolean {
         let child = ele;
@@ -58,7 +59,7 @@ export class HtmlElementHelper {
     }
 
     /**
-     * returns the parent height of ele or 0 if offsetParent is falsy (null, undefined, ...)
+     * returns the parent height of element or 0 if offsetParent is falsy (null, undefined, ...)
      */
     public static getParentHeight(ele: HTMLElement) {
         const parent: HTMLElement = <HTMLElement>ele.offsetParent;
@@ -66,7 +67,7 @@ export class HtmlElementHelper {
     }
 
     /**
-     * returns the position of ele in document
+     * returns the position of element in document
      */
     public static getPosition(ele: HTMLElement) {
         let x = ele.offsetLeft;

@@ -1,12 +1,12 @@
-import { AfterViewInit, Component, OnDestroy, OnInit, ViewEncapsulation } from '@angular/core';
-import { OnboardingService } from './services';
-import { VisibleOnboardingItem } from './models/visible-onboarding-item.model';
-import { OnboardingItemContainer } from './models/onboarding-item-container.model';
-import { OnboardingItem } from './models/onboarding-item.model';
-import { Subscription } from 'rxjs';
-import { HtmlElementHelper } from './models/onboarding-html-helper';
-import { DomSanitizer, SafeStyle } from '@angular/platform-browser';
-import { OnboardingTextConfiguration } from './models';
+import {AfterViewInit, Component, OnDestroy, OnInit, ViewEncapsulation} from '@angular/core';
+import {OnboardingService} from './services';
+import {VisibleOnboardingItem} from './models/visible-onboarding-item.model';
+import {OnboardingItemContainer} from './models/onboarding-item-container.model';
+import {OnboardingItem} from './models/onboarding-item.model';
+import {Subscription} from 'rxjs';
+import {HtmlElementHelper} from './models/onboarding-html-helper';
+import {DomSanitizer, SafeStyle} from '@angular/platform-browser';
+import {OnboardingTextConfiguration} from './models';
 
 
 /**
@@ -94,7 +94,7 @@ export class OnboardingComponent implements OnInit, AfterViewInit, OnDestroy {
         this.visibleItemsChangedSubscription = this.onboardingService.visibleItemsChanged.subscribe(() => {
             this.allVisibleItems = this.onboardingService.visibleItems;
 
-            this.items = this.onboardingService.visibleItems.curItems;
+            this.items = this.onboardingService.visibleItems.currentItems;
             this.hasNext = this.allVisibleItems.hasNext;
             if (this.items) {
                 this.items.forEach(r => this.showItem(r)); // show first group of items
@@ -169,9 +169,9 @@ export class OnboardingComponent implements OnInit, AfterViewInit, OnDestroy {
      */
     private showItem(i: VisibleOnboardingItem) {
         if (this.onboardingService.isEnabled()) {
-            i.ele.classList.add('onboarding-highlighted');
-            if (!i.ele.style.position || i.ele.style.position === 'static') {
-                i.ele.classList.add('onboarding-highlighted-on-static');
+            i.element.classList.add('onboarding-highlighted');
+            if (!i.element.style.position || i.element.style.position === 'static') {
+                i.element.classList.add('onboarding-highlighted-on-static');
             }
         }
     }
@@ -180,8 +180,8 @@ export class OnboardingComponent implements OnInit, AfterViewInit, OnDestroy {
      * Hide SINGLE element without change notification
      */
     private hideItem(i: VisibleOnboardingItem) {
-        i.ele.classList.remove('onboarding-highlighted');
-        i.ele.classList.remove('onboarding-highlighted-on-static');
+        i.element.classList.remove('onboarding-highlighted');
+        i.element.classList.remove('onboarding-highlighted-on-static');
     }
 
 

@@ -9,7 +9,7 @@
     <div class="onboarding-dark-background"></div>
     <div class="onboarding-spotlight" *ngFor="let item of items"
          [class.onboarding-spotlight-transparent]="isSpotlightTransparent(item.item)"
-         [ngStyle]="getPositionStyle(item.ele)"></div>
+         [ngStyle]="getPositionStyle(item.element)"></div>
     <div class="onboarding-items">
         <div *ngFor="let item of items">
             <rosen-onboarding-item [item]="item"></rosen-onboarding-item>

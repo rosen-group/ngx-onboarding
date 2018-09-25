@@ -1,7 +1,7 @@
-import { Component, ElementRef, Inject, Input, LOCALE_ID, ViewChild, ViewEncapsulation } from '@angular/core';
-
+import {Component, ElementRef, Inject, Input, LOCALE_ID, ViewChild, ViewEncapsulation} from '@angular/core';
 import * as _ from 'lodash';
-import { HtmlElementHelper, VisibleOnboardingItem } from './models';
+import {HtmlElementHelper, VisibleOnboardingItem} from './models';
+import {WindowRef} from './services/window-ref.service';
 
 
 const TopPadding = 25;
@@ -29,13 +29,12 @@ export class OnboardingItemComponent {
 
     /**
      * the onboarding item container
-     * used to calulate the position
+     * used to calculate the position
      */
     @ViewChild('container')
     private container: ElementRef;
 
-    constructor(@Inject(LOCALE_ID) private locale: string) {
-        this.locale = '';
+    constructor(@Inject(LOCALE_ID) private readonly locale: string, private windowRef: WindowRef) {
     }
 
     /**
@@ -43,12 +42,12 @@ export class OnboardingItemComponent {
      * calculates the position of the OnboardingItemComponent
      */
     public getStyle() {
-        const pos = HtmlElementHelper.getPosition(this.item.ele);
+        const pos = HtmlElementHelper.getPosition(this.item.element);
         let transform = 'none';
 
         switch (this.item.item.position) {
             case 'top':
-                pos.x += this.item.ele.offsetWidth / 2;
+                pos.x += this.item.element.offsetWidth / 2;
                 if (pos.x < this.getContainerWidth() / 2) {
                     pos.x = this.getContainerWidth() / 2;
                 } else if (pos.x > this.getWindowScreenWidth() - this.getContainerWidth()) {
@@ -58,8 +57,8 @@ export class OnboardingItemComponent {
                 transform = 'translate(-50%,-100%)';
                 break;
             case 'right':
-                pos.x += Math.min(this.item.ele.offsetWidth + RightPadding, this.getWindowScreenWidth() - this.getContainerWidth() / 2);
-                pos.y += this.item.ele.offsetHeight / 2;
+                pos.x += Math.min(this.item.element.offsetWidth + RightPadding, this.getWindowScreenWidth() - this.getContainerWidth() / 2);
+                pos.y += this.item.element.offsetHeight / 2;
                 if (pos.y < 0) {
                     pos.y = 0;
                 } else if (pos.y > this.getWindowScreenHeight() - this.getContainerHeight() / 2) {
@@ -69,7 +68,7 @@ export class OnboardingItemComponent {
                 break;
             case 'left':
                 pos.x -= LeftPadding;
-                pos.y += this.item.ele.offsetHeight / 2;
+                pos.y += this.item.element.offsetHeight / 2;
                 if (pos.y < 0) {
                     pos.y = 0;
                 } else if (pos.y > this.getWindowScreenHeight() - this.getContainerHeight() / 2) {
@@ -90,13 +89,13 @@ export class OnboardingItemComponent {
 
             case 'bottom':
             default:
-                pos.x += this.item.ele.offsetWidth / 2;
+                pos.x += this.item.element.offsetWidth / 2;
                 if (pos.x < this.getContainerWidth() / 2) {
                     pos.x = this.getContainerWidth() / 2;
                 } else if (pos.x > this.getWindowScreenWidth() - this.getContainerWidth()) {
                     pos.x = this.getWindowScreenWidth() - this.getContainerWidth();
                 }
-                pos.y += this.item.ele.offsetHeight;
+                pos.y += this.item.element.offsetHeight;
                 transform = 'translate(-50%,25%)';
                 break;
         }
@@ -117,6 +116,13 @@ export class OnboardingItemComponent {
         return description ? description.details : this.item.item.details;
     }
 
+    public getTextAlignClass(): string {
+        if (_.isEmpty(this.item.item.textAlign) || this.item.item.textAlign === 'center') {
+            return ''; // ==> center
+        }
+        return `align-${this.item.item.textAlign}`;
+    }
+
     private getContainerWidth(): number {
         return this.container.nativeElement.offsetWidth;
     }
@@ -126,24 +132,11 @@ export class OnboardingItemComponent {
     }
 
     private getWindowScreenWidth(): number {
-        return this.hasWindowObject() ? window.screen.width : 1024;
+        return this.windowRef.nativeWindow ? this.windowRef.nativeWindow.screen.width : 1024;
     }
 
     private getWindowScreenHeight(): number {
-        return this.hasWindowObject() ? window.screen.height : 768;
-    }
-
-    private hasWindowObject() {
-        const win = typeof window === 'object' && window ? window : null;
-        // the above check is taken from angular material common-module.ts so it should be save
-        return win !== null;
-    }
-
-    private getTextAlignClass(): string {
-        const talign = this.item.item.textAlign;
-        // if textAlign is not set or textAlign is center we return empty string because "center" is the default from css
-        // only for left and right we return a css class
-        return (talign || talign === 'center') ? '' : `align-${talign}`;
+        return this.windowRef.nativeWindow ? this.windowRef.nativeWindow.screen.height : 768;
     }
 
 

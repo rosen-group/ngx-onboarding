@@ -1,17 +1,14 @@
-import { interval, Subscription, timer } from 'rxjs';
-import { EventEmitter, Injectable } from '@angular/core';
+import {interval, Subscription, timer} from 'rxjs';
+import {ErrorHandler, EventEmitter, Injectable, NgZone} from '@angular/core';
 import * as _ from 'lodash';
+import {BrowserDOMSelectorService} from './browser-dom-selector.service';
+import {HtmlElementHelper, OnboardingConfiguration, OnboardingItem, OnboardingItemContainer, VisibleOnboardingItem} from '../models';
+import {SeenSelectorsBaseService} from './seen-selectors-base-service.model';
+import {EnabledStatusBaseService} from './enabled-status-base-service.model';
 
-import { BrowserDOMSelectorService } from './browser-dom-selector.service';
-import { HtmlElementHelper, OnboardingConfiguration, OnboardingItem, OnboardingItemContainer, VisibleOnboardingItem } from '../models';
-
-const UserSettingsUniqueKey = '894ae732-b4bd-45c9-b543-6f9c5c5a86b6';
-const UserSettingsVersion = '1';
-const EnabledUserSettingsUniqueKey = '42cfe10a-c2d3-42ba-9c55-6198545a0c49';
-const EnabledUserSettingsVersion = '1';
-const AddSeenSelectorDebounceTime = 1000;
-const EnabledChangedDebounceTime = 1000;
-const RefreshTime = 2000;
+const addSeenSelectorDebounceTime = 1000;
+const enabledChangedDebounceTime = 1000;
+const refreshTime = 2000;
 
 
 /**
@@ -20,12 +17,14 @@ const RefreshTime = 2000;
  *
  * The OnboardingComponent listens to the visibleItemsChanged event and retrieves new onboarding items from the visibleItems object.
  */
-@Injectable({providedIn: 'root'})
+@Injectable({
+    providedIn: 'root'
+})
 export class OnboardingService {
 
     /**
      * Container with currently visible onboarding items (grouped).
-     * OnboardingComponent must iterate through theese groups.
+     * OnboardingComponent must iterate through these groups.
      *
      * called by OnboardingComponent
      */
@@ -34,17 +33,13 @@ export class OnboardingService {
      * called by OnboardingComponent
      */
     public visibleItemsChanged = new EventEmitter();
+    public readonly instanceId: string;
     private addSeenSelectorDebounceSubscription: Subscription;
-    private loadSettingsBusy: Subscription;
-    private saveSettingsBusy: Subscription;
     private enabledChangedDebounceSubscription: Subscription;
-    private loadEnabledSettingBusy: Subscription;
-    private saveEnabledSettingBusy: Subscription;
     private refreshSubscription: Subscription;
     private items: Array<OnboardingItem>;
     private seenSelectors: Array<string>;
     private enabled: boolean;
-    public readonly instanceId: string;
     private configuration: OnboardingConfiguration;
 
     private readonly defaultConfiguration: OnboardingConfiguration = {
@@ -60,18 +55,15 @@ export class OnboardingService {
         }
     };
 
-    constructor(private browserDomSelectorService: BrowserDOMSelectorService) {
+    constructor(private browserDomSelectorService: BrowserDOMSelectorService,
+                private loadAndSaveSeenSelectorsService: SeenSelectorsBaseService,
+                private loadAndSaveEnabledStatusService: EnabledStatusBaseService,
+                private errorHandler: ErrorHandler,
+                private zone: NgZone) {
         this.instanceId = makeuuid();
         this.configuration = this.defaultConfiguration;
         /* this is the default setting. can be changed by configure()*/
         this.init();
-    }
-
-    /**
-     * called by OnboardingComponent, HeaderComponent
-     */
-    public get registeredItemsCount(): number {
-        return this.items.length;
     }
 
     /**
@@ -81,7 +73,7 @@ export class OnboardingService {
         if (typeof configuration === 'undefined') {
             throw new Error('Configuration must not be undefined or null');
         }
-        // new merge default configurationm with user configuration
+        // new merge default configuration with user configuration
         const mergedConfig: OnboardingConfiguration = {
             iconConfiguration: Object.assign({}, this.defaultConfiguration.iconConfiguration),
             textConfiguration: Object.assign({}, this.defaultConfiguration.textConfiguration)
@@ -111,7 +103,7 @@ export class OnboardingService {
         this.configuration = mergedConfig;
     }
 
-    /** used internall only to retrive to configuration from configure()*/
+    /** used internal only to retrieve to configuration from configure()*/
     public getConfiguration() {
         return this.configuration;
     }
@@ -122,7 +114,7 @@ export class OnboardingService {
     public register(items: Array<OnboardingItem>): Function {
         this.items.push(...items);
         return () => {
-            this.items = _.filter(this.items, i => !_.some(items, j => i.selector === j.selector));
+            this.items = _.filter(this.items, thisItem => !_.some(items, item => thisItem.selector === item.selector));
         };
     }
 
@@ -133,24 +125,24 @@ export class OnboardingService {
      */
     public check(filterGroupBy: string = null) {
         try {
-            if (this.isEnabled() && this.visibleItems && this.visibleItems.curLength > 0) {
+            if (this.isEnabled() && this.visibleItems && this.visibleItems.currentLength > 0) {
                 return;
             }
             const matches: Array<VisibleOnboardingItem> = [];
             const groupItems = this.getItems(filterGroupBy);
             if (groupItems) {
-                _.each(groupItems, i => {
-                    const eles = this.browserDomSelectorService.querySelectorAll(i.selector);
-                    if (eles && eles.length > 0) {
-                        let ele: HTMLElement = _.find(eles, (e: HTMLElement) => HtmlElementHelper.isVisibleInViewWithParents(e));
-                        if (ele) {
-                            if (i.toParent && ele.offsetParent) {
-                                ele = <HTMLElement>ele.offsetParent;
+                _.each(groupItems, groupItem => {
+                    const elements = this.browserDomSelectorService.querySelectorAll(groupItem.selector);
+                    if (elements && elements.length > 0) {
+                        let element: HTMLElement = _.find(elements, (e: HTMLElement) => HtmlElementHelper.isVisibleInViewWithParents(e));
+                        if (element) {
+                            if (groupItem.toParent && element.offsetParent) {
+                                element = <HTMLElement>element.offsetParent;
                             }
-                            if (ele) {
+                            if (element) {
                                 matches.push({
-                                    item: i,
-                                    ele: ele
+                                    item: groupItem,
+                                    element: element
                                 });
                             }
                         }
@@ -161,8 +153,8 @@ export class OnboardingService {
             this.visibleItems.clear();
             this.evalAndAddGroups(matches);
             this.visibleItemsChanged.emit();
-        } catch (e) {
-            console.error(e);
+        } catch (error) {
+            this.errorHandler.handleError(error);
         }
     }
 
@@ -231,8 +223,8 @@ export class OnboardingService {
         this.items = [];
         this.seenSelectors = [];
         this.visibleItems.clear();
-        this.loadSeenSelectorsFromUserSettings();
-        this.loadEnabledFromUserSetting();
+        this.loadSeenSelectors();
+        this.loadEnabledStatus();
         this.startRefreshTimer();
     }
 
@@ -245,86 +237,22 @@ export class OnboardingService {
         if (this.addSeenSelectorDebounceSubscription) {
             this.addSeenSelectorDebounceSubscription.unsubscribe();
         }
-        const source = timer(AddSeenSelectorDebounceTime);
+        const source = timer(addSeenSelectorDebounceTime);
         this.addSeenSelectorDebounceSubscription = source.subscribe(() => {
-            this.saveSeenSelectorsToUserSettings();
+            this.saveSeenSelectors();
         });
-    }
-
-    private loadSeenSelectorsFromUserSettings(): void {
-        const userSettings = localStorage.getItem(UserSettingsUniqueKey);
-        if (!_.isEmpty(userSettings)) {
-            try {
-                this.seenSelectors = JSON.parse(userSettings);
-            } catch (err) {
-                console.error(err);
-            }
-        }
-        // const errorDummy = new Error('OnboardingService.loadSeenSelectorsFromUserSettings()');
-        // if (this.loadSettingsBusy) {
-        //     this.loadSettingsBusy.unsubscribe();
-        // }
-        // this.loadSettingsBusy = this.settingsService.getSetting(UserSettingsUniqueKey).subscribe(userSettings => {
-        //     this.seenSelectors = [];
-        //     if (userSettings) {
-        //         try {
-        //             this.seenSelectors = JSON.parse(userSettings.data);
-        //         } catch (err) {
-        //             this.loggingService.error(err, 'time', errorDummy, 'failed to parse seen selectors');
-        //         }
-        //     }
-        // });
-    }
-
-    private saveSeenSelectorsToUserSettings(): void {
-
-        localStorage.setItem(UserSettingsUniqueKey, JSON.stringify(this.seenSelectors));
-        // const errorDummy = new Error('OnboardingService.saveSeenSelectorsToUserSettings()');
-        // const userSettings = new UserSetting(UserSettingsUniqueKey);
-        // userSettings.version = UserSettingsVersion;
-        // userSettings.data = JSON.stringify(this.seenSelectors);
-        // if (this.saveSettingsBusy) { this.saveSettingsBusy.unsubscribe(); }
-        // this.saveSettingsBusy = this.settingsService.setSetting(userSettings).subscribe(() => {
-        // }, err => {
-        //     this.loggingService.error(err, 'rolibjs', errorDummy);
-        //     this.dialogService.showError('{{ONBOARDING_FAILED_TO_SAVE_USER_SETTINGS}}', '{{DIALOGS_ERROR}}', err);
-        // });
     }
 
     private enabledChanged() {
         if (this.enabledChangedDebounceSubscription) {
             this.enabledChangedDebounceSubscription.unsubscribe();
         }
-        const source = timer(EnabledChangedDebounceTime);
+        const source = timer(enabledChangedDebounceTime);
         this.enabledChangedDebounceSubscription = source.subscribe(() => {
-            this.saveEnabledUserSetting();
+            this.saveEnabledStatus();
         });
     }
 
-    private loadEnabledFromUserSetting(): void {
-        this.enabled = ('true' === localStorage.getItem(EnabledUserSettingsUniqueKey));
-        // if (this.loadEnabledSettingBusy) { this.loadEnabledSettingBusy.unsubscribe(); }
-        // this.loadEnabledSettingBusy = this.settingsService.getSetting(EnabledUserSettingsUniqueKey).subscribe(setting => {
-        //     this.enabled = setting && setting.data ? setting.data == 'true' : true;
-        // }, () => {
-        //     this.loggingService.info('OnboardingService.loadEnabledFromUserSetting failed. Set enabled to true.', 'rolibjs');
-        //     this.enabled = true;
-        // });
-    }
-
-    private saveEnabledUserSetting(): void {
-        localStorage.setItem(EnabledUserSettingsUniqueKey, this.enabled ? 'true' : 'false');
-        // const errorDummy = new Error('OnboardingService.saveEnabledUserSetting()');
-        // const userSettings = new UserSetting(EnabledUserSettingsUniqueKey);
-        // userSettings.version = EnabledUserSettingsVersion;
-        // userSettings.data = this.enabled ? 'true' : 'false';
-        // if (this.saveEnabledSettingBusy) { this.saveEnabledSettingBusy.unsubscribe(); }
-        // this.saveEnabledSettingBusy = this.settingsService.setSetting(userSettings).subscribe(() => {
-        // }, err => {
-        //     this.loggingService.error(err, 'rolibjs', errorDummy);
-        //     this.dialogService.showError('{{ONBOARDING_FAILED_TO_LOAD_SAVE_SETTINGS}}', '{{DIALOGS_ERROR}}', err);
-        // });
-    }
 
     /**
      * Get candidates for visible items
@@ -341,12 +269,35 @@ export class OnboardingService {
         if (this.refreshSubscription) {
             this.refreshSubscription.unsubscribe();
         }
-        const source = interval(RefreshTime);
-        this.refreshSubscription = source.subscribe(() => {
-            this.check();
+        const source = interval(refreshTime);
+        this.zone.runOutsideAngular(() => {
+            this.refreshSubscription = source.subscribe(() => {
+                this.zone.run(() => {
+                    this.check();
+                });
+            });
         });
     }
 
+    private loadSeenSelectors() {
+        this.loadAndSaveSeenSelectorsService.load().subscribe(seenSelectors => {
+            this.seenSelectors = seenSelectors;
+        });
+    }
+
+    private saveSeenSelectors() {
+        this.loadAndSaveSeenSelectorsService.save(this.seenSelectors);
+    }
+
+    private loadEnabledStatus() {
+        this.loadAndSaveEnabledStatusService.load().subscribe(enabled => {
+            this.enabled = true;
+        });
+    }
+
+    private saveEnabledStatus() {
+        this.loadAndSaveEnabledStatusService.save(this.enabled);
+    }
 
 }
 
