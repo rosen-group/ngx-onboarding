@@ -9,8 +9,9 @@ import {
     OnboardingItemContainer,
     VisibleOnboardingItem
 } from '../models';
-import {SeenSelectorsBaseService} from './seen-selectors-base-service.model';
+import {SeenSelectorsBaseService} from './seen-selectors-base.service';
 import {EnabledStatusBaseService} from './enabled-status-base-service.model';
+import {NgxUidService} from 'ngx-uid';
 
 const addSeenSelectorDebounceTime = 1000;
 const enabledChangedDebounceTime = 1000;
@@ -65,8 +66,9 @@ export class OnboardingService {
                 private loadAndSaveSeenSelectorsService: SeenSelectorsBaseService,
                 private loadAndSaveEnabledStatusService: EnabledStatusBaseService,
                 private errorHandler: ErrorHandler,
-                private zone: NgZone) {
-        this.instanceId = makeuuid();
+                private zone: NgZone,
+                uidService: NgxUidService) {
+        this.instanceId = uidService.next();
         this.configuration = this.defaultConfiguration;
         /* this is the default setting. can be changed by configure()*/
         this.init();
@@ -140,7 +142,9 @@ export class OnboardingService {
                 _.each(groupItems, groupItem => {
                     const elements = this.browserDomSelectorService.querySelectorAll(groupItem.selector);
                     if (elements && elements.length > 0) {
-                        let element: HTMLElement = _.find(elements, (e: HTMLElement) => OnboardingHtmlElementHelper.isVisibleInViewWithParents(e));
+                        let element: HTMLElement = _.find(
+                            elements, (e: HTMLElement) => OnboardingHtmlElementHelper.isVisibleInViewWithParents(e)
+                        );
                         if (element) {
                             if (groupItem.toParent && element.offsetParent) {
                                 element = <HTMLElement>element.offsetParent;
@@ -305,17 +309,4 @@ export class OnboardingService {
         this.loadAndSaveEnabledStatusService.save(this.enabled);
     }
 
-}
-
-
-/** generate unique id (like GUID) */
-export function makeuuid(): string {
-    function s4() {
-        return Math.floor((1 + Math.random()) * 0x10000)
-            .toString(16)
-            .substring(1);
-    }
-
-    return s4() + s4() + '-' + s4() + '-' + s4() + '-' +
-        s4() + '-' + s4() + s4() + s4();
 }

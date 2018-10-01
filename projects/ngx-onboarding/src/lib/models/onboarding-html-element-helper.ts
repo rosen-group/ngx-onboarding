@@ -7,7 +7,6 @@ export class OnboardingHtmlElementHelper {
      * true if element is visible in view (not scrolled out) or false if not
      */
     public static isVisibleInView(ele: HTMLElement): boolean {
-        console.log(ele.offsetParent);
         if (!ele || !ele.offsetParent) {
             return false;
         }

@@ -2,7 +2,7 @@ import {async, inject, TestBed} from '@angular/core/testing';
 import {OnboardingService} from './onboarding.service';
 import {BrowserDOMSelectorService} from './browser-dom-selector.service';
 import {OnboardingItem} from '../models';
-import {SeenSelectorsBaseService} from './seen-selectors-base-service.model';
+import {SeenSelectorsBaseService} from './seen-selectors-base.service';
 import {MockLocalStorageSeenSelectorsService} from './local-storage-seen-selectors.service.mock';
 import {EnabledStatusBaseService} from './enabled-status-base-service.model';
 import {MockLocalStorageEnabledStatusService} from './local-storage-enabled-status.service.mock';

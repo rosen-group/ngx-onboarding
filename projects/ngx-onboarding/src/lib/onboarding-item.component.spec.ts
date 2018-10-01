@@ -3,7 +3,7 @@ import {OnboardingItemComponent} from './onboarding-item.component';
 import {OnboardingService} from './services';
 import {OnboardingServiceMock} from './services/onboarding.service.mock';
 import {WindowRef} from './services/window-ref.service';
-import {SeenSelectorsBaseService} from './services/seen-selectors-base-service.model';
+import {SeenSelectorsBaseService} from './services/seen-selectors-base.service';
 import {MockLocalStorageSeenSelectorsService} from './services/local-storage-seen-selectors.service.mock';
 import {OnboardingHtmlElementHelper, OnboardingItem, VisibleOnboardingItem} from './models';
 

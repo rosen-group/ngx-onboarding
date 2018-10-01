@@ -7,10 +7,11 @@ import {MatBadgeModule, MatButtonModule, MatIconModule, MatMenuModule} from '@an
 import {HttpClientModule} from '@angular/common/http';
 import {BrowserDOMSelectorService, PrimitiveTranslatePipe, PrimitiveTranslateService} from './services';
 import {WindowRef} from './services/window-ref.service';
-import {SeenSelectorsBaseService} from './services/seen-selectors-base-service.model';
+import {SeenSelectorsBaseService} from './services/seen-selectors-base.service';
 import {LocalStorageSeenSelectorsService} from './services/local-storage-seen-selectors.service';
 import {EnabledStatusBaseService} from './services/enabled-status-base-service.model';
 import {LocalStorageEnabledStatusService} from './services/local-storage-enabled-status.service';
+import {NgxUidModule} from 'ngx-uid';
 
 @NgModule({
     imports: [
@@ -19,7 +20,8 @@ import {LocalStorageEnabledStatusService} from './services/local-storage-enabled
         MatBadgeModule,
         MatIconModule,
         MatMenuModule,
-        HttpClientModule
+        HttpClientModule,
+        NgxUidModule.forRoot()
     ],
     declarations: [
         OnboardingComponent,

@@ -29,6 +29,7 @@
         "@angular/router": "^6.1.0",
         "classlist.js": "^1.1.20150312",
         "core-js": "^2.5.4",
+        "ngx-uid": "^1.1.1",
         "reflect-metadata": "^0.1.12",
         "rxjs": "^6.0.0",
         "web-animations-js": "^2.3.1",

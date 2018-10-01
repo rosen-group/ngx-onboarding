@@ -1,4 +1,4 @@
-import {SeenSelectorsBaseService} from './seen-selectors-base-service.model';
+import {SeenSelectorsBaseService} from './seen-selectors-base.service';
 import {Observable, of} from 'rxjs';
 
 export class MockLocalStorageSeenSelectorsService extends SeenSelectorsBaseService {

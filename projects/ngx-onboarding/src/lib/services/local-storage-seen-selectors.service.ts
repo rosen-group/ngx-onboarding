@@ -1,4 +1,4 @@
-import {SeenSelectorsBaseService} from './seen-selectors-base-service.model';
+import {SeenSelectorsBaseService} from './seen-selectors-base.service';
 import * as _ from 'lodash';
 import {ErrorHandler, Injectable} from '@angular/core';
 import {Observable, of} from 'rxjs';
