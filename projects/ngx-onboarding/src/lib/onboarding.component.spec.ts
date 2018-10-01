@@ -1,7 +1,7 @@
 import {async, ComponentFixture, TestBed} from '@angular/core/testing';
 import {OnboardingComponent} from './onboarding.component';
 import {MatBadgeModule, MatButtonModule, MatIconModule, MatMenuModule} from '@angular/material';
-import {BrowserDOMSelectorService, OnboardingService, PrimitiveTranslateService} from './services';
+import {BrowserDOMSelectorService, BuildInTranslatorService, OnboardingService, TranslatorBaseService} from './services';
 import {OnboardingItemComponent} from './onboarding-item.component';
 import {OnboardingServiceMock} from './services/onboarding.service.mock';
 import {of} from 'rxjs';
@@ -22,9 +22,10 @@ describe('OnboardingComponent', () => {
                 OnboardingComponent
             ],
             providers: [
-                {provide: OnboardingService, useClass: OnboardingServiceMock },
+                {provide: OnboardingService, useClass: OnboardingServiceMock},
                 BrowserDOMSelectorService,
-                PrimitiveTranslateService]
+                {provide: TranslatorBaseService, useClass: BuildInTranslatorService}
+            ]
         }).compileComponents();
     }));
 

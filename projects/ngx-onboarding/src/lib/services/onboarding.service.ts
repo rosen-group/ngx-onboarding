@@ -10,7 +10,7 @@ import {
     VisibleOnboardingItem
 } from '../models';
 import {SeenSelectorsBaseService} from './seen-selectors-base.service';
-import {EnabledStatusBaseService} from './enabled-status-base-service.model';
+import {EnabledStatusBaseService} from './enabled-status-base.service';
 import {NgxUidService} from 'ngx-uid';
 
 const addSeenSelectorDebounceTime = 1000;

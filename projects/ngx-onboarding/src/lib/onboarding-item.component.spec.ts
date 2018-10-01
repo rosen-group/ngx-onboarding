@@ -1,9 +1,7 @@
-import {async, ComponentFixture, TestBed} from '@angular/core/testing';
+import {async, ComponentFixture, inject, TestBed} from '@angular/core/testing';
 import {OnboardingItemComponent} from './onboarding-item.component';
-import {OnboardingService} from './services';
+import {BuildInTranslatorService, OnboardingService, SeenSelectorsBaseService, TranslatorBaseService, WindowRef} from './services';
 import {OnboardingServiceMock} from './services/onboarding.service.mock';
-import {WindowRef} from './services/window-ref.service';
-import {SeenSelectorsBaseService} from './services/seen-selectors-base.service';
 import {MockLocalStorageSeenSelectorsService} from './services/local-storage-seen-selectors.service.mock';
 import {OnboardingHtmlElementHelper, OnboardingItem, VisibleOnboardingItem} from './models';
 
@@ -16,7 +14,8 @@ describe('OnboardingItemComponent', () => {
             providers: [
                 {provide: OnboardingService, useClass: OnboardingServiceMock},
                 {provide: SeenSelectorsBaseService, useClass: MockLocalStorageSeenSelectorsService},
-                WindowRef,
+                {provide: TranslatorBaseService, useClass: BuildInTranslatorService},
+                WindowRef
             ]
         }).compileComponents();
     }));
@@ -101,47 +100,49 @@ describe('OnboardingItemComponent', () => {
         expect(value.transform).toBe('translate(-50%,25%)');
     });
 
-    it('getHeadline with locale a expect return value to be testHeadlineA', () => {
-        component.item = new VisibleOnboardingItem(new OnboardingItem(), null);
-        component.item.item.descriptions = [
-            {
-                language: 'a',
-                details: 'testDetailsA',
-                headline: 'testHeadlineA'
-            },
-            {
-                language: 'b',
-                details: 'testDetailsB',
-                headline: 'testHeadlineB'
-            }
-        ];
-        (component as any).locale = 'a';
+    it('getHeadline with locale a expect return value to be testHeadlineA',
+        inject([TranslatorBaseService], (translatorService: TranslatorBaseService) => {
+            spyOnProperty(translatorService, 'currentLang').and.returnValue('a');
+            component.item = new VisibleOnboardingItem(new OnboardingItem(), null);
+            component.item.item.descriptions = [
+                {
+                    language: 'a',
+                    details: 'testDetailsA',
+                    headline: 'testHeadlineA'
+                },
+                {
+                    language: 'b',
+                    details: 'testDetailsB',
+                    headline: 'testHeadlineB'
+                }
+            ];
+            const headline = component.getHeadline();
 
-        const headline = component.getHeadline();
+            expect(headline).toBe('testHeadlineA');
+        })
+    );
 
-        expect(headline).toBe('testHeadlineA');
-    });
+    it('getDetails with locale b expect return value to be testDetailsB',
+        inject([TranslatorBaseService], (translatorService: TranslatorBaseService) => {
+            spyOnProperty(translatorService, 'currentLang').and.returnValue('b');
+            component.item = new VisibleOnboardingItem(new OnboardingItem(), null);
+            component.item.item.descriptions = [
+                {
+                    language: 'a',
+                    details: 'testDetailsA',
+                    headline: 'testHeadlineA'
+                },
+                {
+                    language: 'b',
+                    details: 'testDetailsB',
+                    headline: 'testHeadlineB'
+                }
+            ];
+            const headline = component.getDetails();
 
-    it('getDetails with locale b expect return value to be testDetailsB', () => {
-        component.item = new VisibleOnboardingItem(new OnboardingItem(), null);
-        component.item.item.descriptions = [
-            {
-                language: 'a',
-                details: 'testDetailsA',
-                headline: 'testHeadlineA'
-            },
-            {
-                language: 'b',
-                details: 'testDetailsB',
-                headline: 'testHeadlineB'
-            }
-        ];
-        (component as any).locale = 'b';
-
-        const headline = component.getDetails();
-
-        expect(headline).toBe('testDetailsB');
-    });
+            expect(headline).toBe('testDetailsB');
+        })
+    );
 
     it('getTextAlignClass expect return value to be empty', () => {
         component.item = new VisibleOnboardingItem(new OnboardingItem(), null);

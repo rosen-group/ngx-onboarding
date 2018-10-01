@@ -1,5 +1,5 @@
 import {Pipe, PipeTransform} from '@angular/core';
-import {PrimitiveTranslateService} from '../services/primitive-translate.service';
+import {TranslatorBaseService} from '../services';
 
 /**
  * Pipe for internal usage to translate the text on the onboarding component like disable, enable
@@ -10,10 +10,10 @@ import {PrimitiveTranslateService} from '../services/primitive-translate.service
 })
 export class PrimitiveTranslatePipe implements PipeTransform {
 
-    constructor(private translateService: PrimitiveTranslateService) {
+    constructor(private translateService: TranslatorBaseService) {
     }
 
     public transform(query: string, ...args: any[]): any {
-        return this.translateService.translate(query);
+        return this.translateService.instant(query);
     }
 }

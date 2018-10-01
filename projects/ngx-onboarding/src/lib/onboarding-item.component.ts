@@ -1,7 +1,7 @@
-import {Component, ElementRef, Inject, Input, LOCALE_ID, ViewChild, ViewEncapsulation} from '@angular/core';
+import {Component, ElementRef, Input, ViewChild, ViewEncapsulation} from '@angular/core';
 import * as _ from 'lodash';
 import {OnboardingHtmlElementHelper, VisibleOnboardingItem} from './models';
-import {WindowRef} from './services/window-ref.service';
+import {TranslatorBaseService, WindowRef} from './services';
 
 
 const topPadding = 25;
@@ -34,7 +34,7 @@ export class OnboardingItemComponent {
     @ViewChild('container')
     private container: ElementRef;
 
-    constructor(@Inject(LOCALE_ID) private readonly locale: string, private windowRef: WindowRef) {
+    constructor(private translatorService: TranslatorBaseService, private windowRef: WindowRef) {
     }
 
     /**
@@ -106,12 +106,12 @@ export class OnboardingItemComponent {
     }
 
     public getHeadline(): string {
-        const description = _.find(this.item.item.descriptions, d => d.language === this.locale); // TODO en-EN vs en
+        const description = _.find(this.item.item.descriptions, d => d.language === this.translatorService.currentLang);
         return description ? description.headline : this.item.item.headline;
     }
 
     public getDetails(): string {
-        const description = _.find(this.item.item.descriptions, d => d.language === this.locale); // TODO en-EN vs en
+        const description = _.find(this.item.item.descriptions, d => d.language === this.translatorService.currentLang);
         return description ? description.details : this.item.item.details;
     }
 

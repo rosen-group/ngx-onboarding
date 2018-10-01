@@ -1,13 +1,14 @@
 import {AfterViewInit, Component, OnDestroy, OnInit, ViewEncapsulation} from '@angular/core';
 import {OnboardingService} from './services';
-import {VisibleOnboardingItem} from './models/visible-onboarding-item.model';
-import {OnboardingItemContainer} from './models/onboarding-item-container.model';
-import {OnboardingItem} from './models/onboarding-item.model';
+import {
+    OnboardingHtmlElementHelper,
+    OnboardingItem,
+    OnboardingItemContainer,
+    OnboardingTextConfiguration,
+    VisibleOnboardingItem
+} from './models';
 import {Subscription} from 'rxjs';
-import {OnboardingHtmlElementHelper} from './models/onboarding-html-element-helper';
 import {DomSanitizer, SafeStyle} from '@angular/platform-browser';
-import {OnboardingTextConfiguration} from './models/onboarding-text-configuration.interface';
-
 
 /**
  * Main component of the onboarding module.

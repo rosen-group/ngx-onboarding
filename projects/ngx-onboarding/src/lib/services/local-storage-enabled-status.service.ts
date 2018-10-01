@@ -1,6 +1,7 @@
-import {EnabledStatusBaseService} from './enabled-status-base-service.model';
+
 import {EMPTY, Observable, of} from 'rxjs';
 import {ErrorHandler, Injectable} from '@angular/core';
+import {EnabledStatusBaseService} from './enabled-status-base.service';
 
 /**
  * Unique key to identify the onboarding enabled status in the local storage

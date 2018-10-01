@@ -5,12 +5,16 @@ import {OnboardingButtonComponent} from './onboarding-button.component';
 import {CommonModule} from '@angular/common';
 import {MatBadgeModule, MatButtonModule, MatIconModule, MatMenuModule} from '@angular/material';
 import {HttpClientModule} from '@angular/common/http';
-import {BrowserDOMSelectorService, PrimitiveTranslateService} from './services';
-import {WindowRef} from './services/window-ref.service';
-import {SeenSelectorsBaseService} from './services/seen-selectors-base.service';
-import {LocalStorageSeenSelectorsService} from './services/local-storage-seen-selectors.service';
-import {EnabledStatusBaseService} from './services/enabled-status-base-service.model';
-import {LocalStorageEnabledStatusService} from './services/local-storage-enabled-status.service';
+import {
+    BrowserDOMSelectorService,
+    BuildInTranslatorService,
+    EnabledStatusBaseService,
+    LocalStorageEnabledStatusService,
+    LocalStorageSeenSelectorsService,
+    SeenSelectorsBaseService,
+    TranslatorBaseService,
+    WindowRef
+} from './services';
 import {NgxUidModule} from 'ngx-uid';
 import {PrimitiveTranslatePipe} from './pipes';
 
@@ -35,12 +39,15 @@ import {PrimitiveTranslatePipe} from './pipes';
     ],
     providers: [
         BrowserDOMSelectorService,
-        PrimitiveTranslateService,
         WindowRef,
         {
             provide: SeenSelectorsBaseService, useClass: LocalStorageSeenSelectorsService
-        }, {
+        },
+        {
             provide: EnabledStatusBaseService, useClass: LocalStorageEnabledStatusService
+        },
+        {
+            provide: TranslatorBaseService, useClass: BuildInTranslatorService
         }
 
     ]
