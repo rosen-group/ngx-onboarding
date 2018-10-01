@@ -1,27 +1,36 @@
-# NgxOnboardingApp
+# ngx-onboarding
 
-This Angular project is the workspace and example app to develop the ngx-onboarding library.
+Onboarding library for Angular applications
 
-## Development server
+![Onboarding example image](onboarding-demo.png)
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.
+## Usage
 
-## Code scaffolding
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
+### Configuration
 
-## Build
 
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory. Use the `--prod` flag for a production build.
+Messages can be configured in json files. See the example.json file below src/assets/onboarding/
 
-## Running unit tests
+```
+    {
+        "selector": "#button-that-needs-onboarding",
+        "group": "example1",
+        "position": "right",
+        "textAlign": "left",
+        "headline": "What is behind me?",
+        "details": "Your have to learn a lot about this button",
+        "descriptions": [
+            {
+                "language": "de",
+                "headline": "html tag headline de",
+                "details": "htmp tag details de"
+            }
+        ]
+    },
+```
 
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
 
-## Running end-to-end tests
 
-Run `ng e2e` to execute the end-to-end tests via [Protractor](http://www.protractortest.org/).
 
-## Build Library
 
-Run `build-lib` npm task to create the package in dist folder.
