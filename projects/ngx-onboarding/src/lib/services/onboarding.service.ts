@@ -19,8 +19,7 @@ const refreshTime = 2000;
 
 
 /**
- * OnboardingService:
- * The OnboardingService manages unseen onboarding items.
+ * The OnboardingService manages the configuration and the status of the onboarding component.
  *
  * The OnboardingComponent listens to the visibleItemsChanged event and retrieves new onboarding items from the visibleItems object.
  */
@@ -75,7 +74,10 @@ export class OnboardingService {
     }
 
     /**
-     * call this in your module where you import this service as provider and set global defaults like icon properties
+     * Configures the onboarding icons and fonts.
+     *
+     * If you want to change the default settings, then call this in your module where you import this
+     * service as provider and set global defaults like icon properties
      */
     public configure(configuration: OnboardingConfiguration) {
         if (typeof configuration === 'undefined') {
@@ -184,6 +186,8 @@ export class OnboardingService {
 
     /**
      * called by OnboardingComponent
+     *
+     * Disables the onboarding
      */
     public disable() {
         this.hide();
@@ -194,6 +198,8 @@ export class OnboardingService {
 
     /**
      * called by OnboardingComponent
+     *
+     * Enables the onboarding
      */
     public enable() {
         this.enabled = true;

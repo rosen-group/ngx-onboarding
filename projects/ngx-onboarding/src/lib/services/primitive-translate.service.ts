@@ -1,6 +1,9 @@
 import {Injectable} from '@angular/core';
 
 
+/**
+ * Service for the translations of internal text
+ */
 @Injectable()
 export class PrimitiveTranslateService {
 

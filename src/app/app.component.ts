@@ -2,6 +2,9 @@ import {Component, ErrorHandler, OnDestroy, OnInit, ViewEncapsulation} from '@an
 import {OnboardingItem, OnboardingService} from '../../projects/ngx-onboarding/src';
 import {HttpClient} from '@angular/common/http';
 
+/**
+ * Example component to test the onboarding component
+ */
 @Component({
     selector: 'app-root',
     templateUrl: './app.component.html',
@@ -17,24 +20,24 @@ export class AppComponent implements OnInit, OnDestroy {
                 private errorHandler: ErrorHandler) {
     }
 
-    ngOnInit() {
+    public ngOnInit() {
         this.loadAndRegisterOnboardingData();
     }
 
+    public ngOnDestroy() {
+        if (this.unregisterOnboarding) {
+            this.unregisterOnboarding();
+        }
+    }
+
     private loadAndRegisterOnboardingData() {
-        this.httpClient.get('assets/onboarding/app.json').subscribe((data) => {
+        this.httpClient.get('assets/onboarding/example.json').subscribe((data) => {
             const arr = data as Array<OnboardingItem>;
             this.unregisterOnboarding = this.onboardingService.register(arr);
         }, (error) => {
             this.infoMessage = `Onboarding: ${this.formatError(error)}`;
             this.errorHandler.handleError(error);
         });
-    }
-
-    ngOnDestroy() {
-        if (this.unregisterOnboarding) {
-            this.unregisterOnboarding();
-        }
     }
 
     private formatError(error: any): string {
@@ -54,5 +57,4 @@ export class AppComponent implements OnInit, OnDestroy {
         }
         return error;
     }
-
 }

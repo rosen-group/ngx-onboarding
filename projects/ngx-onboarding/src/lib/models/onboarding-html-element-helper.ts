@@ -6,24 +6,24 @@ export class OnboardingHtmlElementHelper {
     /**
      * true if element is visible in view (not scrolled out) or false if not
      */
-    public static isVisibleInView(ele: HTMLElement): boolean {
-        if (!ele || !ele.offsetParent) {
+    public static isVisibleInView(htmlElement: HTMLElement): boolean {
+        if (!htmlElement || !htmlElement.offsetParent) {
             return false;
         }
-        const parentTop = ele.offsetParent.scrollTop;
-        const parentBottom = parentTop + OnboardingHtmlElementHelper.getParentHeight(ele);
-        const eleTop = ele.offsetTop;
-        const eleBottom = eleTop + ele.offsetHeight;
+        const parentTop = htmlElement.offsetParent.scrollTop;
+        const parentBottom = parentTop + OnboardingHtmlElementHelper.getParentHeight(htmlElement);
+        const elementTop = htmlElement.offsetTop;
+        const elementBottom = elementTop + htmlElement.offsetHeight;
 
-        return parentTop < eleTop && parentBottom > eleBottom;
+        return parentTop < elementTop && parentBottom > elementBottom;
     }
 
     /**
      * true if element and all parents are visible in view (not scrolled out) or false if not
      */
-    public static isVisibleInViewWithParents(ele: HTMLElement): boolean {
-        let child = ele;
-        let parent = <HTMLElement>ele.offsetParent;
+    public static isVisibleInViewWithParents(htmlElement: HTMLElement): boolean {
+        let child = htmlElement;
+        let parent = <HTMLElement>htmlElement.offsetParent;
 
         /*
         https://developer.mozilla.org/en-US/docs/Web/API/HTMLElement/offsetParent:
@@ -40,7 +40,7 @@ export class OnboardingHtmlElementHelper {
                 return false;
                 // onboarding makes no sense on a prerendered server site (because the state of onboarding is always per individual)
             }
-            const style = getComputedStyle(ele);
+            const style = getComputedStyle(htmlElement);
             if (style.display === 'none') {
                 return false;
             }
@@ -60,18 +60,18 @@ export class OnboardingHtmlElementHelper {
     /**
      * returns the parent height of element or 0 if offsetParent is falsy (null, undefined, ...)
      */
-    public static getParentHeight(ele: HTMLElement) {
-        const parent: HTMLElement = <HTMLElement>ele.offsetParent;
+    public static getParentHeight(htmlElement: HTMLElement) {
+        const parent: HTMLElement = <HTMLElement>htmlElement.offsetParent;
         return parent ? parent.offsetHeight : 0;
     }
 
     /**
      * returns the position of element in document
      */
-    public static getPosition(ele: HTMLElement) {
-        let x = ele.offsetLeft;
-        let y = ele.offsetTop;
-        let parent = <HTMLElement>ele.offsetParent;
+    public static getPosition(htmlElement: HTMLElement) {
+        let x = htmlElement.offsetLeft;
+        let y = htmlElement.offsetTop;
+        let parent = <HTMLElement>htmlElement.offsetParent;
         while (parent != null) {
             x += parent.offsetLeft;
             y += parent.offsetTop - parent.scrollTop;
@@ -80,8 +80,8 @@ export class OnboardingHtmlElementHelper {
         return {
             x: x,
             y: y,
-            width: ele.offsetWidth,
-            height: ele.offsetHeight
+            width: htmlElement.offsetWidth,
+            height: htmlElement.offsetHeight
         };
     }
 

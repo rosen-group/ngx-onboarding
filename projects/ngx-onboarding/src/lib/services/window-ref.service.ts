@@ -1,15 +1,19 @@
 import {Injectable} from '@angular/core';
 
+/**
+ * return the global native browser window object
+ */
 function _window(): any {
-    // return the global native browser window object
     return window;
 }
 
+/**
+ * Abstraction of the window reference
+ */
 @Injectable()
 export class WindowRef {
 
     public get nativeWindow(): any {
         return _window();
     }
-
 }

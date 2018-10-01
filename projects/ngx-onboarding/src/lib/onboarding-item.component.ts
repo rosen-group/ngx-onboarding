@@ -4,9 +4,9 @@ import {OnboardingHtmlElementHelper, VisibleOnboardingItem} from './models';
 import {WindowRef} from './services/window-ref.service';
 
 
-const TopPadding = 25;
-const RightPadding = 25;
-const LeftPadding = 25;
+const topPadding = 25;
+const rightPadding = 25;
+const leftPadding = 25;
 
 /**
  * used by onboarding component
@@ -38,7 +38,6 @@ export class OnboardingItemComponent {
     }
 
     /**
-     * used by template
      * calculates the position of the OnboardingItemComponent
      */
     public getStyle() {
@@ -53,11 +52,11 @@ export class OnboardingItemComponent {
                 } else if (pos.x > this.getWindowScreenWidth() - this.getContainerWidth()) {
                     pos.x = this.getWindowScreenWidth() - this.getContainerWidth();
                 }
-                pos.y -= TopPadding;
+                pos.y -= topPadding;
                 transform = 'translate(-50%,-100%)';
                 break;
             case 'right':
-                pos.x += Math.min(this.item.element.offsetWidth + RightPadding, this.getWindowScreenWidth() - this.getContainerWidth() / 2);
+                pos.x += Math.min(this.item.element.offsetWidth + rightPadding, this.getWindowScreenWidth() - this.getContainerWidth() / 2);
                 pos.y += this.item.element.offsetHeight / 2;
                 if (pos.y < 0) {
                     pos.y = 0;
@@ -67,7 +66,7 @@ export class OnboardingItemComponent {
                 transform = 'translateY(-50%)';
                 break;
             case 'left':
-                pos.x -= LeftPadding;
+                pos.x -= leftPadding;
                 pos.y += this.item.element.offsetHeight / 2;
                 if (pos.y < 0) {
                     pos.y = 0;
@@ -77,8 +76,8 @@ export class OnboardingItemComponent {
                 transform = 'translate(-100%,-50%)';
                 break;
             case 'topleft':
-                pos.x -= LeftPadding;
-                pos.y -= TopPadding;
+                pos.x -= leftPadding;
+                pos.y -= topPadding;
                 if (pos.y < 0) {
                     pos.y = 0;
                 } else if (pos.y > this.getWindowScreenHeight() - this.getContainerHeight() / 2) {

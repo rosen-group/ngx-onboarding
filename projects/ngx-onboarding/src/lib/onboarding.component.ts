@@ -10,10 +10,8 @@ import {OnboardingTextConfiguration} from './models/onboarding-text-configuratio
 
 
 /**
- * OnboardingComponent
- *
- * Do not use this Component directly. Use the register method of [[OnboardingService]]
- *
+ * Main component of the onboarding module.
+ * Handles the visualization of the onboarding items
  */
 @Component({
     selector: 'rosen-onboarding',
@@ -29,7 +27,6 @@ export class OnboardingComponent implements OnInit, AfterViewInit, OnDestroy {
     public items: VisibleOnboardingItem[];
 
     /**
-     * used by template
      * if true, the "show next" button is visible
      * it false, the "got it" button is visible
      * is true, if there are more items to show
@@ -56,12 +53,8 @@ export class OnboardingComponent implements OnInit, AfterViewInit, OnDestroy {
      *  name of registered svg icon (excludes matIconeName,fontSet and fontIcon)
      */
     public svgIcon: string;
-
-    // public iconConfig: OnboardingIconConfiguration;
-    private textConfig: OnboardingTextConfiguration;
-
     public dynamicCss: SafeStyle;
-
+    private textConfig: OnboardingTextConfiguration;
     private visibleItemsChangedSubscription: Subscription;
     private allVisibleItems: OnboardingItemContainer;
 
@@ -79,7 +72,7 @@ export class OnboardingComponent implements OnInit, AfterViewInit, OnDestroy {
     }
 
     public ngOnInit() {
-        // sorry but dynamic generated css is needed because these options have be configurable
+        // Dynamic generated css is needed because these options have be configurable
         let dynCss = ``;
         // for this component
         dynCss += `<style type="text/css">`;
@@ -99,7 +92,6 @@ export class OnboardingComponent implements OnInit, AfterViewInit, OnDestroy {
             if (this.items) {
                 this.items.forEach(r => this.showItem(r)); // show first group of items
             }
-
         });
     }
 

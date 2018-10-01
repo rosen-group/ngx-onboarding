@@ -71,10 +71,10 @@ export class OnboardingItemContainer {
     /**
      * Add new group of items
      */
-    public add(arr: Array<VisibleOnboardingItem>) {
-        if (arr && arr.length > 0) {
-            this.groupedItems.push(arr);
-            this.totalCount += arr.length;
+    public add(array: Array<VisibleOnboardingItem>) {
+        if (array && array.length > 0) {
+            this.groupedItems.push(array);
+            this.totalCount += array.length;
         }
     }
 
