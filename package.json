@@ -59,5 +59,9 @@
         "tslib": "^1.9.0",
         "tslint": "~5.9.1",
         "typescript": "~2.7.2"
+    },
+    "repository": {
+        "type": "git",
+        "url": "git+https://github.com/rosen-group/ngx-onboarding.git"
     }
 }
