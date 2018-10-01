@@ -1,6 +1,6 @@
-import {HtmlElementHelper} from './onboarding-html-helper';
+import {OnboardingHtmlElementHelper} from './onboarding-html-element-helper';
 
-describe('HtmlElementHelper', () => {
+describe('OnboardingHtmlElementHelper', () => {
 
     it('expect isVisibleInView to be true', () => {
         const element = document.createElement('div');
@@ -14,7 +14,7 @@ describe('HtmlElementHelper', () => {
 
         parent.appendChild(element);
 
-        const isVisible = HtmlElementHelper.isVisibleInView(element);
+        const isVisible = OnboardingHtmlElementHelper.isVisibleInView(element);
 
         expect(isVisible).toBe(true);
     });
@@ -29,7 +29,7 @@ describe('HtmlElementHelper', () => {
         spyOnProperty(parent, 'offsetHeight').and.returnValue(500);
         spyOnProperty(element, 'offsetParent').and.returnValue(parent);
 
-        const isVisible = HtmlElementHelper.isVisibleInView(element);
+        const isVisible = OnboardingHtmlElementHelper.isVisibleInView(element);
 
         expect(isVisible).toBe(false);
     });
@@ -49,7 +49,7 @@ describe('HtmlElementHelper', () => {
         spyOnProperty(parentParent, 'offsetHeight').and.returnValue(500);
         spyOnProperty(parent, 'offsetParent').and.returnValue(parentParent);
 
-        const isVisible = HtmlElementHelper.isVisibleInViewWithParents(element);
+        const isVisible = OnboardingHtmlElementHelper.isVisibleInViewWithParents(element);
 
         expect(isVisible).toBe(true);
     });
@@ -69,7 +69,7 @@ describe('HtmlElementHelper', () => {
         spyOnProperty(parentParent, 'offsetHeight').and.returnValue(500);
         spyOnProperty(parent, 'offsetParent').and.returnValue(parentParent);
 
-        const isVisible = HtmlElementHelper.isVisibleInViewWithParents(element);
+        const isVisible = OnboardingHtmlElementHelper.isVisibleInViewWithParents(element);
 
         expect(isVisible).toBe(false);
     });
@@ -88,7 +88,7 @@ describe('HtmlElementHelper', () => {
         spyOnProperty(parent, 'offsetTop').and.returnValue(2);
         spyOnProperty(parent, 'scrollTop').and.returnValue(3);
 
-        const position = HtmlElementHelper.getPosition(element);
+        const position = OnboardingHtmlElementHelper.getPosition(element);
 
         expect(position.x).toBe(101);
         expect(position.y).toBe(199);

@@ -1,7 +1,7 @@
 /**
  * contains static helper methods for [[HTMLELement]]
  */
-export class HtmlElementHelper {
+export class OnboardingHtmlElementHelper {
 
     /**
      * true if element is visible in view (not scrolled out) or false if not
@@ -12,7 +12,7 @@ export class HtmlElementHelper {
             return false;
         }
         const parentTop = ele.offsetParent.scrollTop;
-        const parentBottom = parentTop + HtmlElementHelper.getParentHeight(ele);
+        const parentBottom = parentTop + OnboardingHtmlElementHelper.getParentHeight(ele);
         const eleTop = ele.offsetTop;
         const eleBottom = eleTop + ele.offsetHeight;
 
@@ -50,7 +50,7 @@ export class HtmlElementHelper {
 
         while (parent) {
             if (parent.scrollTop > 0) {
-                return HtmlElementHelper.isVisibleInView(child);
+                return OnboardingHtmlElementHelper.isVisibleInView(child);
             }
             child = parent;
             parent = <HTMLElement>child.offsetParent;

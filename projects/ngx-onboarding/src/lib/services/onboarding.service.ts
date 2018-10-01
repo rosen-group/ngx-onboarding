@@ -2,7 +2,13 @@ import {interval, Subscription, timer} from 'rxjs';
 import {ErrorHandler, EventEmitter, Injectable, NgZone} from '@angular/core';
 import * as _ from 'lodash';
 import {BrowserDOMSelectorService} from './browser-dom-selector.service';
-import {HtmlElementHelper, OnboardingConfiguration, OnboardingItem, OnboardingItemContainer, VisibleOnboardingItem} from '../models';
+import {
+    OnboardingConfiguration,
+    OnboardingHtmlElementHelper,
+    OnboardingItem,
+    OnboardingItemContainer,
+    VisibleOnboardingItem
+} from '../models';
 import {SeenSelectorsBaseService} from './seen-selectors-base-service.model';
 import {EnabledStatusBaseService} from './enabled-status-base-service.model';
 
@@ -134,7 +140,7 @@ export class OnboardingService {
                 _.each(groupItems, groupItem => {
                     const elements = this.browserDomSelectorService.querySelectorAll(groupItem.selector);
                     if (elements && elements.length > 0) {
-                        let element: HTMLElement = _.find(elements, (e: HTMLElement) => HtmlElementHelper.isVisibleInViewWithParents(e));
+                        let element: HTMLElement = _.find(elements, (e: HTMLElement) => OnboardingHtmlElementHelper.isVisibleInViewWithParents(e));
                         if (element) {
                             if (groupItem.toParent && element.offsetParent) {
                                 element = <HTMLElement>element.offsetParent;

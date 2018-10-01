@@ -5,7 +5,7 @@ import {OnboardingServiceMock} from './services/onboarding.service.mock';
 import {WindowRef} from './services/window-ref.service';
 import {SeenSelectorsBaseService} from './services/seen-selectors-base-service.model';
 import {MockLocalStorageSeenSelectorsService} from './services/local-storage-seen-selectors.service.mock';
-import {HtmlElementHelper, OnboardingItem, VisibleOnboardingItem} from './models';
+import {OnboardingHtmlElementHelper, OnboardingItem, VisibleOnboardingItem} from './models';
 
 describe('OnboardingItemComponent', () => {
     beforeEach(async(() => {
@@ -34,7 +34,7 @@ describe('OnboardingItemComponent', () => {
     });
 
     it('getStyle with top', () => {
-        spyOn(HtmlElementHelper, 'getPosition').and.returnValue({
+        spyOn(OnboardingHtmlElementHelper, 'getPosition').and.returnValue({
             x: 100,
             y: 200,
             width: 120,
@@ -51,7 +51,7 @@ describe('OnboardingItemComponent', () => {
     });
 
     it('getStyle with right', () => {
-        spyOn(HtmlElementHelper, 'getPosition').and.returnValue({
+        spyOn(OnboardingHtmlElementHelper, 'getPosition').and.returnValue({
             x: 100,
             y: 200,
             width: 120,
@@ -68,7 +68,7 @@ describe('OnboardingItemComponent', () => {
     });
 
     it('getStyle with left', () => {
-        spyOn(HtmlElementHelper, 'getPosition').and.returnValue({
+        spyOn(OnboardingHtmlElementHelper, 'getPosition').and.returnValue({
             x: 100,
             y: 200,
             width: 120,
@@ -85,7 +85,7 @@ describe('OnboardingItemComponent', () => {
     });
 
     it('getStyle with bottom', () => {
-        spyOn(HtmlElementHelper, 'getPosition').and.returnValue({
+        spyOn(OnboardingHtmlElementHelper, 'getPosition').and.returnValue({
             x: 100,
             y: 200,
             width: 120,

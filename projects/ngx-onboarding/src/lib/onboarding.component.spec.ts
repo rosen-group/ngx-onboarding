@@ -5,7 +5,7 @@ import {BrowserDOMSelectorService, OnboardingService, PrimitiveTranslatePipe, Pr
 import {OnboardingItemComponent} from './onboarding-item.component';
 import {OnboardingServiceMock} from './services/onboarding.service.mock';
 import {of} from 'rxjs';
-import {HtmlElementHelper, OnboardingItem, VisibleOnboardingItem} from './models';
+import {OnboardingHtmlElementHelper, OnboardingItem, VisibleOnboardingItem} from './models';
 
 describe('OnboardingComponent', () => {
     beforeEach(async(() => {
@@ -71,7 +71,7 @@ describe('OnboardingComponent', () => {
     });
 
     it('getPositionStyle expect return value.position to be fixed, ...', () => {
-        spyOn(HtmlElementHelper, 'getPosition').and.returnValue({
+        spyOn(OnboardingHtmlElementHelper, 'getPosition').and.returnValue({
             x: 1,
             y: 2,
             width: 100,

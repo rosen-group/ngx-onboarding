@@ -1,5 +1,5 @@
 export * from './onboarding-html-element.model';
-export * from './onboarding-html-helper';
+export * from './onboarding-html-element-helper';
 export * from './onboarding-item-container.model';
 export * from './onboarding-item-description.model';
 export * from './onboarding-item.model';

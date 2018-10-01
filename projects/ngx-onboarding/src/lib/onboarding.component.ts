@@ -4,9 +4,9 @@ import {VisibleOnboardingItem} from './models/visible-onboarding-item.model';
 import {OnboardingItemContainer} from './models/onboarding-item-container.model';
 import {OnboardingItem} from './models/onboarding-item.model';
 import {Subscription} from 'rxjs';
-import {HtmlElementHelper} from './models/onboarding-html-helper';
+import {OnboardingHtmlElementHelper} from './models/onboarding-html-element-helper';
 import {DomSanitizer, SafeStyle} from '@angular/platform-browser';
-import {OnboardingTextConfiguration} from './models';
+import {OnboardingTextConfiguration} from './models/onboarding-text-configuration.interface';
 
 
 /**
@@ -115,7 +115,7 @@ export class OnboardingComponent implements OnInit, AfterViewInit, OnDestroy {
      * used by template to set the position of the spotlight
      */
     public getPositionStyle(ele: HTMLElement) {
-        const pos = HtmlElementHelper.getPosition(ele);
+        const pos = OnboardingHtmlElementHelper.getPosition(ele);
         return {
             position: 'fixed',
             left: pos.x + 'px',

@@ -1,6 +1,6 @@
 import {Component, ElementRef, Inject, Input, LOCALE_ID, ViewChild, ViewEncapsulation} from '@angular/core';
 import * as _ from 'lodash';
-import {HtmlElementHelper, VisibleOnboardingItem} from './models';
+import {OnboardingHtmlElementHelper, VisibleOnboardingItem} from './models';
 import {WindowRef} from './services/window-ref.service';
 
 
@@ -42,7 +42,7 @@ export class OnboardingItemComponent {
      * calculates the position of the OnboardingItemComponent
      */
     public getStyle() {
-        const pos = HtmlElementHelper.getPosition(this.item.element);
+        const pos = OnboardingHtmlElementHelper.getPosition(this.item.element);
         let transform = 'none';
 
         switch (this.item.item.position) {
