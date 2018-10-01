@@ -5,13 +5,14 @@ import {OnboardingButtonComponent} from './onboarding-button.component';
 import {CommonModule} from '@angular/common';
 import {MatBadgeModule, MatButtonModule, MatIconModule, MatMenuModule} from '@angular/material';
 import {HttpClientModule} from '@angular/common/http';
-import {BrowserDOMSelectorService, PrimitiveTranslatePipe, PrimitiveTranslateService} from './services';
+import {BrowserDOMSelectorService, PrimitiveTranslateService} from './services';
 import {WindowRef} from './services/window-ref.service';
 import {SeenSelectorsBaseService} from './services/seen-selectors-base.service';
 import {LocalStorageSeenSelectorsService} from './services/local-storage-seen-selectors.service';
 import {EnabledStatusBaseService} from './services/enabled-status-base-service.model';
 import {LocalStorageEnabledStatusService} from './services/local-storage-enabled-status.service';
 import {NgxUidModule} from 'ngx-uid';
+import {PrimitiveTranslatePipe} from './pipes';
 
 @NgModule({
     imports: [

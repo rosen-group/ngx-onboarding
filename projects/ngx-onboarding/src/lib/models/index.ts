@@ -5,3 +5,4 @@ export * from './onboarding-item-description.model';
 export * from './onboarding-item.model';
 export * from './visible-onboarding-item.model';
 export * from './onboarding-configuration.model';
+export * from './onboarding-locale-provider.interface';

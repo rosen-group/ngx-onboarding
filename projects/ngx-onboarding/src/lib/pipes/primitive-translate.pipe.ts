@@ -1,5 +1,5 @@
 import {Pipe, PipeTransform} from '@angular/core';
-import {PrimitiveTranslateService} from './primitive-translate.service';
+import {PrimitiveTranslateService} from '../services/primitive-translate.service';
 
 /**
  * Pipe for internal usage to translate the text on the onboarding component like disable, enable
