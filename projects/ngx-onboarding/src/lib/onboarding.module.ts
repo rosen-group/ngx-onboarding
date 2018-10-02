@@ -1,10 +1,10 @@
-import {NgModule} from '@angular/core';
-import {OnboardingComponent} from './onboarding.component';
-import {OnboardingItemComponent} from './onboarding-item.component';
-import {OnboardingButtonComponent} from './onboarding-button.component';
-import {CommonModule} from '@angular/common';
-import {MatBadgeModule, MatButtonModule, MatIconModule, MatMenuModule} from '@angular/material';
-import {HttpClientModule} from '@angular/common/http';
+import { NgModule } from '@angular/core';
+import { OnboardingComponent } from './onboarding.component';
+import { OnboardingItemComponent } from './onboarding-item.component';
+import { OnboardingButtonComponent } from './onboarding-button.component';
+import { CommonModule } from '@angular/common';
+import { MatBadgeModule, MatButtonModule, MatIconModule, MatMenuModule } from '@angular/material';
+import { HttpClientModule } from '@angular/common/http';
 import {
     BrowserDOMSelectorService,
     BuildInTranslatorService,
@@ -15,9 +15,13 @@ import {
     TranslatorBaseService,
     WindowRef
 } from './services';
-import {NgxUidModule} from 'ngx-uid';
-import {PrimitiveTranslatePipe} from './pipes';
+import { NgxUidModule } from 'ngx-uid';
+import { PrimitiveTranslatePipe } from './pipes';
 
+/**
+ * Module for ngx-onboarding.
+ * Import this into your "main" module e.g. AppModule
+ */
 @NgModule({
     imports: [
         CommonModule,

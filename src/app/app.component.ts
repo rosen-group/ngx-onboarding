@@ -1,6 +1,6 @@
-import {Component, ErrorHandler, OnDestroy, OnInit, ViewEncapsulation} from '@angular/core';
-import {OnboardingItem, OnboardingService} from '../../projects/ngx-onboarding/src';
-import {HttpClient} from '@angular/common/http';
+import { Component, ErrorHandler, OnDestroy, OnInit, ViewEncapsulation } from '@angular/core';
+import { OnboardingItem, OnboardingService } from '../../projects/ngx-onboarding/src';
+import { HttpClient } from '@angular/common/http';
 
 /**
  * Example component to test the onboarding component

@@ -1,5 +1,5 @@
-import {AfterViewInit, Component, OnDestroy, OnInit, ViewEncapsulation} from '@angular/core';
-import {OnboardingService} from './services';
+import { AfterViewInit, Component, OnDestroy, OnInit, ViewEncapsulation } from '@angular/core';
+import { OnboardingService } from './services';
 import {
     OnboardingHtmlElementHelper,
     OnboardingItem,
@@ -7,8 +7,8 @@ import {
     OnboardingTextConfiguration,
     VisibleOnboardingItem
 } from './models';
-import {Subscription} from 'rxjs';
-import {DomSanitizer, SafeStyle} from '@angular/platform-browser';
+import { Subscription } from 'rxjs';
+import { DomSanitizer, SafeStyle } from '@angular/platform-browser';
 
 /**
  * Main component of the onboarding module.

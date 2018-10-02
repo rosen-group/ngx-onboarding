@@ -1,7 +1,7 @@
-import {SeenSelectorsBaseService} from './seen-selectors-base.service';
+import { SeenSelectorsBaseService } from './seen-selectors-base.service';
 import * as _ from 'lodash';
-import {ErrorHandler, Injectable} from '@angular/core';
-import {Observable, of} from 'rxjs';
+import { ErrorHandler, Injectable } from '@angular/core';
+import { Observable, of } from 'rxjs';
 
 /**
  * Unique key to identify the seen onboarding items in the local storage

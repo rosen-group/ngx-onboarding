@@ -1,7 +1,7 @@
-import {Component, ElementRef, Input, ViewChild, ViewEncapsulation} from '@angular/core';
+import { Component, ElementRef, Input, ViewChild, ViewEncapsulation } from '@angular/core';
 import * as _ from 'lodash';
-import {OnboardingHtmlElementHelper, VisibleOnboardingItem} from './models';
-import {TranslatorBaseService, WindowRef} from './services';
+import { OnboardingHtmlElementHelper, VisibleOnboardingItem } from './models';
+import { TranslatorBaseService, WindowRef } from './services';
 
 
 const topPadding = 25;

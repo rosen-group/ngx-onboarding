@@ -1,4 +1,4 @@
-import {VisibleOnboardingItem} from './visible-onboarding-item.model';
+import { VisibleOnboardingItem } from './visible-onboarding-item.model';
 
 /**
  * Container to pass visible onboarding elements from onboarding service

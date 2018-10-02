@@ -1,6 +1,5 @@
-
-import {EMPTY, Observable, of} from 'rxjs';
-import {EnabledStatusBaseService} from './enabled-status-base.service';
+import { EMPTY, Observable, of } from 'rxjs';
+import { EnabledStatusBaseService } from './enabled-status-base.service';
 
 /**
  * Mock of the EnabledStatusBaseService for unit testing

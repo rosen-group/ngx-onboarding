@@ -1,6 +1,6 @@
-import {async, inject, TestBed} from '@angular/core/testing';
-import {LocalStorageSeenSelectorsService} from './local-storage-seen-selectors.service';
-import {ErrorHandler} from '@angular/core';
+import { async, inject, TestBed } from '@angular/core/testing';
+import { LocalStorageSeenSelectorsService } from './local-storage-seen-selectors.service';
+import { ErrorHandler } from '@angular/core';
 
 describe('LocalStorageSeenSelectorsService', () => {
     beforeEach(async(() => {

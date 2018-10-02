@@ -1,31 +1,31 @@
 {
-  "name": "@rosen-group/ngx-onboarding",
-  "version": "1.0.0",
-  "description": "Onboarding module for Angular applications",
-  "homepage": "https://www.rosen-group.com",
-  "license": "MIT",
-  "author": "ROSEN Group",
-  "keywords": [
-      "ngx-onboarding",
-      "angular",
-      "onboarding",
-      "walkthrough",
-      "tutorial"
-  ],
-  "peerDependencies": {
-    "@angular/common": "^6.0.0-rc.0 || ^6.0.0",
-    "@angular/core": "^6.0.0-rc.0 || ^6.0.0",
-    "@angular/animations": "^6.1.4",
-    "@angular/cdk": "^6.4.6",
-    "@angular/compiler": "^6.1.0",
-    "@angular/forms": "^6.1.0",
-    "@angular/http": "^6.1.0",
-    "@angular/material": "^6.4.6",
-    "lodash": "^4.17.11",
-    "ngx-uid": "^1.1.1",
-    "rxjs": "^6.0.0",
-    "zone.js": "~0.8.26"
-  },
+    "name": "@rosen-group/ngx-onboarding",
+    "version": "1.0.0",
+    "description": "Onboarding module for Angular applications",
+    "homepage": "https://www.rosen-group.com",
+    "license": "MIT",
+    "author": "ROSEN Group",
+    "keywords": [
+        "ngx-onboarding",
+        "angular",
+        "onboarding",
+        "walkthrough",
+        "tutorial"
+    ],
+    "peerDependencies": {
+        "@angular/common": "^6.0.0-rc.0 || ^6.0.0",
+        "@angular/core": "^6.0.0-rc.0 || ^6.0.0",
+        "@angular/animations": "^6.1.4",
+        "@angular/cdk": "^6.4.6",
+        "@angular/compiler": "^6.1.0",
+        "@angular/forms": "^6.1.0",
+        "@angular/http": "^6.1.0",
+        "@angular/material": "^6.4.6",
+        "lodash": "^4.17.11",
+        "ngx-uid": "^1.1.1",
+        "rxjs": "^6.0.0",
+        "zone.js": "~0.8.26"
+    },
     "repository": {
         "type": "git",
         "url": "git+https://github.com/rosen-group/ngx-onboarding.git"

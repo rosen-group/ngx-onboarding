@@ -1,5 +1,5 @@
-import {SeenSelectorsBaseService} from './seen-selectors-base.service';
-import {Observable, of} from 'rxjs';
+import { SeenSelectorsBaseService } from './seen-selectors-base.service';
+import { Observable, of } from 'rxjs';
 
 /**
  * Mock of the SeenSelectorsBaseService for unit testing

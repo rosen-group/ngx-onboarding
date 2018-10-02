@@ -1,9 +1,9 @@
-import {async, ComponentFixture, inject, TestBed} from '@angular/core/testing';
-import {OnboardingItemComponent} from './onboarding-item.component';
-import {BuildInTranslatorService, OnboardingService, SeenSelectorsBaseService, TranslatorBaseService, WindowRef} from './services';
-import {OnboardingServiceMock} from './services/onboarding.service.mock';
-import {MockLocalStorageSeenSelectorsService} from './services/local-storage-seen-selectors.service.mock';
-import {OnboardingHtmlElementHelper, OnboardingItem, VisibleOnboardingItem} from './models';
+import { async, ComponentFixture, inject, TestBed } from '@angular/core/testing';
+import { OnboardingItemComponent } from './onboarding-item.component';
+import { BuildInTranslatorService, OnboardingService, SeenSelectorsBaseService, TranslatorBaseService, WindowRef } from './services';
+import { OnboardingServiceMock } from './services/onboarding.service.mock';
+import { MockLocalStorageSeenSelectorsService } from './services/local-storage-seen-selectors.service.mock';
+import { OnboardingHtmlElementHelper, OnboardingItem, VisibleOnboardingItem } from './models';
 
 describe('OnboardingItemComponent', () => {
     beforeEach(async(() => {

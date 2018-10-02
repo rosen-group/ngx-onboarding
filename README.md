@@ -41,16 +41,48 @@ For detailed information how to use Angular material please have a look at the [
 
 Add the rosen-onboarding-component anywhere to your main component, e.g. app.component
 
-```
+```html
 <rosen-onboarding></rosen-onboarding>
 ```
 
 
+Add the material icons reference to the index.html
+```html
+<link href="//fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+```
+
 The onboarding contains a button component which provides a context menu for resetting and turning on again the onboarding feature. 
 Place this button into your application where you want.
 
-```
+```html
 <rosen-onboarding-button title="ONBOARDING"></rosen-onboarding-button>
+```
+
+Add the OnboardingModule, the OnboardingService and it's dependencies to your module, e.g.
+```typescript
+    imports: [
+        BrowserModule,
+        BrowserAnimationsModule,
+        HttpClientModule,
+        MatIconModule,
+        MatButtonModule,
+        OnboardingModule
+    ],
+    providers: [OnboardingService],
+```
+
+Add some styles, e.g. to your app.component.css ()
+
+```
+@import "~@angular/material/prebuilt-themes/indigo-pink.css";
+```
+
+And don't forget to bundle it to your output, e.g. in your angular.json
+```
+"styles": [
+ "src/styles.css",
+ "node_modules/@angular/material/prebuilt-themes/indigo-pink.css"
+]
 ```
 
 The messages will be configured in json files.
@@ -58,7 +90,7 @@ The messages will be configured in json files.
 Place the json file(s) where you are able to load them on application runtime. 
 
 ### Example
-```
+```JSON
 [
     {
         "selector": "#logo-img",
@@ -91,6 +123,7 @@ Place the json file(s) where you are able to load them on application runtime.
     }
 ]
 ```
+(Use a _selector_ that exists in your application, e.g. h2 in a plain Angular-CLI application)
 
 ### Property descriptions
 
@@ -109,7 +142,7 @@ Place the json file(s) where you are able to load them on application runtime.
 
 Inject the OnboardingService into your component and load the configuration json file.
 
-```
+```typescript
 export class AppComponent implements OnInit, OnDestroy {
      private unregisterOnboarding: Function;
     
@@ -145,4 +178,4 @@ See [I18N instructions](I18N.md)
 - Internet Explorer 11 (with polyfills)
 
 ## For Contributors
-See [CONTRIBUTING.md](https://github.com/rosen-group/ngx-onboarding) (todo: Link to file)
+See [CONTRIBUTING](CONTRIBUTING.md)

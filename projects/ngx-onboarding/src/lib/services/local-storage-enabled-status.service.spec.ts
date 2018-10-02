@@ -1,6 +1,6 @@
-import {async, inject, TestBed} from '@angular/core/testing';
-import {LocalStorageEnabledStatusService} from './local-storage-enabled-status.service';
-import {ErrorHandler} from '@angular/core';
+import { async, inject, TestBed } from '@angular/core/testing';
+import { LocalStorageEnabledStatusService } from './local-storage-enabled-status.service';
+import { ErrorHandler } from '@angular/core';
 
 describe('LocalStorageEnabledStatusService', () => {
     beforeEach(async(() => {

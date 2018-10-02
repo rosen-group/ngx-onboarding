@@ -1,7 +1,7 @@
 /**
  * Base interface for translatorservice (used for core ngx-onboarding labels)
  */
-import {EventEmitter} from '@angular/core';
+import { EventEmitter } from '@angular/core';
 
 export abstract class TranslatorBaseService {
 
@@ -10,6 +10,11 @@ export abstract class TranslatorBaseService {
      * the argument has the minimium properties lang: string (where lang is the new language code)
      */
     abstract onLangChange: EventEmitter<{ lang: string }>;
+
+    /**
+     * The language (code) currently used
+     */
+    abstract get currentLang(): string;
 
     /**
      * Returns a translation instantly from the internal state of loaded translation.
@@ -25,10 +30,5 @@ export abstract class TranslatorBaseService {
      'ONBOARDING_CLEAR': 'Reset'
      */
     abstract instant(key: string): string;
-
-    /**
-     * The language (code) currently used
-     */
-    abstract get currentLang(): string;
 
 }

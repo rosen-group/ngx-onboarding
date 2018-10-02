@@ -1,5 +1,5 @@
-import {OnboardingIconConfiguration} from './onboarding-icon-configuration.interface';
-import {OnboardingTextConfiguration} from './onboarding-text-configuration.interface';
+import { OnboardingIconConfiguration } from './onboarding-icon-configuration.interface';
+import { OnboardingTextConfiguration } from './onboarding-text-configuration.interface';
 
 /**
  * global configuration parameters for onboarding

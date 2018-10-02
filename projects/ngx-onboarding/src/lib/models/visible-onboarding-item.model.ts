@@ -1,4 +1,4 @@
-import {OnboardingItem} from './onboarding-item.model';
+import { OnboardingItem } from './onboarding-item.model';
 
 export class VisibleOnboardingItem {
 

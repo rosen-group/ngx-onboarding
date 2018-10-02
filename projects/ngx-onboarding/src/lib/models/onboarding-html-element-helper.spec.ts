@@ -1,4 +1,4 @@
-import {OnboardingHtmlElementHelper} from './onboarding-html-element-helper';
+import { OnboardingHtmlElementHelper } from './onboarding-html-element-helper';
 
 describe('OnboardingHtmlElementHelper', () => {
 

@@ -1,4 +1,4 @@
-import {Observable} from 'rxjs';
+import { Observable } from 'rxjs';
 
 /**
  * Base class for storing the onboarding item seen status. Can be overridden with own implementations
