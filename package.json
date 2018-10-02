@@ -2,6 +2,12 @@
     "name": "ngx-onboarding-app",
     "version": "1.0.0",
     "license": "MIT",
+    "author": "ROSEN Group",
+    "keywords": [
+        "ngx-onboarding",
+        "angular-onboarding",
+        "onboarding"
+    ],
     "scripts": {
         "ng": "ng",
         "start": "ng serve",
@@ -11,7 +17,7 @@
         "lint": "ng lint",
         "e2e": "ng e2e",
         "clean-dist": "rimraf dist",
-        "build-lib": "ng build --prod ngx-onboarding",
+        "build-lib": "ng build --prod ngx-onboarding && copyfiles *.md LICENSE.txt onboarding-demo.png dist/ngx-onboarding",
         "npm-pack": "cd dist/ngx-onboarding && npm pack",
         "package": "npm run clean-dist && npm run build-lib && npm run npm-pack"
     },
@@ -45,6 +51,7 @@
         "@types/jasminewd2": "~2.0.3",
         "@types/node": "~8.9.4",
         "codelyzer": "~4.2.1",
+        "copyfiles": "^2.1.0",
         "jasmine-core": "~2.99.1",
         "jasmine-spec-reporter": "~4.2.1",
         "karma": "~1.7.1",

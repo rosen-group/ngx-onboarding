@@ -31,9 +31,8 @@ export class AppComponent implements OnInit, OnDestroy {
     }
 
     private loadAndRegisterOnboardingData() {
-        this.httpClient.get('assets/onboarding/example.json').subscribe((data) => {
-            const arr = data as Array<OnboardingItem>;
-            this.unregisterOnboarding = this.onboardingService.register(arr);
+        this.httpClient.get('assets/onboarding/example.json').subscribe((onboardingItems: Array<OnboardingItem>) => {
+            this.unregisterOnboarding = this.onboardingService.register(onboardingItems);
         }, (error) => {
             this.infoMessage = `Onboarding: ${this.formatError(error)}`;
             this.errorHandler.handleError(error);
