@@ -168,7 +168,7 @@ export class AppComponent implements OnInit, OnDestroy {
 
 ## Translations (I18N)
 
-See [I18N instructions](https://raw.githubusercontent.com/rosen-group/ngx-onboarding/master/I18N.md)
+See [I18N instructions](https://github.com/rosen-group/ngx-onboarding/blob/master/I18N.md)
 
 ## Browser Support
 
@@ -178,4 +178,4 @@ See [I18N instructions](https://raw.githubusercontent.com/rosen-group/ngx-onboar
 - Internet Explorer 11 (with polyfills)
 
 ## For Contributors
-See [CONTRIBUTING](https://raw.githubusercontent.com/rosen-group/ngx-onboarding/master/CONTRIBUTING.md)
+See [CONTRIBUTING](https://github.com/rosen-group/ngx-onboarding/blob/master/CONTRIBUTING.md)
