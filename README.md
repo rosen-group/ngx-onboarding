@@ -2,7 +2,7 @@
 
 An onboarding library for Angular applications.
 
-![Onboarding example image](onboarding-demo.png)
+![Onboarding example image](https://raw.githubusercontent.com/rosen-group/ngx-onboarding/master/onboarding-demo.png)
 
 ## Overview
 
@@ -168,7 +168,7 @@ export class AppComponent implements OnInit, OnDestroy {
 
 ## Translations (I18N)
 
-See [I18N instructions](I18N.md)
+See [I18N instructions](https://raw.githubusercontent.com/rosen-group/ngx-onboarding/master/I18N.md)
 
 ## Browser Support
 
@@ -178,4 +178,4 @@ See [I18N instructions](I18N.md)
 - Internet Explorer 11 (with polyfills)
 
 ## For Contributors
-See [CONTRIBUTING](CONTRIBUTING.md)
+See [CONTRIBUTING](https://raw.githubusercontent.com/rosen-group/ngx-onboarding/master/CONTRIBUTING.md)
