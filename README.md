@@ -33,7 +33,6 @@ npm install --save @rosen-group/ngx-onboarding
 
 - [angular-material](https://www.npmjs.com/package/angular-material)
 - [@angular/cdk](https://www.npmjs.com/package/@angular/cdk)
-- [ngx-uid](https://www.npmjs.com/package/ngx-uid)
 
 For detailed information how to use Angular material please have a look at the [Angular material getting started page](https://material.angular.io/guide/getting-started) and follow the installations instructions.
 
@@ -67,8 +66,7 @@ Add the OnboardingModule, the OnboardingService and it's dependencies to your mo
         MatIconModule,
         MatButtonModule,
         OnboardingModule
-    ],
-    providers: [OnboardingService],
+    ]
 ```
 
 Add some styles, e.g. to your app.component.css ()

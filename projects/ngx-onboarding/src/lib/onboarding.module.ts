@@ -15,7 +15,6 @@ import {
     TranslatorBaseService,
     WindowRef
 } from './services';
-import { NgxUidModule } from 'ngx-uid';
 import { PrimitiveTranslatePipe } from './pipes';
 
 /**
@@ -29,8 +28,7 @@ import { PrimitiveTranslatePipe } from './pipes';
         MatBadgeModule,
         MatIconModule,
         MatMenuModule,
-        HttpClientModule,
-        NgxUidModule.forRoot()
+        HttpClientModule
     ],
     declarations: [
         OnboardingComponent,

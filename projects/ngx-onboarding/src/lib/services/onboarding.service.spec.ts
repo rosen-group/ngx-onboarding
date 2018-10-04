@@ -5,7 +5,6 @@ import { OnboardingItem } from '../models';
 import { SeenSelectorsBaseService } from './seen-selectors-base.service';
 import { MockLocalStorageSeenSelectorsService } from './local-storage-seen-selectors.service.mock';
 import { MockLocalStorageEnabledStatusService } from './local-storage-enabled-status.service.mock';
-import { NgxUidService } from 'ngx-uid';
 import { EnabledStatusBaseService } from './enabled-status-base.service';
 
 describe('OnboardingService', () => {
@@ -14,7 +13,6 @@ describe('OnboardingService', () => {
             providers: [
                 BrowserDOMSelectorService,
                 OnboardingService,
-                NgxUidService,
                 {provide: SeenSelectorsBaseService, useClass: MockLocalStorageSeenSelectorsService},
                 {provide: EnabledStatusBaseService, useClass: MockLocalStorageEnabledStatusService}
             ],
