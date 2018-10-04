@@ -1,7 +1,7 @@
-import { interval, Subscription, timer } from 'rxjs';
-import { ErrorHandler, EventEmitter, Injectable, NgZone } from '@angular/core';
+import {interval, Subscription, timer} from 'rxjs';
+import {ErrorHandler, EventEmitter, Injectable, NgZone} from '@angular/core';
 import * as _ from 'lodash';
-import { BrowserDOMSelectorService } from './browser-dom-selector.service';
+import {BrowserDOMSelectorService} from './browser-dom-selector.service';
 import {
     OnboardingConfiguration,
     OnboardingHtmlElementHelper,
@@ -9,9 +9,8 @@ import {
     OnboardingItemContainer,
     VisibleOnboardingItem
 } from '../models';
-import { SeenSelectorsBaseService } from './seen-selectors-base.service';
-import { EnabledStatusBaseService } from './enabled-status-base.service';
-import { NgxUidService } from 'ngx-uid';
+import {SeenSelectorsBaseService} from './seen-selectors-base.service';
+import {EnabledStatusBaseService} from './enabled-status-base.service';
 
 const addSeenSelectorDebounceTime = 1000;
 const enabledChangedDebounceTime = 1000;
@@ -39,7 +38,6 @@ export class OnboardingService {
      * called by OnboardingComponent
      */
     public visibleItemsChanged = new EventEmitter();
-    public readonly instanceId: string;
     private addSeenSelectorDebounceSubscription: Subscription;
     private enabledChangedDebounceSubscription: Subscription;
     private refreshSubscription: Subscription;
@@ -65,9 +63,7 @@ export class OnboardingService {
                 private loadAndSaveSeenSelectorsService: SeenSelectorsBaseService,
                 private loadAndSaveEnabledStatusService: EnabledStatusBaseService,
                 private errorHandler: ErrorHandler,
-                private zone: NgZone,
-                uidService: NgxUidService) {
-        this.instanceId = uidService.next();
+                private zone: NgZone) {
         this.configuration = this.defaultConfiguration;
         /* this is the default setting. can be changed by configure()*/
         this.init();

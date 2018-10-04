@@ -1,12 +1,11 @@
-import { async, inject, TestBed } from '@angular/core/testing';
-import { OnboardingService } from './onboarding.service';
-import { BrowserDOMSelectorService } from './browser-dom-selector.service';
-import { OnboardingItem } from '../models';
-import { SeenSelectorsBaseService } from './seen-selectors-base.service';
-import { MockLocalStorageSeenSelectorsService } from './local-storage-seen-selectors.service.mock';
-import { MockLocalStorageEnabledStatusService } from './local-storage-enabled-status.service.mock';
-import { NgxUidService } from 'ngx-uid';
-import { EnabledStatusBaseService } from './enabled-status-base.service';
+import {async, inject, TestBed} from '@angular/core/testing';
+import {OnboardingService} from './onboarding.service';
+import {BrowserDOMSelectorService} from './browser-dom-selector.service';
+import {OnboardingItem} from '../models';
+import {SeenSelectorsBaseService} from './seen-selectors-base.service';
+import {MockLocalStorageSeenSelectorsService} from './local-storage-seen-selectors.service.mock';
+import {MockLocalStorageEnabledStatusService} from './local-storage-enabled-status.service.mock';
+import {EnabledStatusBaseService} from './enabled-status-base.service';
 
 describe('OnboardingService', () => {
     beforeEach(async(() => {
@@ -14,7 +13,6 @@ describe('OnboardingService', () => {
             providers: [
                 BrowserDOMSelectorService,
                 OnboardingService,
-                NgxUidService,
                 {provide: SeenSelectorsBaseService, useClass: MockLocalStorageSeenSelectorsService},
                 {provide: EnabledStatusBaseService, useClass: MockLocalStorageEnabledStatusService}
             ],
