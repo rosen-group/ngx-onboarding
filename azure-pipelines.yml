@@ -15,6 +15,19 @@ steps:
 - script: |
     npm install -g @angular/cli
     npm install
-    ng test ngx-onboarding --watch=false --browsers=ChromeHeadless
+    ng test ngx-onboarding --watch=false --browsers=ChromeHeadless --code-coverage
     npm run package
   displayName: 'test, build & package'
+
+- task: PublishTestResults@2
+  inputs:
+      testRunner: JUnit
+      testResultsFiles: ./reports/junit.xml
+  displayName: 'Publish test results'
+
+- task: PublishCodeCoverageResults@1
+  inputs:
+      codeCoverageTool: Cobertura
+      summaryFileLocation: '$(System.DefaultWorkingDirectory)/**/*coverage.xml'
+      reportDirectory: '$(System.DefaultWorkingDirectory)/**/coverage'
+  displayName: 'Publish test coverage'
