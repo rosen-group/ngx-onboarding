@@ -10,7 +10,6 @@ export class OnboardingServiceMock {
 
     public readonly visibleItems = new OnboardingItemContainer();
     public visibleItemsChanged = new EventEmitter();
-    public readonly instanceId: string;
 
     public get registeredItemsCount(): number {
         return 1;
