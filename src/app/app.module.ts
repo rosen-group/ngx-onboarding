@@ -2,7 +2,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 
 import { AppComponent } from './app.component';
-import { OnboardingModule, OnboardingService } from '../../projects/ngx-onboarding/src';
+import { OnboardingModule } from '../../projects/ngx-onboarding/src';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MatButtonModule, MatIconModule } from '@angular/material';
 import { HttpClientModule } from '@angular/common/http';
@@ -22,7 +22,7 @@ import { HttpClientModule } from '@angular/common/http';
         MatButtonModule,
         HttpClientModule
     ],
-    providers: [OnboardingService],
+    providers: [],
     bootstrap: [AppComponent]
 })
 export class AppModule {

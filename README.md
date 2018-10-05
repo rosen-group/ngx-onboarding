@@ -66,8 +66,7 @@ Add the OnboardingModule, the OnboardingService and it's dependencies to your mo
         MatIconModule,
         MatButtonModule,
         OnboardingModule
-    ],
-    providers: [OnboardingService],
+    ]
 ```
 
 Add some styles, e.g. to your app.component.css ()
