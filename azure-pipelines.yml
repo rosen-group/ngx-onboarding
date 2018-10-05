@@ -16,5 +16,5 @@ steps:
     npm install -g @angular/cli
     npm install
     npm version patch
-    npm package
+    npm run package
   displayName: 'build and package'
