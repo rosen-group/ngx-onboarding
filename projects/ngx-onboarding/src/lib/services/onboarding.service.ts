@@ -1,7 +1,7 @@
-import {interval, Subscription, timer} from 'rxjs';
-import {ErrorHandler, EventEmitter, Injectable, NgZone} from '@angular/core';
+import { interval, Subscription, timer } from 'rxjs';
+import { ErrorHandler, EventEmitter, Injectable, NgZone } from '@angular/core';
 import * as _ from 'lodash';
-import {BrowserDOMSelectorService} from './browser-dom-selector.service';
+import { BrowserDOMSelectorService } from './browser-dom-selector.service';
 import {
     OnboardingConfiguration,
     OnboardingHtmlElementHelper,
@@ -9,8 +9,8 @@ import {
     OnboardingItemContainer,
     VisibleOnboardingItem
 } from '../models';
-import {SeenSelectorsBaseService} from './seen-selectors-base.service';
-import {EnabledStatusBaseService} from './enabled-status-base.service';
+import { SeenSelectorsBaseService } from './seen-selectors-base.service';
+import { EnabledStatusBaseService } from './enabled-status-base.service';
 
 const addSeenSelectorDebounceTime = 1000;
 const enabledChangedDebounceTime = 1000;
