@@ -6,7 +6,7 @@ An onboarding library for Angular applications.
 
 ## Overview
 
-The Onboarding library gives you the possibility to add a tutorial directly into your angular application. 
+The onboarding library gives you the possibility to add a tutorial directly into your angular application. 
 After that users learn easily how to use your application and the learning curve is not so high.
 
 You can specify an onboarding element on every html element you want.
@@ -38,7 +38,7 @@ For detailed information how to use Angular material please have a look at the [
 
 ## Usage
 
-Add the rosen-onboarding-component anywhere to your main component, e.g. app.component
+Add the `rosen-onboarding-component` anywhere to your main component, e.g. app.component
 
 ```html
 <rosen-onboarding></rosen-onboarding>
@@ -50,14 +50,14 @@ Add the material icons reference to the index.html
 <link href="//fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 ```
 
-The onboarding contains a button component which provides a context menu for resetting and turning on again the onboarding feature. 
+The onboarding library contains a button component which provides a context menu for resetting and turning on/off the onboarding feature. 
 Place this button into your application where you want.
 
 ```html
 <rosen-onboarding-button title="ONBOARDING"></rosen-onboarding-button>
 ```
 
-Add the OnboardingModule, the OnboardingService and it's dependencies to your module, e.g.
+Add the `OnboardingModule` and it's dependencies to your module, e.g.
 ```typescript
     imports: [
         BrowserModule,
@@ -83,11 +83,11 @@ And don't forget to bundle it to your output, e.g. in your angular.json
 ]
 ```
 
-The messages will be configured in json files.
+The messages will be configured in JSON files.
 
-Place the json file(s) where you are able to load them on application runtime. 
+Place the JSON file(s) where you are able to load them during application runtime. For example if you are using angular-cli, copy them in an assets subfolder and add the folder to your assets array in the `angular.json` config file.
 
-### Example
+### Example for JSON configuration file containing onboarding messages
 ```JSON
 [
     {
@@ -138,7 +138,7 @@ Place the json file(s) where you are able to load them on application runtime.
 |  -- headline | string  | null  | Translated headline text for a single onboarding item |
 |  -- details | string  | null  | Translated details text for a single onboarding item|
 
-Inject the OnboardingService into your component and load the configuration json file.
+Inject the `OnboardingService` into your component and load the configuration JSON file.
 
 ```typescript
 export class AppComponent implements OnInit, OnDestroy {
