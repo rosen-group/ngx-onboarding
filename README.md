@@ -10,8 +10,8 @@ An onboarding library for Angular applications.
 
 ## Overview
 
-The onboarding library gives you the possibility to add a tutorial directly into your angular application. 
-After that users learn easily how to use your application and the learning curve is not so high.
+The onboarding library gives you the possibility to add a tutorial directly into your angular application.
+After that, users learn easily how to use your application and the learning curve is not so steep.
 
 You can specify an onboarding element on every html element you want.
 
@@ -21,9 +21,9 @@ You can specify an onboarding element on every html element you want.
 - Highlighting of every step.
 - Configurable on which position (top, bottom, left or right) the information text should be displayed.
 - Multiple language support
-- If onboarding is enabled, buttons are visible to switch to the next step or turn off onboarding
-- If a user has seen the onboarding of a view, it will be stored per default to the local storage of the browser.
-- Possibility to reset and turn on again the onboarding.
+- If onboarding is enabled, buttons for going to the next step and for turning off the onboarding become visible.
+- If a user has seen the onboarding of a view, it will by default be stored  in the local storage of the browser.
+- Possibility to reset and again turn on the onboarding.
 
 ## Installation
 
@@ -38,7 +38,7 @@ npm install --save @rosen-group/ngx-onboarding
 - [angular-material](https://www.npmjs.com/package/angular-material)
 - [@angular/cdk](https://www.npmjs.com/package/@angular/cdk)
 
-For detailed information how to use Angular material please have a look at the [Angular material getting started page](https://material.angular.io/guide/getting-started) and follow the installations instructions.
+For detailed information on how to use the Angular material, please refer to the [Angular material getting started page](https://material.angular.io/guide/getting-started) and follow the installations instructions.
 
 ## Usage
 
@@ -54,8 +54,8 @@ Add the material icons reference to the index.html
 <link href="//fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 ```
 
-The onboarding library contains a button component which provides a context menu for resetting and turning on/off the onboarding feature. 
-Place this button into your application where you want.
+The onboarding library contains a button component, which provides a context menu for resetting and turning on/off the onboarding feature. 
+Place this button in the desired position in your application.
 
 ```html
 <rosen-onboarding-button title="ONBOARDING"></rosen-onboarding-button>
@@ -89,7 +89,7 @@ And don't forget to bundle it to your output, e.g. in your angular.json
 
 The messages will be configured in JSON files.
 
-Place the JSON file(s) where you are able to load them during application runtime. For example if you are using angular-cli, copy them in an assets subfolder and add the folder to your assets array in the `angular.json` config file.
+Place the JSON file(s) where you are able to load them during application runtime. For example, if you are using angular-cli, copy them in an assets subfolder and add the folder to your assets array in the angular.json config file.
 
 ### Example for JSON configuration file containing onboarding messages
 ```JSON
@@ -131,14 +131,14 @@ Place the JSON file(s) where you are able to load them during application runtim
 
 |  Property | Type | Default value   | Description  |
 |---|---|---|---|
-|  selector |  string | null  | The css selector which identifies the html element you want to describe. |
+|  selector |  string | null  | The CSS selector, which identifies the html element you want to describe |
 |  group | string  |  null | Groups in the same view will be displayed together |
 |  position | top / bottom / right / left  |  bottom | Positioning of the headline and details |
 |  textAlign | left / right / center | center  | Alignment of the headline and details |
 | headline  |  string | null  | Headline text for a single onboarding item |
 | details  | string  |  null | Details text for a single onboarding item|
 | descriptions  | Array  | null  | Collection of additional translations for headline and detail text |
-|  -- language | string  | null  | Language key, e.g. en or de related to your translation definition |
+|  -- language | string  | null  | Language key, e.g. en or de, related to your translation definition |
 |  -- headline | string  | null  | Translated headline text for a single onboarding item |
 |  -- details | string  | null  | Translated details text for a single onboarding item|
 
