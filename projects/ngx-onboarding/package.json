@@ -10,7 +10,9 @@
         "angular",
         "onboarding",
         "walkthrough",
-        "tutorial"
+        "tutorial",
+        "tour",
+        "guided"
     ],
     "peerDependencies": {
         "@angular/common": "^6.0.0 || ^7.0.0",
