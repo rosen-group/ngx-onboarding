@@ -13,6 +13,7 @@
     "start": "ng serve",
     "build": "ng build",
     "test": "ng test ngx-onboarding",
+      "test-coverage-report": "ng test ngx-onboarding --code-coverage --watch=false",
     "test-app": "ng test",
     "lint": "ng lint",
     "e2e": "ng e2e",

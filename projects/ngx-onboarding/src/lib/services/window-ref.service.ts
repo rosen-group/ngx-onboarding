@@ -10,7 +10,9 @@ function _window(): any {
 /**
  * Abstraction of the window reference
  */
-@Injectable()
+@Injectable(
+    {providedIn: 'root' /* makes sure that service stays a single instance among seperate modules */}
+)
 export class WindowRef {
 
     public get nativeWindow(): any {

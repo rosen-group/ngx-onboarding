@@ -5,7 +5,16 @@ import { Observable } from 'rxjs';
  * if you don't want to store the settings in the local storage
  */
 export abstract class EnabledStatusBaseService {
-    abstract save(enabled: boolean): Observable<never>;
 
+    /**
+     * saves the status to a persistent storage
+     * @returns success of the operation (true = good, false = failed)
+     */
+    abstract save(enabled: boolean): Observable<boolean>;
+
+    /**
+     * loads the status from the persistent storage
+     * @returns status (true = enabled, false = disabled)
+     */
     abstract load(): Observable<boolean>;
 }

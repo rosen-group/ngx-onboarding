@@ -1,4 +1,4 @@
-import { EMPTY, Observable, of } from 'rxjs';
+import { Observable, of } from 'rxjs';
 import { EnabledStatusBaseService } from './enabled-status-base.service';
 
 /**
@@ -10,7 +10,7 @@ export class MockLocalStorageEnabledStatusService extends EnabledStatusBaseServi
         return of(true);
     }
 
-    public save(enabled: boolean): Observable<never> {
-        return EMPTY;
+    public save(enabled: boolean): Observable<boolean> {
+        return of(true);
     }
 }

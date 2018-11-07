@@ -5,7 +5,9 @@ import { TranslatorBaseService } from './translator-base.service';
 /**
  * Service for the translations of internal text
  */
-@Injectable()
+@Injectable(
+    {providedIn: 'root' /* makes sure that service stays a single instance among seperate modules */}
+)
 export class BuildInTranslatorService extends TranslatorBaseService {
 
     /**
