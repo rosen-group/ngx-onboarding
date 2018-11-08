@@ -23,7 +23,7 @@ const refreshTime = 2000;
  * The OnboardingComponent listens to the visibleItemsChanged event and retrieves new onboarding items from the visibleItems object.
  */
 @Injectable({
-    providedIn: 'root'
+    providedIn: 'root' /* makes sure that service stays a single instance among seperate modules */
 })
 export class OnboardingService {
 

@@ -22,6 +22,10 @@ export class LocalStorageSeenSelectorsService extends SeenSelectorsBaseService {
         super();
     }
 
+    /**
+     * loads seen items from localStorage
+     * @returns string array of all seen selectors
+     */
     public load(): Observable<Array<string>> {
         const seenSelectorsString = localStorage.getItem(seenSelectorsLocalStorageKey);
         if (!_.isEmpty(seenSelectorsString)) {
@@ -34,6 +38,10 @@ export class LocalStorageSeenSelectorsService extends SeenSelectorsBaseService {
         return of([]);
     }
 
+    /**
+     * save items to localStorage
+     * @returns success of the operation (true = good, false = failed)
+     */
     public save(seenSelectors: Array<string>): Observable<boolean> {
         try {
             localStorage.setItem(seenSelectorsLocalStorageKey, JSON.stringify(seenSelectors));
