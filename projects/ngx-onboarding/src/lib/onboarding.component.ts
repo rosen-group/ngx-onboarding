@@ -1,5 +1,5 @@
-import { AfterViewInit, Component, OnDestroy, OnInit, ViewEncapsulation } from '@angular/core';
-import { OnboardingService } from './services';
+import {AfterViewInit, Component, OnDestroy, OnInit, ViewEncapsulation} from '@angular/core';
+import {OnboardingService} from './services';
 import {
     OnboardingHtmlElementHelper,
     OnboardingItem,
@@ -7,8 +7,10 @@ import {
     OnboardingTextConfiguration,
     VisibleOnboardingItem
 } from './models';
-import { Subscription } from 'rxjs';
-import { DomSanitizer, SafeStyle } from '@angular/platform-browser';
+import {Subscription} from 'rxjs';
+import {DomSanitizer, SafeStyle} from '@angular/platform-browser';
+import {OnboardingButtonsPosition} from './models/onboarding-buttons-position.enum';
+import {OnboardingButtonsConfiguration} from './models/onboarding-buttons-configuration.interface';
 
 /**
  * Main component of the onboarding module.
@@ -56,6 +58,7 @@ export class OnboardingComponent implements OnInit, AfterViewInit, OnDestroy {
     public svgIcon: string;
     public dynamicCss: SafeStyle;
     private textConfig: OnboardingTextConfiguration;
+    private buttonConfig: OnboardingButtonsConfiguration;
     private visibleItemsChangedSubscription: Subscription;
     private allVisibleItems: OnboardingItemContainer;
 
@@ -63,6 +66,7 @@ export class OnboardingComponent implements OnInit, AfterViewInit, OnDestroy {
         this.items = [];
         const config = onboardingService.getConfiguration();
         this.textConfig = config.textConfiguration;
+        this.buttonConfig = config.buttonsConfiguration;
         if (config.iconConfiguration) { // we expect the config to be present always but just in case
             this.matIconName = config.iconConfiguration.matIconName;
             this.fontSet = config.iconConfiguration.fontSet;
@@ -154,6 +158,56 @@ export class OnboardingComponent implements OnInit, AfterViewInit, OnDestroy {
             this.onboardingService.hide(); // mark all items as seen...
             this.items = [];
             this.hasNext = false;
+        }
+    }
+
+    public buttonsPositionStyle(): any {
+        switch (this.buttonConfig.position) {
+            case OnboardingButtonsPosition.Bottom:
+                return {
+                    bottom: this.buttonConfig.verticalDistanceToBorderInPx + 'px',
+                    left: '50%',
+                    transform: 'translateX(-50%)',
+                };
+            case OnboardingButtonsPosition.BottomLeft:
+                return {
+                    bottom: this.buttonConfig.verticalDistanceToBorderInPx + 'px',
+                    left: this.buttonConfig.horizontalDistanceToBorderInPx + 'px',
+                };
+            case OnboardingButtonsPosition.Left:
+                return {
+                    top: '50%',
+                    transform: 'translateY(-50%)',
+                    left: this.buttonConfig.horizontalDistanceToBorderInPx + 'px'
+                };
+            case OnboardingButtonsPosition.TopLeft:
+                return {
+                    top: this.buttonConfig.verticalDistanceToBorderInPx + 'px',
+                    left: this.buttonConfig.horizontalDistanceToBorderInPx + 'px'
+                };
+            case OnboardingButtonsPosition.Top:
+                return {
+                    top: this.buttonConfig.verticalDistanceToBorderInPx + 'px',
+                    left: '50%',
+                    transform: 'translateX(-50%)',
+                };
+            case OnboardingButtonsPosition.TopRight:
+                return {
+                    top: this.buttonConfig.verticalDistanceToBorderInPx + 'px',
+                    right: this.buttonConfig.horizontalDistanceToBorderInPx + 'px'
+                };
+            case OnboardingButtonsPosition.Right:
+                return {
+                    top: '50%',
+                    transform: 'translateY(-50%)',
+                    right: this.buttonConfig.horizontalDistanceToBorderInPx + 'px'
+                };
+            case OnboardingButtonsPosition.BottomRight:
+            default:
+                return {
+                    bottom: this.buttonConfig.verticalDistanceToBorderInPx + 'px',
+                    right: this.buttonConfig.horizontalDistanceToBorderInPx + 'px'
+                };
         }
     }
 
