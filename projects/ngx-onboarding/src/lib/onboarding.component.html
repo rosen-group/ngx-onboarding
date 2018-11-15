@@ -16,7 +16,7 @@
         </div>
     </div>
     <div class="onboarding-overlay" (click)="hide()"></div>
-    <div class="onboarding-buttons">
+    <div class="onboarding-buttons" [ngStyle]="buttonsPositionStyle()">
         <button *ngIf="onboardingService.isEnabled() && items && items.length > 0" mat-flat-button color="warn"
                 (click)="disable()">{{'ONBOARDING_DO_NOT_SHOW_AGAIN_MSG' |translate}}
         </button>

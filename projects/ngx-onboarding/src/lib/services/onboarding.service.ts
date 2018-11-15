@@ -1,7 +1,7 @@
-import { interval, Subscription, timer } from 'rxjs';
-import { ErrorHandler, EventEmitter, Injectable, NgZone } from '@angular/core';
+import {interval, Subscription, timer} from 'rxjs';
+import {ErrorHandler, EventEmitter, Injectable, NgZone} from '@angular/core';
 import * as _ from 'lodash';
-import { BrowserDOMSelectorService } from './browser-dom-selector.service';
+import {BrowserDOMSelectorService} from './browser-dom-selector.service';
 import {
     OnboardingConfiguration,
     OnboardingHtmlElementHelper,
@@ -9,8 +9,9 @@ import {
     OnboardingItemContainer,
     VisibleOnboardingItem
 } from '../models';
-import { SeenSelectorsBaseService } from './seen-selectors-base.service';
-import { EnabledStatusBaseService } from './enabled-status-base.service';
+import {SeenSelectorsBaseService} from './seen-selectors-base.service';
+import {EnabledStatusBaseService} from './enabled-status-base.service';
+import {OnboardingButtonsPosition} from '../models/onboarding-buttons-position.enum';
 
 const addSeenSelectorDebounceTime = 1000;
 const enabledChangedDebounceTime = 1000;
@@ -56,6 +57,11 @@ export class OnboardingService {
         textConfiguration: {
             regularFontFamily: 'Roboto, "Segoe UI", Helvetica, Arial, sans-serif;',
             scriptFontFamily: '"Gochi Hand", Georgia, "Segoe Script",  "Comic Sans MS", serif'
+        },
+        buttonsConfiguration: {
+            position: OnboardingButtonsPosition.BottomRight,
+            horizontalDistanceToBorderInPx: 10,
+            verticalDistanceToBorderInPx: 10
         }
     };
 
@@ -82,7 +88,8 @@ export class OnboardingService {
         // new merge default configuration with user configuration
         const mergedConfig: OnboardingConfiguration = {
             iconConfiguration: Object.assign({}, this.defaultConfiguration.iconConfiguration),
-            textConfiguration: Object.assign({}, this.defaultConfiguration.textConfiguration)
+            textConfiguration: Object.assign({}, this.defaultConfiguration.textConfiguration),
+            buttonsConfiguration: Object.assign({}, this.defaultConfiguration.buttonsConfiguration)
         };
 
         if (configuration.iconConfiguration) {
@@ -90,6 +97,11 @@ export class OnboardingService {
                 mergedConfig.iconConfiguration,
                 configuration.iconConfiguration
             );
+            // icon shape configurations are mutually exclusive so a special checks are needed for that
+            if (!configuration.iconConfiguration.matIconName &&
+                (configuration.iconConfiguration.fontSet || configuration.iconConfiguration.svgIcon)) {
+                mergedConfig.iconConfiguration.matIconName = undefined; // if the user wants fontSet than we have to disable matIconName
+            }
         }
 
         if (configuration.textConfiguration) {
@@ -99,11 +111,11 @@ export class OnboardingService {
             );
         }
 
-        // icon shape configurations are mutually exclusive so a special checks are needed for that
-        if (!configuration.iconConfiguration.matIconName &&
-            (configuration.iconConfiguration.fontSet || configuration.iconConfiguration.svgIcon)
-        ) {
-            mergedConfig.iconConfiguration.matIconName = undefined; // if the user wants fontSet than we have to disable matIconName
+        if (configuration.buttonsConfiguration) {
+            Object.assign(
+                mergedConfig.buttonsConfiguration,
+                configuration.buttonsConfiguration
+            );
         }
 
         this.configuration = mergedConfig;
@@ -303,7 +315,7 @@ export class OnboardingService {
 
     private loadEnabledStatus() {
         this.loadAndSaveEnabledStatusService.load().subscribe(enabled => {
-            this.enabled = true;
+            this.enabled = enabled;
         });
     }
 
