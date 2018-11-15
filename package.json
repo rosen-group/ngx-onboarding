@@ -48,6 +48,7 @@
     "@angular/language-service": "^7.0.2",
     "@types/jasmine": "~2.8.6",
     "@types/jasminewd2": "~2.0.3",
+    "@types/lodash": "^4.14.118",
     "@types/node": "~8.9.4",
     "codelyzer": "~4.2.1",
     "copyfiles": "^2.1.0",
