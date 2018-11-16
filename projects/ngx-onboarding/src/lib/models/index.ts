@@ -6,3 +6,4 @@ export * from './onboarding-item.model';
 export * from './visible-onboarding-item.model';
 export * from './onboarding-configuration.model';
 export * from './onboarding-text-configuration.interface';
+export * from './onboarding-buttons-position.enum';
