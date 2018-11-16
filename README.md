@@ -167,6 +167,32 @@ export class AppComponent implements OnInit, OnDestroy {
      }
  }
 ```
+## Custom configurations 
+Some options can be configured with the `configure` method of the onboarding service. 
+ 
+### Font family customization
+You can replace the font-family usesd for the onboarding UI.
+
+If you add the imports for onboarding service in your `AppModule` a configuration would be arranged like this:
+``` 
+
+export class AppModule {
+    constructor(onboardingService: OnboardingService) {
+        onboardingService.configure({
+            textConfiguration: {
+                regularFontFamily: '"Segoe UI", "SegoeUI-Regular","Tahoma", Helvetica, Arial, sans-serif;',
+                scriptFontFamily: '"Segoe Script", "Comic Sans MS", Georgia,  Times New Roman, serif;'
+            }
+        });
+    }
+
+}
+```
+
+`scriptFontFamily` is used for headers (see "What is behind me?" in the screenshot)
+
+`regularFontFamily` is used for text body (see "You have to learn a lot about this button" in the screenshot) 
+ 
 
 ## Translations (I18N)
 
