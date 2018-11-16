@@ -1,7 +1,6 @@
 import {Component, ErrorHandler, OnDestroy, OnInit, ViewEncapsulation} from '@angular/core';
 import {OnboardingItem, OnboardingService} from '../../projects/ngx-onboarding/src';
 import {HttpClient} from '@angular/common/http';
-import {OnboardingButtonsPosition} from '../../projects/ngx-onboarding/src/lib/models/onboarding-buttons-position.enum';
 
 /**
  * Example component to test the onboarding component
@@ -19,13 +18,6 @@ export class AppComponent implements OnInit, OnDestroy {
     constructor(private onboardingService: OnboardingService,
                 private httpClient: HttpClient,
                 private errorHandler: ErrorHandler) {
-        onboardingService.configure({
-            buttonsConfiguration: {
-                position: OnboardingButtonsPosition.BottomRight,
-                verticalDistanceToBorderInPx: 10,
-                horizontalDistanceToBorderInPx: 10
-            }
-        });
     }
 
     public ngOnInit() {
