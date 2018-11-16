@@ -171,10 +171,10 @@ export class AppComponent implements OnInit, OnDestroy {
 Some options can be configured with the `configure` method of the onboarding service. 
  
 ### Font family customization
-You can replace the font-family usesd for the onboarding UI.
+You can replace the font-family used for the onboarding UI.
 
-If you add the imports for onboarding service in your `AppModule` a configuration would be arranged like this:
-``` 
+If you add the imports for onboarding service in your `AppModule`, a configuration would be arranged like this:
+```typescript
 
 export class AppModule {
     constructor(onboardingService: OnboardingService) {
@@ -193,6 +193,62 @@ export class AppModule {
 
 `regularFontFamily` is used for text body (see "You have to learn a lot about this button" in the screenshot) 
  
+### Icon customization
+
+You can replace the icon for the onboarding UI.
+
+The are three different ways how to do that:
+
+1 ) Use an predefined icon from the material design icons (look here: [material design icons](https://material.io/tools/icons/?icon=outlined_flag&style=baseline) )
+```typescript
+export class AppModule {
+    constructor(onboardingService: OnboardingService) {
+        onboardingService.configure({
+            iconConfiguration: {
+                matIconName: 'outlined_flag'
+            }
+        });
+    }
+}
+```
+This code would show a flag as an icon. The name of the icon can be found on the above-mentioned website.
+
+2 ) Use an icon from a font set (e.g. glyphicons)
+```typescript
+export class AppModule {
+    constructor(onboardingService: OnboardingService, iconRegistry: MatIconRegistry,) {
+        iconRegistry.registerFontClassAlias('fas');
+        onboardingService.configure({
+            iconConfiguration: {
+                fontSet: 'fas',
+                fontIcon: 'fa-exclamation-circle'
+            }
+        });
+        // if you haven not already added fontawesome icons to your page you need to add a reference to your index.html
+        // e.g. <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.5.0/css/all.css" >
+    }
+}
+```
+
+This code would show an exclamation mark in a circle as icon. The name of the icon can be found on the font awesome website.
+
+3 ) Use an svg icon
+
+If you have placed a svg icon e.g. in the folder src/assets/icons the configuration would look like this: 
+```typescript
+export class AppModule {
+    constructor(onboardingService: OnboardingService, sanitizer: DomSanitizer, iconRegistry: MatIconRegistry) {
+        iconRegistry.addSvgIcon('onboarding_icon',
+            sanitizer.bypassSecurityTrustResourceUrl('./assets/icons/onboarding_icon.svg'));
+        onboardingService.configure({
+            iconConfiguration: {
+                svgIcon: 'onboarding_icon'
+            }
+        });
+    }
+}
+```
+
 
 ## Translations (I18N)
 

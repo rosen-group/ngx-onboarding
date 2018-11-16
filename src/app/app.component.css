@@ -1,0 +1,25 @@
+/* styles for svg icon on onboarding overlay */
+.onboarding-header svg path,
+.onboarding-header svg rect {
+    fill: #d9d9d9;
+}
+
+.onboarding-header svg .backfill {
+    fill: #d9d9d9;
+    fill-opacity: 1.0;
+}
+.onboarding-header svg .letters {
+    fill-opacity: 0.0;
+}
+
+/* adjust counter position at icon */
+.onboarding-button .mat-badge-content {
+    width: 16px;
+    height: 16px;
+    line-height: 16px;
+}
+
+.onboarding-button .mat-badge-medium.mat-badge-below .mat-badge-content {
+    bottom: -4px;
+    right: -6px;
+}
