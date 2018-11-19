@@ -83,7 +83,6 @@ export class OnboardingComponent implements OnInit, AfterViewInit, OnDestroy {
         dynCss += `<style type="text/css">`;
         dynCss += `.onboarding-component-container .script-font { font-family: ${this.textConfig.scriptFontFamily}}`;
         dynCss += `.onboarding-component-container .regular-font { font-family: ${this.textConfig.regularFontFamily}}`;
-        dynCss += `.onboarding-component-container .onboarding-buttons button[color=primary] { margin-right: ${this.buttonConfig.betweenButtonsDistanceInPx}px }`;
         dynCss += `</style>`;
         this.dynamicCss = this.domSanitizer.bypassSecurityTrustHtml(dynCss);
     }

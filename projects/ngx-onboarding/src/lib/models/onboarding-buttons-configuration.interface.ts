@@ -19,9 +19,4 @@ export interface OnboardingButtonsConfiguration {
      * the distance to the left or right border in pixel
      */
     horizontalDistanceToBorderInPx?: number;
-
-    /**
-     * the distance between the buttons in pixels
-     */
-    betweenButtonsDistanceInPx?: number;
 }
