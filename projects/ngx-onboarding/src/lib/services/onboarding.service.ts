@@ -60,8 +60,8 @@ export class OnboardingService {
         },
         buttonsConfiguration: {
             position: OnboardingButtonsPosition.BottomRight,
-            horizontalDistanceToBorderInPx: 10,
-            verticalDistanceToBorderInPx: 10
+            horizontalDistanceToBorderInPx: 50,
+            verticalDistanceToBorderInPx: 40
         }
     };
 

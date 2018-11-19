@@ -250,6 +250,30 @@ export class AppModule {
 ```
 
 
+### Customization of overlay buttons
+Position of buttons on the onboarding overlay ('Next' and 'Turn off') can be customized:
+  
+```typescript
+export class AppModule {
+    constructor(onboardingService: OnboardingService) {
+        onboardingService.configure({
+            buttonsConfiguration: {
+                position: OnboardingButtonsPosition.BottomLeft,
+                verticalDistanceToBorderInPx: 10,
+                horizontalDistanceToBorderInPx: 10
+            }
+        });
+    }
+}
+```
+
+The above configuration would place the buttons on the bottom left side of the screen (position). Possible values for `position` are:
+ 
+  BottomRight (default), Bottom, BottomLeft, Left, TopLeft, Top, TopRight, Right
+  
+The distance from the left is specificied with `horizontalDistanceToBorderInPx` and the distance from the screen´s bottom
+is set via `verticalDistanceToBorderInPx`.
+
 ## Translations (I18N)
 
 See [I18N instructions](https://github.com/rosen-group/ngx-onboarding/blob/master/I18N.md)
