@@ -8,6 +8,7 @@
     fill: #d9d9d9;
     fill-opacity: 1.0;
 }
+
 .onboarding-header svg .letters {
     fill-opacity: 0.0;
 }
@@ -22,4 +23,38 @@
 .onboarding-button .mat-badge-medium.mat-badge-below .mat-badge-content {
     bottom: -4px;
     right: -6px;
+}
+
+.test-dialog-with-transform-background {
+    position: fixed;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background: rgba(0.5,0.5,0.5,0.5);
+}
+
+.test-dialog-with-transform {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 300px;
+    height: 250px;
+    transform: translate(-50%, -50%);
+    background: white;
+    -webkit-box-shadow: 4px 4px 50px 0 #000;
+    -moz-box-shadow: 4px 4px 50px 0 #000;
+    box-shadow: 4px 4px 50px 0 #000;
+    display: flex;
+    flex-direction: column;
+}
+
+.test-dialog-with-transform > div:first-child {
+    flex: 1 0 1px;
+    padding: 8px;
+}
+
+.test-dialog-with-transform > div:last-child {
+    text-align: center;
+    padding: 4px;
 }

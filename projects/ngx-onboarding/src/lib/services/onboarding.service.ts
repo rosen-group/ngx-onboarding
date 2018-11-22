@@ -11,7 +11,7 @@ import {
 } from '../models';
 import {SeenSelectorsBaseService} from './seen-selectors-base.service';
 import {EnabledStatusBaseService} from './enabled-status-base.service';
-import {OnboardingButtonsPosition} from '../models/onboarding-buttons-position.enum';
+import {OnboardingButtonsPosition} from '../models';
 
 const addSeenSelectorDebounceTime = 1000;
 const enabledChangedDebounceTime = 1000;

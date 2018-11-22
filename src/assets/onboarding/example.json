@@ -85,5 +85,20 @@
                 "details": "Bring dich nach Hause"
             }
         ]
+    },
+    {
+        "selector": "#dx-popup-ok-button",
+        "group": "",
+        "position": "right",
+        "headline": "Ok Button",
+        "details": "Closes the dialog",
+        "descriptions": [
+            {
+                "language": "de",
+                "headline": "Ok Button",
+                "details": "Schließt den Dialog"
+            }
+        ]
     }
+
 ]

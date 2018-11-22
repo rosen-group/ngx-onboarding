@@ -77,7 +77,8 @@ describe('OnboardingComponent', () => {
             x: 1,
             y: 2,
             width: 100,
-            height: 200
+            height: 200,
+            fixed: false
         });
         const value = component.getPositionStyle(null);
 
@@ -86,6 +87,25 @@ describe('OnboardingComponent', () => {
         expect(value.top).toBe('2px');
         expect(value.width).toBe('100px');
         expect(value.height).toBe('200px');
+        expect(value.background).not.toBeDefined();
+    });
+
+    it('getPositionStyle expect return value.background to be transparent, ...', () => {
+        spyOn(OnboardingHtmlElementHelper, 'getPosition').and.returnValue({
+            x: 1,
+            y: 2,
+            width: 100,
+            height: 200,
+            fixed: true
+        });
+        const value = component.getPositionStyle(null);
+
+        expect(value.position).toBe('fixed');
+        expect(value.left).toBe('1px');
+        expect(value.top).toBe('2px');
+        expect(value.width).toBe('100px');
+        expect(value.height).toBe('200px');
+        expect(value.background).toBe('transparent');
     });
 
     it('isSpotlightTransparent expect return value to be false', () => {

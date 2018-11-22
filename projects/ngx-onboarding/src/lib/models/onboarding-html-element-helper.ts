@@ -1,17 +1,33 @@
 /**
  * contains static helper methods for [[HTMLELement]]
  */
+
 export class OnboardingHtmlElementHelper {
+
+    public static isVisible(htmlElement: HTMLElement): boolean {
+        if (!htmlElement || typeof getComputedStyle !== 'function') {
+            return false;
+        }
+
+        const style = getComputedStyle(htmlElement);
+
+        if (!htmlElement.offsetParent && style.position !== 'fixed') {
+            return false;
+        }
+
+        return !(style.opacity === '0' || style.display === 'none' || style.visibility === 'hidden' || style.visibility === 'collapse');
+    }
 
     /**
      * true if element is visible in view (not scrolled out) or false if not
      */
-    public static isVisibleInView(htmlElement: HTMLElement): boolean {
+    public static isNotScrolledOut(htmlElement: HTMLElement): boolean {
         if (!htmlElement || !htmlElement.offsetParent) {
             return false;
         }
-        const parentTop = htmlElement.offsetParent.scrollTop;
-        const parentBottom = parentTop + OnboardingHtmlElementHelper.getParentHeight(htmlElement);
+        const parent = <HTMLElement>htmlElement.offsetParent;
+        const parentTop = parent.scrollTop;
+        const parentBottom = parentTop + parent.offsetHeight;
         const elementTop = htmlElement.offsetTop;
         const elementBottom = elementTop + htmlElement.offsetHeight;
 
@@ -22,68 +38,54 @@ export class OnboardingHtmlElementHelper {
      * true if element and all parents are visible in view (not scrolled out) or false if not
      */
     public static isVisibleInViewWithParents(htmlElement: HTMLElement): boolean {
-        let child = htmlElement;
-        let parent = <HTMLElement>htmlElement.offsetParent;
-
-        /*
-        https://developer.mozilla.org/en-US/docs/Web/API/HTMLElement/offsetParent:
-        " ...
-        In compliance with the specification, this property will return null on Webkit if the element is hidden (the style.display
-        of this element or any ancestor is "none") or if the style.position of the element itself is set to "fixed".
-        ..."
-         */
-
-        if (!parent) {
-            if (typeof getComputedStyle !== 'function') {
-                // this is how the angular material guys check for presence of this function
-                // so it is also server side safe (see https://github.com/angular/material2/issues/3870)
-                return false;
-                // onboarding makes no sense on a prerendered server site (because the state of onboarding is always per individual)
+        do {
+            if (htmlElement && htmlElement.tagName && htmlElement.tagName.toLowerCase() === 'body') {
+                return true;
             }
-            const style = getComputedStyle(htmlElement);
-            if (style.display === 'none') {
+            if (!OnboardingHtmlElementHelper.isVisible(htmlElement)) {
                 return false;
             }
-
-        }
-
-        while (parent) {
-            if (parent.scrollTop > 0) {
-                return OnboardingHtmlElementHelper.isVisibleInView(child);
+            if (htmlElement.scrollTop > 0) {
+                if (!OnboardingHtmlElementHelper.isNotScrolledOut(htmlElement)) {
+                    return false;
+                }
             }
-            child = parent;
-            parent = <HTMLElement>child.offsetParent;
-        }
+        } while (htmlElement = <HTMLElement>htmlElement.offsetParent);
         return true;
-    }
-
-    /**
-     * returns the parent height of element or 0 if offsetParent is falsy (null, undefined, ...)
-     */
-    public static getParentHeight(htmlElement: HTMLElement) {
-        const parent: HTMLElement = <HTMLElement>htmlElement.offsetParent;
-        return parent ? parent.offsetHeight : 0;
     }
 
     /**
      * returns the position of element in document
      */
     public static getPosition(htmlElement: HTMLElement) {
-        let x = htmlElement.offsetLeft;
-        let y = htmlElement.offsetTop;
-        let parent = <HTMLElement>htmlElement.offsetParent;
-        while (parent != null) {
-            x += parent.offsetLeft;
-            y += parent.offsetTop - parent.scrollTop;
-            parent = <HTMLElement>parent.offsetParent;
+        const rect: ClientRect | DOMRect = htmlElement.getBoundingClientRect();
+        if (typeof DOMRect !== 'undefined' && rect instanceof DOMRect) {
+            return {
+                fixed: OnboardingHtmlElementHelper.isFixed(htmlElement),
+                x: rect.x,
+                y: rect.y,
+                width: rect.width,
+                height: rect.height
+            };
         }
         return {
-            x: x,
-            y: y,
-            width: htmlElement.offsetWidth,
-            height: htmlElement.offsetHeight
+            fixed: OnboardingHtmlElementHelper.isFixed(htmlElement),
+            x: rect.left,
+            y: rect.top,
+            width: rect.width,
+            height: rect.height
         };
     }
 
+    private static isFixed(htmlElement: HTMLElement) {
+        if (!htmlElement || typeof getComputedStyle !== 'function') {
+            return false;
+        }
+        const style = getComputedStyle(htmlElement);
+        if (style.position === 'fixed') {
+            return true;
+        }
+        return OnboardingHtmlElementHelper.isFixed(<HTMLElement>htmlElement.offsetParent);
+    }
 
 }

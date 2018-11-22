@@ -16,6 +16,8 @@ export class AppComponent implements OnInit, OnDestroy {
     infoMessage = '';
     private unregisterOnboarding: Function;
 
+    public popupVisible: boolean = false;
+
     constructor(private onboardingService: OnboardingService,
                 private httpClient: HttpClient,
                 private errorHandler: ErrorHandler) {
