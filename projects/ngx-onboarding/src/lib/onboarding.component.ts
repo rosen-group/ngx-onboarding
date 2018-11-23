@@ -113,13 +113,17 @@ export class OnboardingComponent implements OnInit, AfterViewInit, OnDestroy {
      */
     public getPositionStyle(ele: HTMLElement) {
         const pos = OnboardingHtmlElementHelper.getPosition(ele);
-        return {
+        const style: any = {
             position: 'fixed',
             left: pos.x + 'px',
             top: pos.y + 'px',
             width: pos.width + 'px',
             height: pos.height + 'px'
         };
+        if (pos.fixed) {
+            style.background = 'transparent';
+        }
+        return style;
     }
 
     public isSpotlightTransparent(item: OnboardingItem) {

@@ -1,7 +1,7 @@
 import { async, inject, TestBed } from '@angular/core/testing';
 import { OnboardingService } from './onboarding.service';
 import { BrowserDOMSelectorService } from './browser-dom-selector.service';
-import { OnboardingItem } from '../models';
+import {OnboardingHtmlElementHelper, OnboardingItem} from '../models';
 import { SeenSelectorsBaseService } from './seen-selectors-base.service';
 import { MockLocalStorageSeenSelectorsService } from './local-storage-seen-selectors.service.mock';
 import { MockLocalStorageEnabledStatusService } from './local-storage-enabled-status.service.mock';
@@ -45,6 +45,7 @@ describe('OnboardingService', () => {
                 spyOn(browserDomSelectorService, 'querySelectorAll').and.callFake(() => {
                     return getHtmlElements(6);
                 });
+                spyOn(OnboardingHtmlElementHelper, 'isVisibleInViewWithParents').and.returnValue(true);
                 onboardingService['items'] = getOnboardingItems();
                 onboardingService.visibleItems.clear();
                 expect(onboardingService.visibleItems.isEmpty).toBeTruthy();
@@ -71,6 +72,7 @@ describe('OnboardingService', () => {
                 spyOn(browserDomSelectorService, 'querySelectorAll').and.callFake(() => {
                     return getHtmlElements(6);
                 });
+                spyOn(OnboardingHtmlElementHelper, 'isVisibleInViewWithParents').and.returnValue(true);
                 onboardingService['items'] = getOnboardingItems(true);
                 onboardingService.visibleItems.clear();
                 onboardingService['seenSelectors'] = [];
@@ -247,8 +249,10 @@ describe('OnboardingService', () => {
 
     const getHtmlElements = (count: number) => {
         const elements = [];
+        const body = document.createElement('body');
         for (let i = 0; i < count; i++) {
             const element = document.createElement('div');
+            body.appendChild(element);
             element.classList.add('css-class-' + (i + 1));
             elements.push(element);
         }

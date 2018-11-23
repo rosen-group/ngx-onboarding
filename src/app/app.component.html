@@ -29,6 +29,17 @@
             </h2>
         </li>
     </ul>
-    <rosen-onboarding></rosen-onboarding>
-
+    <button mat-raised-button (click)="popupVisible = true">Show modal dialog</button>
+    <div class="test-dialog-with-transform-background" *ngIf="popupVisible">
+        <div class="test-dialog-with-transform">
+            <div>
+                Close dialog?
+            </div>
+            <div>
+                <button mat-raised-button (click)="popupVisible = false">Yes</button>
+                <button id="dx-popup-ok-button" color="primary" mat-raised-button (click)="popupVisible = false">Ok</button>
+            </div>
+        </div>
+    </div>
 </div>
+<rosen-onboarding></rosen-onboarding>
