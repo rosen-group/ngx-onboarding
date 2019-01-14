@@ -2,16 +2,14 @@ import {interval, Subscription, timer} from 'rxjs';
 import {ErrorHandler, EventEmitter, Injectable, NgZone} from '@angular/core';
 import * as _ from 'lodash';
 import {BrowserDOMSelectorService} from './browser-dom-selector.service';
-import {
-    OnboardingConfiguration,
-    OnboardingHtmlElementHelper,
-    OnboardingItem,
-    OnboardingItemContainer,
-    VisibleOnboardingItem
-} from '../models';
+import {OnboardingItemContainer} from '../models/onboarding-item-container.model';
+import {OnboardingConfiguration} from '../models/onboarding-configuration.model';
+import {VisibleOnboardingItem} from '../models/visible-onboarding-item.model';
+import {OnboardingHtmlElementHelper} from '../models/onboarding-html-element-helper';
+import {OnboardingItem} from '../models/onboarding-item.model';
+import {EnabledStatusBaseService } from './enabled-status-base.service';
+import {OnboardingButtonsPosition} from '../models/onboarding-buttons-position.enum';
 import {SeenSelectorsBaseService} from './seen-selectors-base.service';
-import {EnabledStatusBaseService} from './enabled-status-base.service';
-import {OnboardingButtonsPosition} from '../models';
 
 const addSeenSelectorDebounceTime = 1000;
 const enabledChangedDebounceTime = 1000;

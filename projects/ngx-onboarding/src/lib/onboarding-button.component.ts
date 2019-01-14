@@ -1,6 +1,7 @@
 import { Component, ViewEncapsulation } from '@angular/core';
-import { OnboardingService } from './services';
-import { OnboardingIconConfiguration } from './models/onboarding-icon-configuration.interface';
+import {OnboardingIconConfiguration} from './models/onboarding-icon-configuration.interface';
+import {OnboardingService} from './services/onboarding.service';
+
 
 /**
  * onboarding button including context menu (see header.component in rolib/navigation)

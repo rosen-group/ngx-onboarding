@@ -5,17 +5,15 @@ import { OnboardingButtonComponent } from './onboarding-button.component';
 import { CommonModule } from '@angular/common';
 import { MatBadgeModule, MatButtonModule, MatIconModule, MatMenuModule } from '@angular/material';
 import { HttpClientModule } from '@angular/common/http';
-import {
-    BrowserDOMSelectorService,
-    BuildInTranslatorService,
-    EnabledStatusBaseService,
-    LocalStorageEnabledStatusService,
-    LocalStorageSeenSelectorsService,
-    SeenSelectorsBaseService,
-    TranslatorBaseService,
-    WindowRef
-} from './services';
-import { PrimitiveTranslatePipe } from './pipes';
+import {PrimitiveTranslatePipe} from './pipes/primitive-translate.pipe';
+import {BrowserDOMSelectorService} from './services/browser-dom-selector.service';
+import {WindowRef} from './services/window-ref.service';
+import {SeenSelectorsBaseService} from './services/seen-selectors-base.service';
+import {EnabledStatusBaseService} from './services/enabled-status-base.service';
+import {TranslatorBaseService} from './services/translator-base.service';
+import {LocalStorageSeenSelectorsService} from './services/local-storage-seen-selectors.service';
+import {LocalStorageEnabledStatusService} from './services/local-storage-enabled-status.service';
+import {BuildInTranslatorService} from './services/build-in-translator.service';
 
 /**
  * Module for ngx-onboarding.
@@ -33,7 +31,8 @@ import { PrimitiveTranslatePipe } from './pipes';
     declarations: [
         OnboardingComponent,
         OnboardingItemComponent,
-        OnboardingButtonComponent, PrimitiveTranslatePipe
+        OnboardingButtonComponent,
+        PrimitiveTranslatePipe
     ],
     exports: [
         OnboardingComponent,
