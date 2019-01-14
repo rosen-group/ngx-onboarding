@@ -1,8 +1,9 @@
 import { Component, ElementRef, Input, ViewChild, ViewEncapsulation } from '@angular/core';
 import * as _ from 'lodash';
-import { OnboardingHtmlElementHelper, VisibleOnboardingItem } from './models';
-import { TranslatorBaseService, WindowRef } from './services';
-
+import {VisibleOnboardingItem} from './models/visible-onboarding-item.model';
+import {TranslatorBaseService} from './services/translator-base.service';
+import {WindowRef} from './services/window-ref.service';
+import {OnboardingHtmlElementHelper} from './models/onboarding-html-element-helper';
 
 const topPadding = 25;
 const rightPadding = 25;
