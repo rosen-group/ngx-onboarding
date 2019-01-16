@@ -1,10 +1,13 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { OnboardingButtonComponent } from './onboarding-button.component';
 import { MatBadgeModule, MatButtonModule, MatIconModule, MatMenuModule } from '@angular/material';
-import { BrowserDOMSelectorService, BuildInTranslatorService, OnboardingService, TranslatorBaseService } from './services';
 import { OnboardingServiceMock } from './services/onboarding.service.mock';
-import { VisibleOnboardingItem } from './models';
-import { PrimitiveTranslatePipe } from './pipes';
+import {PrimitiveTranslatePipe} from './pipes/primitive-translate.pipe';
+import {OnboardingService} from './services/onboarding.service';
+import {BrowserDOMSelectorService} from './services/browser-dom-selector.service';
+import {BuildInTranslatorService} from './services/build-in-translator.service';
+import {TranslatorBaseService} from './services/translator-base.service';
+import {VisibleOnboardingItem} from './models/visible-onboarding-item.model';
 
 describe('OnboardingButtonComponent', () => {
     beforeEach(async(() => {
