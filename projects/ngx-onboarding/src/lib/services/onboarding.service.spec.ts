@@ -1,11 +1,12 @@
 import { async, inject, TestBed } from '@angular/core/testing';
 import { OnboardingService } from './onboarding.service';
 import { BrowserDOMSelectorService } from './browser-dom-selector.service';
-import {OnboardingHtmlElementHelper, OnboardingItem} from '../models';
 import { SeenSelectorsBaseService } from './seen-selectors-base.service';
 import { MockLocalStorageSeenSelectorsService } from './local-storage-seen-selectors.service.mock';
 import { MockLocalStorageEnabledStatusService } from './local-storage-enabled-status.service.mock';
 import { EnabledStatusBaseService } from './enabled-status-base.service';
+import {OnboardingHtmlElementHelper} from '../models/onboarding-html-element-helper';
+import {OnboardingItem} from '../..';
 
 describe('OnboardingService', () => {
     beforeEach(async(() => {
