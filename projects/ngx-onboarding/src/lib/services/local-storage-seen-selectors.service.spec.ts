@@ -44,26 +44,18 @@ describe('LocalStorageSeenSelectorsService', () => {
         }
     );
 
-    it('save expect localStorage.setItem to have been called',
-        done => {
+    it('save expect localStorage.setItem to have been called', () => {
             const spy = spyOn(localStorage, 'setItem').and.stub();
-            service.save(['A', 'B', 'C']).subscribe((result: boolean) => {
-                expect(result).toBe(true);
-                expect(spy).toHaveBeenCalledWith('894ae732-b4bd-45c9-b543-6f9c5c5a86b6', '["A","B","C"]');
-                done();
-            });
+            service.save(['A', 'B', 'C']);
+            expect(spy).toHaveBeenCalledWith('894ae732-b4bd-45c9-b543-6f9c5c5a86b6', '["A","B","C"]');
         }
     );
 
-    it('save with localStorage.getItem throws error expect errorHandler to have been called',
-        done => {
+    it('save with localStorage.getItem throws error expect errorHandler to have been called', () => {
             spyOn(localStorage, 'setItem').and.throwError('setItem failed');
             const spy = spyOn(errorHandler, 'handleError').and.stub();
-            service.save(['A', 'B', 'C']).subscribe((result: boolean) => {
-                expect(result).toBe(false);
-                expect(spy).toHaveBeenCalled();
-                done();
-            });
+            service.save(['A', 'B', 'C']);
+            expect(spy).toHaveBeenCalled();
         }
     );
 });
