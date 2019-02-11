@@ -8,9 +8,8 @@ export abstract class EnabledStatusBaseService {
 
     /**
      * saves the status to a persistent storage
-     * @returns success of the operation (true = good, false = failed)
      */
-    abstract save(enabled: boolean): Observable<boolean>;
+    abstract save(enabled: boolean): void;
 
     /**
      * loads the status from the persistent storage

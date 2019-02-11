@@ -1,4 +1,4 @@
-import { Observable } from 'rxjs';
+import {Observable} from 'rxjs';
 
 /**
  * Base class for storing the onboarding item seen status. Can be overridden with own implementations
@@ -14,8 +14,7 @@ export abstract class SeenSelectorsBaseService {
 
     /**
      * save items to a persistent storage
-     * @returns success of the operation (true = good, false = failed)
      */
-    abstract save(seenSelectors: Array<string>): Observable<boolean>;
+    abstract save(seenSelectors: Array<string>): void;
 
 }

@@ -40,37 +40,29 @@ describe('LocalStorageEnabledStatusService', () => {
         }
     );
 
-    it('save expect setItem to have been called with true', done => {
+    it('save expect setItem to have been called with true', () => {
             const errorSpy = spyOn(errorHandler, 'handleError').and.stub();
             const storageSpy = spyOn(localStorage, 'setItem').and.stub();
-            service.save(true).subscribe(() => {
-                expect(storageSpy).toHaveBeenCalledWith('42cfe10a-c2d3-42ba-9c55-6198545a0c49', 'true');
-                expect(errorSpy).not.toHaveBeenCalled();
-                done();
-            });
+            service.save(true);
+            expect(storageSpy).toHaveBeenCalledWith('42cfe10a-c2d3-42ba-9c55-6198545a0c49', 'true');
+            expect(errorSpy).not.toHaveBeenCalled();
         }
     );
 
-    it('save expect setItem to have been called with false', done => {
+    it('save expect setItem to have been called with false', () => {
             const errorSpy = spyOn(errorHandler, 'handleError').and.stub();
             const storageSpy = spyOn(localStorage, 'setItem').and.stub();
-            service.save(false).subscribe((success: boolean) => {
-                expect(storageSpy).toHaveBeenCalledWith('42cfe10a-c2d3-42ba-9c55-6198545a0c49', 'false');
-                expect(errorSpy).not.toHaveBeenCalled();
-                expect(success).toEqual(true);
-                done();
-            });
+            service.save(false);
+            expect(storageSpy).toHaveBeenCalledWith('42cfe10a-c2d3-42ba-9c55-6198545a0c49', 'false');
+            expect(errorSpy).not.toHaveBeenCalled();
         }
     );
 
-    it('save expect setItem to call errorhandler if exception occurs', done => {
+    it('save expect setItem to call errorhandler if exception occurs', () => {
             spyOn(localStorage, 'setItem').and.throwError('setItem failed');
             const errorSpy = spyOn(errorHandler, 'handleError').and.stub();
-            service.save(false).subscribe((success: boolean) => {
-                expect(errorSpy).toHaveBeenCalled();
-                expect(success).toEqual(false);
-                done();
-            });
+            service.save(false);
+            expect(errorSpy).toHaveBeenCalled();
         }
     );
 

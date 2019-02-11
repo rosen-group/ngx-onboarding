@@ -40,13 +40,11 @@ export class LocalStorageEnabledStatusService extends EnabledStatusBaseService {
      * saves the status to localStorage
      * @returns success of the operation (true = good, false = failed)
      */
-    public save(enabled: boolean): Observable<boolean> {
+    public save(enabled: boolean): void {
         try {
             localStorage.setItem(enabledLocalStorageKey, enabled ? 'true' : 'false');
-            return of(true);
         } catch (error) {
             this.errorHandler.handleError(error);
         }
-        return of(false);
     }
 }

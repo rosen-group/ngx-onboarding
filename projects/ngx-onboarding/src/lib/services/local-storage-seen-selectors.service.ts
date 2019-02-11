@@ -42,13 +42,11 @@ export class LocalStorageSeenSelectorsService extends SeenSelectorsBaseService {
      * save items to localStorage
      * @returns success of the operation (true = good, false = failed)
      */
-    public save(seenSelectors: Array<string>): Observable<boolean> {
+    public save(seenSelectors: Array<string>): void {
         try {
             localStorage.setItem(seenSelectorsLocalStorageKey, JSON.stringify(seenSelectors));
-            return of(true);
         } catch (error) {
             this.errorHandler.handleError(error);
         }
-        return of(false);
     }
 }
