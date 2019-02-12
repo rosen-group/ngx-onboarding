@@ -7,7 +7,7 @@ import {OnboardingConfiguration} from '../models/onboarding-configuration.model'
 import {VisibleOnboardingItem} from '../models/visible-onboarding-item.model';
 import {OnboardingHtmlElementHelper} from '../models/onboarding-html-element-helper';
 import {OnboardingItem} from '../models/onboarding-item.model';
-import {EnabledStatusBaseService } from './enabled-status-base.service';
+import {EnabledStatusBaseService} from './enabled-status-base.service';
 import {OnboardingButtonsPosition} from '../models/onboarding-buttons-position.enum';
 import {SeenSelectorsBaseService} from './seen-selectors-base.service';
 
@@ -71,6 +71,13 @@ export class OnboardingService {
         this.configuration = this.defaultConfiguration;
         /* this is the default setting. can be changed by configure()*/
         this.init();
+    }
+
+    /**
+     * returns the count of the registered items
+     */
+    public get registeredItemsCount(): number {
+        return this.items.length;
     }
 
     /**
