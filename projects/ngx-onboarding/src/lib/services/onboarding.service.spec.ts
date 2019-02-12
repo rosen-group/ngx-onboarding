@@ -164,6 +164,13 @@ describe('OnboardingService', () => {
         })();
     });
 
+    it('registeredItemsCount expect to be 6', () => {
+        inject([OnboardingService], (onboardingService: OnboardingService) => {
+            onboardingService.register(getOnboardingItems());
+            expect(onboardingService.registeredItemsCount).toBe(6);
+        });
+    });
+
     const getOnboardingItems: (boolean?) => Array<OnboardingItem> = (ordered: boolean = false) => {
         return [
             {
