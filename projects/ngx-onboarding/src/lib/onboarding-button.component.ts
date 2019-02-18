@@ -14,7 +14,7 @@ import {OnboardingService} from './services/onboarding.service';
 })
 export class OnboardingButtonComponent {
 
-    /** used by template to apply the custimizations on icons */
+    /** used by template to apply the customizations on icons */
     public iconConfig: OnboardingIconConfiguration;
 
     constructor(private onboardingService: OnboardingService) {

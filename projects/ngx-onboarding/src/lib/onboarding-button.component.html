@@ -17,14 +17,14 @@
     </mat-menu>
     <button *ngIf="iconConfig" mat-icon-button [matMenuTriggerFor]="onboardingMenu" class="onboarding-button">
         <mat-icon *ngIf="iconConfig.matIconName && !iconConfig.svgIcon && !iconConfig.fontSet"
-                  [matBadgeColor]="iconConfig.matBadgeColor" [matBadge]="onboardingItemCount"
+                  [matBadgeColor]="iconConfig.matBadgeColor" [matBadgeDisabled]="isOnboardingEnabled()" [matBadge]="onboardingItemCount"
                   [matBadgePosition]="iconConfig.matBadgePosition" [matBadgeSize]="iconConfig.matBadgeSize"
                   [matBadgeOverlap]="true">{{iconConfig.matIconName}}
         </mat-icon>
         <mat-icon *ngIf="iconConfig.svgIcon || iconConfig.fontSet"
                   [svgIcon]="iconConfig.svgIcon"
                   [fontSet]="iconConfig.fontSet" [fontIcon]="iconConfig.fontIcon"
-                  [matBadgeColor]="iconConfig.matBadgeColor" [matBadge]="onboardingItemCount"
+                  [matBadgeColor]="iconConfig.matBadgeColor" [matBadgeHidden]="isOnboardingEnabled()" [matBadge]="onboardingItemCount"
                   [matBadgePosition]="iconConfig.matBadgePosition" [matBadgeSize]="iconConfig.matBadgeSize"
                   [matBadgeOverlap]="true">
         </mat-icon>
