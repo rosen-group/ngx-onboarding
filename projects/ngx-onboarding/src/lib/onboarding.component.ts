@@ -58,7 +58,6 @@ export class OnboardingComponent implements OnInit, AfterViewInit, OnDestroy {
     private textConfig: OnboardingTextConfiguration;
     private buttonConfig: OnboardingButtonsConfiguration;
     private visibleItemsChangedSubscription: Subscription;
-    private allVisibleItems: OnboardingItemContainer;
 
     constructor(public onboardingService: OnboardingService, private domSanitizer: DomSanitizer) {
         this.visibleItem = null;
@@ -88,10 +87,8 @@ export class OnboardingComponent implements OnInit, AfterViewInit, OnDestroy {
     public ngAfterViewInit() {
 
         this.visibleItemsChangedSubscription = this.onboardingService.visibleItemsChanged.subscribe(() => {
-            this.allVisibleItems = this.onboardingService.visibleItems;
-
             this.visibleItem = this.onboardingService.visibleItems.currentItem;
-            this.hasNext = this.allVisibleItems.hasNext;
+            this.hasNext = this.onboardingService.visibleItems.hasNext;
             if (this.visibleItem) {
                 this.showItem(this.visibleItem);
             }
@@ -142,11 +139,11 @@ export class OnboardingComponent implements OnInit, AfterViewInit, OnDestroy {
      * hide current group (show next one if one is available
      */
     public hide(): void {
-        if (this.allVisibleItems && this.hasNext) {
+        if (this.onboardingService.visibleItems && this.hasNext) {
             // hide current and show next item
             this.hideItem(this.visibleItem); // hide OLD items
-            this.visibleItem = this.allVisibleItems.nextItem();
-            this.hasNext = this.allVisibleItems.hasNext; // show NEW ones
+            this.visibleItem = this.onboardingService.visibleItems.nextItem();
+            this.hasNext = this.onboardingService.visibleItems.hasNext; // show NEW ones
             this.showItem(this.visibleItem);
         } else {
             this.hideItem(this.visibleItem);

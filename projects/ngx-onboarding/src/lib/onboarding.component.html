@@ -12,7 +12,7 @@
          [class.onboarding-spotlight-transparent]="isSpotlightTransparent(visibleItem.item)"
          [ngStyle]="getPositionStyle(visibleItem.element)"></div>
     <div class="onboarding-items">
-        <div *ngFor="let currentItem of allVisibleItems.allItems">
+        <div *ngFor="let currentItem of onboardingService.visibleItems.allItems">
             <rosen-onboarding-item [item]="currentItem" *ngIf="currentItem === visibleItem"></rosen-onboarding-item>
         </div>
     </div>
