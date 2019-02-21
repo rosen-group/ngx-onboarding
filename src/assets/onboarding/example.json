@@ -1,7 +1,6 @@
 [
     {
         "selector": "#logo-img",
-        "group": "example0",
         "position": "top",
         "headline": "Angular Logo",
         "details": "This is the angular logo",
@@ -15,7 +14,6 @@
     },
     {
         "selector": "#button-that-needs-onboarding",
-        "group": "example1",
         "position": "right",
         "textAlign": "left",
         "headline": "What is behind me?",
@@ -30,7 +28,6 @@
     },
     {
         "selector": "#tour-of-heroes",
-        "group": "example2",
         "position": "right",
         "textAlign": "left",
         "headline": "Tutorial: Tour of Heroes",
@@ -45,7 +42,6 @@
     },
     {
         "selector": "#documentation",
-        "group": "example3",
         "position": "right",
         "textAlign": "left",
         "headline": "Angular CLI Documentation",
@@ -60,7 +56,6 @@
     },
     {
         "selector": "#angular-blog",
-        "group": "example4",
         "position": "bottom",
         "headline": "The Angular Blog",
         "details": "News and Tips from the Angular Team",
@@ -74,7 +69,6 @@
     },
     {
         "selector": ".home-button",
-        "group": "example",
         "position": "right",
         "headline": "Home Button",
         "details": "Takes you home",
@@ -88,7 +82,6 @@
     },
     {
         "selector": "#dx-popup-ok-button",
-        "group": "",
         "position": "right",
         "headline": "Ok Button",
         "details": "Closes the dialog",

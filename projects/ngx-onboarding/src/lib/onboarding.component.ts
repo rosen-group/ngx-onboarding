@@ -23,9 +23,9 @@ import {OnboardingItem} from './models/onboarding-item.model';
 export class OnboardingComponent implements OnInit, AfterViewInit, OnDestroy {
 
     /**
-     * all onboarding items
+     * current visible onboarding item
      */
-    public items: VisibleOnboardingItem[];
+    public visibleItem: VisibleOnboardingItem;
 
     /**
      * if true, the "show next" button is visible
@@ -58,10 +58,9 @@ export class OnboardingComponent implements OnInit, AfterViewInit, OnDestroy {
     private textConfig: OnboardingTextConfiguration;
     private buttonConfig: OnboardingButtonsConfiguration;
     private visibleItemsChangedSubscription: Subscription;
-    private allVisibleItems: OnboardingItemContainer;
 
     constructor(public onboardingService: OnboardingService, private domSanitizer: DomSanitizer) {
-        this.items = [];
+        this.visibleItem = null;
         const config = onboardingService.getConfiguration();
         this.textConfig = config.textConfiguration;
         this.buttonConfig = config.buttonsConfiguration;
@@ -88,12 +87,10 @@ export class OnboardingComponent implements OnInit, AfterViewInit, OnDestroy {
     public ngAfterViewInit() {
 
         this.visibleItemsChangedSubscription = this.onboardingService.visibleItemsChanged.subscribe(() => {
-            this.allVisibleItems = this.onboardingService.visibleItems;
-
-            this.items = this.onboardingService.visibleItems.currentItems;
-            this.hasNext = this.allVisibleItems.hasNext;
-            if (this.items) {
-                this.items.forEach(r => this.showItem(r)); // show first group of items
+            this.visibleItem = this.onboardingService.visibleItems.currentItem;
+            this.hasNext = this.onboardingService.visibleItems.hasNext;
+            if (this.visibleItem) {
+                this.showItem(this.visibleItem);
             }
         });
     }
@@ -132,33 +129,26 @@ export class OnboardingComponent implements OnInit, AfterViewInit, OnDestroy {
      * used by turn off button in template
      */
     public disable(): void {
-
-        this.items.forEach(x => this.hideItem(x)); // hide OLD items
-
+        if (this.visibleItem) {
+            this.hideItem(this.visibleItem); // hide old item
+        }
         this.onboardingService.disable();
-
     }
 
     /**
      * hide current group (show next one if one is available
      */
     public hide(): void {
-        if (this.allVisibleItems && this.hasNext) {
-            // hide current and show next group
-
-            this.items.forEach(x => this.hideItem(x)); // hide OLD items
-
-            this.items = this.allVisibleItems.nextItems();
-            this.hasNext = this.allVisibleItems.hasNext; // show NEW ones
-
-            this.items.forEach(x => this.showItem(x));
+        if (this.onboardingService.visibleItems && this.hasNext) {
+            // hide current and show next item
+            this.hideItem(this.visibleItem); // hide OLD items
+            this.visibleItem = this.onboardingService.visibleItems.nextItem();
+            this.hasNext = this.onboardingService.visibleItems.hasNext; // show NEW ones
+            this.showItem(this.visibleItem);
         } else {
-
-            // last group => hide items
-            this.allVisibleItems.allItems.forEach(x => this.hideItem(x));
-
+            this.hideItem(this.visibleItem);
             this.onboardingService.hide(); // mark all items as seen...
-            this.items = [];
+            this.visibleItem = null;
             this.hasNext = false;
         }
     }

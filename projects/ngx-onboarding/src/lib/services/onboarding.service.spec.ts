@@ -37,10 +37,10 @@ describe('OnboardingService', () => {
 
                 expect(browserDomSelectorService.querySelectorAll).toHaveBeenCalledTimes(6);
                 expect(onboardingService.visibleItemsChanged.emit).toHaveBeenCalled();
-                expect(onboardingService.visibleItems.currentLength).toBe(0);
+                expect(onboardingService.visibleItems.totalLength).toBe(0);
             }));
 
-    it('call check expects visibleItems.length to be 2',
+    it('call check expects visibleItems.length to be 6',
         inject([OnboardingService, BrowserDOMSelectorService],
             (onboardingService: OnboardingService, browserDomSelectorService: BrowserDOMSelectorService) => {
                 spyOn(browserDomSelectorService, 'querySelectorAll').and.callFake(() => {
@@ -53,10 +53,10 @@ describe('OnboardingService', () => {
                 onboardingService['seenSelectors'] = [];
                 onboardingService['enabled'] = true;
 
-                onboardingService.check('group 2');
+                onboardingService.check();
 
-                expect(browserDomSelectorService.querySelectorAll).toHaveBeenCalledTimes(2);
-                expect(onboardingService.visibleItems.currentLength).toBe(2);
+                expect(browserDomSelectorService.querySelectorAll).toHaveBeenCalledTimes(6);
+                expect(onboardingService.visibleItems.totalLength).toBe(6);
                 expect(onboardingService.visibleItems.isEmpty).toBeFalsy();
             }));
 
@@ -66,45 +66,6 @@ describe('OnboardingService', () => {
         unregister();
         expect(onboardingService['items'].length).toBe(0);
     }));
-
-    it('call check expects visibleItems to contain 3x arrays with 2 items each when grouping sortOrder',
-        inject([OnboardingService, BrowserDOMSelectorService],
-            (onboardingService: OnboardingService, browserDomSelectorService: BrowserDOMSelectorService) => {
-                spyOn(browserDomSelectorService, 'querySelectorAll').and.callFake(() => {
-                    return getHtmlElements(6);
-                });
-                spyOn(OnboardingHtmlElementHelper, 'isVisibleInViewWithParents').and.returnValue(true);
-                onboardingService['items'] = getOnboardingItems(true);
-                onboardingService.visibleItems.clear();
-                onboardingService['seenSelectors'] = [];
-                onboardingService['enabled'] = true;
-
-                onboardingService.check();
-
-                expect(browserDomSelectorService.querySelectorAll).toHaveBeenCalledTimes(6);
-
-                expect(onboardingService.visibleItems.totalLength).toBe(6);
-                expect(onboardingService.visibleItems.currentLength).toBe(2);
-                expect(onboardingService.visibleItems.hasNext).toBe(true);
-
-                // go to next group
-                onboardingService.visibleItems.nextItems();
-
-                expect(onboardingService.visibleItems.totalLength).toBe(6);
-                expect(onboardingService.visibleItems.currentLength).toBe(2);
-                expect(onboardingService.visibleItems.hasNext).toBe(true);
-
-                // go to next group
-                onboardingService.visibleItems.nextItems();
-
-                expect(onboardingService.visibleItems.totalLength).toBe(6);
-                expect(onboardingService.visibleItems.currentLength).toBe(2);
-                expect(onboardingService.visibleItems.hasNext).toBe(false);
-
-                // go to next group
-                expect(onboardingService.visibleItems.nextItems().length).toBe(0);
-
-            }));
 
     it('call disable expects isEnabled to be false and enableChanged to have been called',
         inject([OnboardingService], (onboardingService: OnboardingService) => {
@@ -171,11 +132,10 @@ describe('OnboardingService', () => {
         });
     });
 
-    const getOnboardingItems: (boolean?) => Array<OnboardingItem> = (ordered: boolean = false) => {
+    const getOnboardingItems: () => Array<OnboardingItem> = () => {
         return [
             {
                 'selector': '.css-class-1',
-                'group': 'group 1' + (ordered ? 1 : 0),
                 'position': 'top',
                 'headline': 'headline 1',
                 'details': 'details 1',
@@ -188,7 +148,6 @@ describe('OnboardingService', () => {
                 ]
             } as OnboardingItem, {
                 'selector': '.css-class-2',
-                'group': 'group 1' + (ordered ? 1 : 0),
                 'position': 'bottom',
                 'headline': 'headline 2',
                 'details': 'details 2',
@@ -201,7 +160,6 @@ describe('OnboardingService', () => {
                 ]
             } as OnboardingItem, {
                 'selector': '.css-class-3',
-                'group': 'group 1' + (ordered ? 2 : 0),
                 'position': 'left',
                 'headline': 'headline 3',
                 'details': 'details 3',
@@ -214,7 +172,6 @@ describe('OnboardingService', () => {
                 ]
             } as OnboardingItem, {
                 'selector': '.css-class-4',
-                'group': 'group 1' + (ordered ? 2 : 0),
                 'position': 'right',
                 'headline': 'headline 4',
                 'details': 'details 4',
@@ -227,7 +184,6 @@ describe('OnboardingService', () => {
                 ]
             } as OnboardingItem, {
                 'selector': '.css-class-5',
-                'group': 'group 2' + (ordered ? 3 : 0),
                 'position': 'top',
                 'headline': 'headline 5',
                 'details': 'details 5',
@@ -240,7 +196,6 @@ describe('OnboardingService', () => {
                 ]
             } as OnboardingItem, {
                 'selector': '.css-class-6',
-                'group': 'group 2' + (ordered ? 3 : 0),
                 'position': 'bottom',
                 'headline': 'headline 6',
                 'details': 'details 6',
