@@ -10,43 +10,36 @@ import { VisibleOnboardingItem } from './visible-onboarding-item.model';
  */
 export class OnboardingItemContainer {
 
-    private groupedItems: Array<Array<VisibleOnboardingItem>> = [];
+    private items: Array<VisibleOnboardingItem> = [];
     private totalCount = 0;
     private currentGroupIndex = 0;
 
     public get isEmpty(): boolean {
-        return !this.groupedItems || this.totalCount === 0;
+        return !this.items || this.totalCount === 0;
     }
 
     /**
      * Check if there is another group of visible onboarding items
      */
     public get hasNext(): boolean {
-        return this.groupedItems && this.currentGroupIndex < (this.groupedItems.length - 1);
+        return this.items && this.currentGroupIndex < (this.items.length - 1);
     }
 
     /**
      * Return current group of visible onboarding items
      */
-    public get currentItems(): Array<VisibleOnboardingItem> {
-        if (this.groupedItems && this.currentGroupIndex < this.groupedItems.length) {
-            return this.groupedItems[this.currentGroupIndex];
+    public get currentItem(): VisibleOnboardingItem {
+        if (this.items && this.currentGroupIndex < this.items.length) {
+            return this.items[this.currentGroupIndex];
         }
-        return [];
+        return null;
     }
 
     /**
      * Return list of All visible onboarding items (regardless of grouping)
      */
     public get allItems(): Array<VisibleOnboardingItem> {
-        return [].concat.apply([], this.groupedItems);
-    }
-
-    /**
-     * Return length of current group of items
-     */
-    public get currentLength(): number {
-        return this.currentItems.length;
+        return this.items.slice();
     }
 
     /**
@@ -59,22 +52,21 @@ export class OnboardingItemContainer {
     /**
      * Return next group of visible onboarding items
      */
-    public nextItems(): Array<VisibleOnboardingItem> {
+    public nextItem(): VisibleOnboardingItem {
         if (this.hasNext) {
             this.currentGroupIndex++;
-            return this.currentItems;
+            return this.currentItem;
         }
-
-        return [];
+        return null;
     }
 
     /**
      * Add new group of items
      */
-    public add(array: Array<VisibleOnboardingItem>) {
-        if (array && array.length > 0) {
-            this.groupedItems.push(array);
-            this.totalCount += array.length;
+    public add(items: Array<VisibleOnboardingItem>) {
+        if (items) {
+            this.items.push(...items);
+            this.totalCount += items.length;
         }
     }
 
@@ -82,7 +74,7 @@ export class OnboardingItemContainer {
      * Clear items from container
      */
     public clear(): void {
-        this.groupedItems = [];
+        this.items = [];
         this.totalCount = 0;
         this.currentGroupIndex = 0;
     }

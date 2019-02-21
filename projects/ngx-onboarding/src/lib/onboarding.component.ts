@@ -23,9 +23,9 @@ import {OnboardingItem} from './models/onboarding-item.model';
 export class OnboardingComponent implements OnInit, AfterViewInit, OnDestroy {
 
     /**
-     * all onboarding items
+     * current visible onboarding item
      */
-    public items: VisibleOnboardingItem[];
+    public visibleItem: VisibleOnboardingItem;
 
     /**
      * if true, the "show next" button is visible
@@ -61,7 +61,7 @@ export class OnboardingComponent implements OnInit, AfterViewInit, OnDestroy {
     private allVisibleItems: OnboardingItemContainer;
 
     constructor(public onboardingService: OnboardingService, private domSanitizer: DomSanitizer) {
-        this.items = [];
+        this.visibleItem = null;
         const config = onboardingService.getConfiguration();
         this.textConfig = config.textConfiguration;
         this.buttonConfig = config.buttonsConfiguration;
@@ -90,10 +90,10 @@ export class OnboardingComponent implements OnInit, AfterViewInit, OnDestroy {
         this.visibleItemsChangedSubscription = this.onboardingService.visibleItemsChanged.subscribe(() => {
             this.allVisibleItems = this.onboardingService.visibleItems;
 
-            this.items = this.onboardingService.visibleItems.currentItems;
+            this.visibleItem = this.onboardingService.visibleItems.currentItem;
             this.hasNext = this.allVisibleItems.hasNext;
-            if (this.items) {
-                this.items.forEach(r => this.showItem(r)); // show first group of items
+            if (this.visibleItem) {
+                this.showItem(this.visibleItem);
             }
         });
     }
@@ -132,11 +132,10 @@ export class OnboardingComponent implements OnInit, AfterViewInit, OnDestroy {
      * used by turn off button in template
      */
     public disable(): void {
-
-        this.items.forEach(x => this.hideItem(x)); // hide OLD items
-
+        if (this.visibleItem) {
+            this.hideItem(this.visibleItem); // hide old item
+        }
         this.onboardingService.disable();
-
     }
 
     /**
@@ -144,21 +143,15 @@ export class OnboardingComponent implements OnInit, AfterViewInit, OnDestroy {
      */
     public hide(): void {
         if (this.allVisibleItems && this.hasNext) {
-            // hide current and show next group
-
-            this.items.forEach(x => this.hideItem(x)); // hide OLD items
-
-            this.items = this.allVisibleItems.nextItems();
+            // hide current and show next item
+            this.hideItem(this.visibleItem); // hide OLD items
+            this.visibleItem = this.allVisibleItems.nextItem();
             this.hasNext = this.allVisibleItems.hasNext; // show NEW ones
-
-            this.items.forEach(x => this.showItem(x));
+            this.showItem(this.visibleItem);
         } else {
-
-            // last group => hide items
-            this.allVisibleItems.allItems.forEach(x => this.hideItem(x));
-
+            this.hideItem(this.visibleItem);
             this.onboardingService.hide(); // mark all items as seen...
-            this.items = [];
+            this.visibleItem = null;
             this.hasNext = false;
         }
     }

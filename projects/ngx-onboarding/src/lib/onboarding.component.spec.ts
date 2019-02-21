@@ -120,7 +120,6 @@ describe('OnboardingComponent', () => {
             details: '',
             textAlign: 'center',
             position: '',
-            group: '',
             descriptions: [],
             disableSpotlight: false,
             disableBackground: false,
@@ -138,7 +137,6 @@ describe('OnboardingComponent', () => {
             details: '',
             textAlign: 'center',
             position: '',
-            group: '',
             descriptions: [],
             disableSpotlight: false,
             disableBackground: false,
@@ -150,15 +148,13 @@ describe('OnboardingComponent', () => {
     });
 
     it('disable expect hideItem called with each item and disabled called on onboardingService', () => {
-        component.items = [
-            new VisibleOnboardingItem()
-        ];
+        component.visibleItem = new VisibleOnboardingItem();
         const hideSpy = spyOn(component as any, 'hideItem');
         const disableSpy = spyOn(component.onboardingService, 'disable');
 
         component.disable();
 
-        expect(hideSpy).toHaveBeenCalledWith(component.items[0]);
+        expect(hideSpy).toHaveBeenCalledWith(component.visibleItem);
         expect(disableSpy).toHaveBeenCalled();
     });
 

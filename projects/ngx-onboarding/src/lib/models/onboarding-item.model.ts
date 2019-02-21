@@ -6,7 +6,6 @@ export class OnboardingItem {
     public details: string;
     public textAlign?: 'center' | 'left' | 'right';
     public position: string;
-    public group: string;
     public descriptions: Array<OnboardingItemDescription>;
     public disableSpotlight = false;
     public disableBackground = false;

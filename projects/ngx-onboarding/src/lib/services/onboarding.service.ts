@@ -144,29 +144,28 @@ export class OnboardingService {
     /**
      * Check which onboarding items are visible. Emit visibleItemsChanged event.
      * called by OnboardingComponent
-     * @param filterGroupBy Regex pattern to filter onboarding items by group name
      */
-    public check(filterGroupBy: string = null) {
+    public check() {
         try {
-            if (this.isEnabled() && this.visibleItems && this.visibleItems.currentLength > 0) {
+            if (this.isEnabled() && this.visibleItems && this.visibleItems.totalLength > 0) {
                 return;
             }
             const matches: Array<VisibleOnboardingItem> = [];
-            const groupItems = this.getItems(filterGroupBy);
-            if (groupItems) {
-                _.each(groupItems, groupItem => {
-                    const elements = this.browserDomSelectorService.querySelectorAll(groupItem.selector);
+            const notSeenItems = this.getNotSeenItems();
+            if (notSeenItems) {
+                _.each(notSeenItems, item => {
+                    const elements = this.browserDomSelectorService.querySelectorAll(item.selector);
                     if (elements && elements.length > 0) {
                         let element: HTMLElement = _.find(
                             elements, (e: HTMLElement) => OnboardingHtmlElementHelper.isVisibleInViewWithParents(e)
                         );
                         if (element) {
-                            if (groupItem.toParent && element.offsetParent) {
+                            if (item.toParent && element.offsetParent) {
                                 element = <HTMLElement>element.offsetParent;
                             }
                             if (element) {
                                 matches.push({
-                                    item: groupItem,
+                                    item: item,
                                     element: element
                                 });
                             }
@@ -176,7 +175,7 @@ export class OnboardingService {
             }
 
             this.visibleItems.clear();
-            this.evalAndAddGroups(matches);
+            this.visibleItems.add(matches);
             this.visibleItemsChanged.emit();
         } catch (error) {
             this.errorHandler.handleError(error);
@@ -236,18 +235,6 @@ export class OnboardingService {
         this.seenSelectorsChanged();
     }
 
-    /**
-     * Evaluate group and add grouped items to visible items container
-     */
-    private evalAndAddGroups(input: Array<VisibleOnboardingItem>) {
-        const tmpDic = _.groupBy(input, x => x.item.group || undefined);
-
-        for (const g of Object.getOwnPropertyNames(tmpDic).sort()) {
-            const v = tmpDic[g] as Array<VisibleOnboardingItem>;
-            this.visibleItems.add(v);
-        }
-    }
-
     private init() {
         this.items = [];
         this.seenSelectors = [];
@@ -282,16 +269,8 @@ export class OnboardingService {
         });
     }
 
-
-    /**
-     * Get candidates for visible items
-     * @param filterByGroupPattern Regex pattern to filter candidates by group name
-     */
-    private getItems(filterByGroupPattern: string = null): Array<OnboardingItem> {
-        const groupItems: Array<OnboardingItem> = filterByGroupPattern ?
-            _.filter(this.items, i => new RegExp(filterByGroupPattern, 'i')
-                .test(i.group)) : this.items;
-        return _.filter(groupItems, i => !_.some(this.seenSelectors, seen => seen === i.selector));
+    private getNotSeenItems(): Array<OnboardingItem> {
+        return _.filter(this.items, i => !_.some(this.seenSelectors, seen => seen === i.selector));
     }
 
     private startRefreshTimer() {

@@ -15,7 +15,7 @@
             {{'ONBOARDING_CLEAR'|translate}}
         </button>
     </mat-menu>
-    <button *ngIf="iconConfig" mat-icon-button [matMenuTriggerFor]="onboardingMenu" class="onboarding-button">
+    <button *ngIf="iconConfig" mat-icon-button [matMenuTriggerFor]="onboardingMenu" class="onboarding-button" [title]="'ONBOARDING'|translate">
         <mat-icon *ngIf="iconConfig.matIconName && !iconConfig.svgIcon && !iconConfig.fontSet"
                   [matBadgeColor]="iconConfig.matBadgeColor" [matBadgeHidden]="isOnboardingEnabled()" [matBadge]="onboardingItemCount"
                   [matBadgePosition]="iconConfig.matBadgePosition" [matBadgeSize]="iconConfig.matBadgeSize"
