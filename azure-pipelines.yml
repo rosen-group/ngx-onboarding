@@ -15,6 +15,7 @@ steps:
 - script: |
     npm install -g @angular/cli
     npm install
+    npm run lint
     ng test ngx-onboarding --watch=false --browsers=ChromeHeadless --code-coverage
     npm run package
   displayName: 'test, build & package'
