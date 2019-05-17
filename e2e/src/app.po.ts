@@ -1,34 +1,48 @@
-import { browser, by, element, protractor } from 'protractor';
+import { browser, by, element, ElementArrayFinder, ElementFinder, promise as wdpromise, protractor } from 'protractor';
+
 const EC = protractor.ExpectedConditions;
 
 export class AppPage {
-    clearLocalStorage() {
-        this.navigateTo();
-        browser.executeScript('window.localStorage.clear();');
+    clearLocalStorage(): wdpromise.Promise<any> {
+        this.navigateToStart();
+        return browser.executeScript('window.localStorage.clear();');
     }
 
-    navigateTo() {
+    navigateToStart(): wdpromise.Promise<any> {
         return browser.get('/');
     }
 
-    getParagraphText() {
+    getParagraphText(): wdpromise.Promise<string> {
         return element(by.css('app-root h1')).getText();
     }
 
+    getOnBoardingButton(): ElementFinder {
+        return element(by.css('button.onboarding-button'));
+    }
 
-    getTurnOffButton() {
+    getOnBoardingMenuButtons(): ElementArrayFinder {
+        return element.all(by.css('.mat-menu-content button'));
+    }
+
+    getTurnOffButton(): ElementFinder {
         return element(by.css('button[color="warn"]'));
     }
 
-    waitAndCountOnboardingHeader() {
-        // the onboarding overlay always has small delay so we have to wait a big
+    waitAndCountOnboardingMenuItems(): wdpromise.Promise<number> {
+        browser.wait(EC.visibilityOf(element(by.css('.mat-menu-content'))), 10000);
+        return element.all(by.css('.mat-menu-content button')).count();
+    }
+
+    waitAndCountOnboardingHeader(): wdpromise.Promise<number> {
+        // the onboarding overlay always has small delay so we have to wait a bit
         browser.wait(EC.visibilityOf(element(by.css('.onboarding-header'))), 10000);
         return element.all(by.css('.onboarding-header')).count();
     }
 
-    countOnboardingHeader() {
+    countOnboardingHeader(): wdpromise.Promise<number> {
         // the onboarding overlay always has small delay so we have to wait a big
         return element.all(by.css('.onboarding-header')).count();
     }
+
 
 }
