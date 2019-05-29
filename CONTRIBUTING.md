@@ -8,7 +8,7 @@ Please use GitHub issues to report Bugs. Include all necessary information (OS, 
 
 ## Contribute
 
-Feel free to to support us and fix bugs or develop features. If you want to contribute send us a pull reqest.
+Feel free to to support us and fix bugs or develop features. If you want to contribute send us a pull request.
 Please ensure that the code matches the angular style guides and is covered by unit tests. 
 
 ### Development server
