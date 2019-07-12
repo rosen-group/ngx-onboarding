@@ -23,7 +23,7 @@
         "@angular/forms": "^6.1.0 || ^7.0.0",
         "@angular/http": "^6.1.0 || ^7.0.0",
         "@angular/material": "^6.4.6 || ^7.0.0",
-        "lodash": "^4.17.11",
+        "lodash": "^4.17.14",
         "rxjs": "^6.0.0",
         "zone.js": "~0.8.26"
     },
