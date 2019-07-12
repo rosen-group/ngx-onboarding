@@ -1,6 +1,9 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { OnboardingButtonComponent } from './onboarding-button.component';
-import { MatBadgeModule, MatButtonModule, MatIconModule, MatMenuModule } from '@angular/material';
+import { MatBadgeModule } from '@angular/material/badge';
+import { MatButtonModule } from '@angular/material/button';
+import { MatIconModule } from '@angular/material/icon';
+import { MatMenuModule } from '@angular/material/menu';
 import { OnboardingServiceMock } from './services/onboarding.service.mock';
 import {PrimitiveTranslatePipe} from './pipes/primitive-translate.pipe';
 import {OnboardingService} from './services/onboarding.service';

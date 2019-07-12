@@ -3,7 +3,8 @@ import {NgModule} from '@angular/core';
 import {AppComponent} from './app.component';
 import {OnboardingButtonsPosition, OnboardingModule, OnboardingService} from '../../projects/ngx-onboarding/src';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
-import {MatButtonModule, MatIconModule, MatIconRegistry} from '@angular/material';
+import { MatButtonModule } from '@angular/material/button';
+import { MatIconModule, MatIconRegistry } from '@angular/material/icon';
 import {HttpClientModule} from '@angular/common/http';
 
 /**
