@@ -16,7 +16,7 @@ describe('OnboardingHtmlElementHelper', () => {
         const element = document.createElement('div');
         const parent = document.createElement('div');
         spyOnProperty(element, 'offsetParent').and.returnValue(parent);
-        spyOn(window, 'getComputedStyle').and.returnValue({
+        spyOn((window as any), 'getComputedStyle').and.returnValue({
             opacity: '0'
         });
 
@@ -29,7 +29,7 @@ describe('OnboardingHtmlElementHelper', () => {
         const element = document.createElement('div');
         const parent = document.createElement('div');
         spyOnProperty(element, 'offsetParent').and.returnValue(parent);
-        spyOn(window, 'getComputedStyle').and.returnValue({
+        spyOn((window as any), 'getComputedStyle').and.returnValue({
             opacity: '1',
             display: 'none'
         });
@@ -43,7 +43,7 @@ describe('OnboardingHtmlElementHelper', () => {
         const element = document.createElement('div');
         const parent = document.createElement('div');
         spyOnProperty(element, 'offsetParent').and.returnValue(parent);
-        spyOn(window, 'getComputedStyle').and.returnValue({
+        spyOn((window as any), 'getComputedStyle').and.returnValue({
             opacity: '1',
             display: 'block',
             visibility: 'hidden'
@@ -58,7 +58,7 @@ describe('OnboardingHtmlElementHelper', () => {
         const element = document.createElement('div');
         const parent = document.createElement('div');
         spyOnProperty(element, 'offsetParent').and.returnValue(parent);
-        spyOn(window, 'getComputedStyle').and.returnValue({
+        spyOn((window as any), 'getComputedStyle').and.returnValue({
             opacity: '1',
             display: 'block',
             visibility: 'collapse'
@@ -169,7 +169,7 @@ describe('OnboardingHtmlElementHelper', () => {
         const element = document.createElement('div');
         const parent = document.createElement('div');
         spyOnProperty(element, 'offsetParent').and.returnValue(parent);
-        spyOn(window, 'getComputedStyle').and.callFake((htmlElement) => {
+        spyOn((window as any), 'getComputedStyle').and.callFake((htmlElement) => {
             if (htmlElement === element) {
                 return {
                     position: 'static'
@@ -189,7 +189,7 @@ describe('OnboardingHtmlElementHelper', () => {
     it('isFixed with parent null expect to be false', () => {
         const element = document.createElement('div');
         spyOnProperty(element, 'offsetParent').and.returnValue(null);
-        spyOn(window, 'getComputedStyle').and.returnValue({
+        spyOn((window as any), 'getComputedStyle').and.returnValue({
             position: 'relative'
         });
 

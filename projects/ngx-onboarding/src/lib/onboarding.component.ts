@@ -5,7 +5,6 @@ import {OnboardingButtonsPosition} from './models/onboarding-buttons-position.en
 import {OnboardingButtonsConfiguration} from './models/onboarding-buttons-configuration.interface';
 import {VisibleOnboardingItem} from './models/visible-onboarding-item.model';
 import {OnboardingTextConfiguration} from './models/onboarding-text-configuration.interface';
-import {OnboardingItemContainer} from './models/onboarding-item-container.model';
 import {OnboardingService} from './services/onboarding.service';
 import {OnboardingHtmlElementHelper} from './models/onboarding-html-element-helper';
 import {OnboardingItem} from './models/onboarding-item.model';

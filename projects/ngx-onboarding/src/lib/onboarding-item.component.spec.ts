@@ -1,4 +1,4 @@
-import { async, ComponentFixture, inject, TestBed } from '@angular/core/testing';
+
 import { OnboardingItemComponent } from './onboarding-item.component';
 import { OnboardingServiceMock } from './services/onboarding.service.mock';
 import { MockLocalStorageSeenSelectorsService } from './services/local-storage-seen-selectors.service.mock';
@@ -10,6 +10,7 @@ import {WindowRef} from './services/window-ref.service';
 import {OnboardingHtmlElementHelper} from './models/onboarding-html-element-helper';
 import {VisibleOnboardingItem} from './models/visible-onboarding-item.model';
 import {OnboardingItem} from './models/onboarding-item.model';
+import {async, ComponentFixture, inject, TestBed} from '@angular/core/testing';
 
 describe('OnboardingItemComponent', () => {
     beforeEach(async(() => {
@@ -39,7 +40,7 @@ describe('OnboardingItemComponent', () => {
     });
 
     it('getStyle with top', () => {
-        spyOn(OnboardingHtmlElementHelper, 'getPosition').and.returnValue({
+        spyOn((OnboardingHtmlElementHelper as any), 'getPosition').and.returnValue({
             x: 100,
             y: 200,
             width: 120,
@@ -56,7 +57,7 @@ describe('OnboardingItemComponent', () => {
     });
 
     it('getStyle with right', () => {
-        spyOn(OnboardingHtmlElementHelper, 'getPosition').and.returnValue({
+        spyOn((OnboardingHtmlElementHelper as any), 'getPosition').and.returnValue({
             x: 100,
             y: 200,
             width: 120,
@@ -73,7 +74,7 @@ describe('OnboardingItemComponent', () => {
     });
 
     it('getStyle with left', () => {
-        spyOn(OnboardingHtmlElementHelper, 'getPosition').and.returnValue({
+        spyOn((OnboardingHtmlElementHelper as any), 'getPosition').and.returnValue({
             x: 100,
             y: 200,
             width: 120,
@@ -90,7 +91,7 @@ describe('OnboardingItemComponent', () => {
     });
 
     it('getStyle with bottom', () => {
-        spyOn(OnboardingHtmlElementHelper, 'getPosition').and.returnValue({
+        spyOn((OnboardingHtmlElementHelper as any), 'getPosition').and.returnValue({
             x: 100,
             y: 200,
             width: 120,
