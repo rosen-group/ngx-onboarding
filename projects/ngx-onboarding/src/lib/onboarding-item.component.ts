@@ -32,7 +32,7 @@ export class OnboardingItemComponent {
      * the onboarding item container
      * used to calculate the position
      */
-    @ViewChild('container')
+    @ViewChild('container', { static: true })
     private container: ElementRef;
 
     constructor(private translatorService: TranslatorBaseService, private windowRef: WindowRef) {
