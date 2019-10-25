@@ -2,7 +2,11 @@
     "extends": "../tsconfig.json",
     "compilerOptions": {
         "outDir": "../out-tsc/app",
-        "types": []
+        "types": [],
+        "paths": {
+            "core-js/es7/reflect": ["node_modules/core-js/proposals/reflect-metadata"],
+            "core-js/es6/*": ["node_modules/core-js/es/*"]
+        }
     },
     "exclude": [
         "src/test.ts",
