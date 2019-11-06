@@ -1,0 +1,30 @@
+name: CI-master
+
+on:
+    push:
+        branches:
+            - master
+
+jobs:
+    build:
+
+        runs-on: ubuntu-16.04
+
+        steps:
+            - uses: actions/checkout@v1
+            - name: Use Node.js 10.x
+              uses: actions/setup-node@v1
+              with:
+                  node-version: 10.x
+            - name: Install dependencies
+              run: |
+                  npm install
+                  npm install -g @angular/cli
+            - name: Lint
+              run: npm run lint
+            - name: Build
+              run: npm run package
+            - name: Test
+              run: ng test ngx-onboarding --watch=false --browsers=ChromeHeadless --code-coverage
+              env:
+                  CI: true

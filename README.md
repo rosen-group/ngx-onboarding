@@ -1,5 +1,5 @@
 [![npm (scoped)](https://img.shields.io/npm/v/@rosen-group/ngx-onboarding.svg)](https://www.npmjs.com/package/@rosen-group/ngx-onboarding)
-[![Build Status](https://sdohle.visualstudio.com/ngx-onboarding/_apis/build/status/rosen-group.ngx-onboarding)](https://sdohle.visualstudio.com/ngx-onboarding/_build/latest?definitionId=1)
+[![Actions Status](https://github.com/rosen-group/ngx-onboarding/workflows/CI-master/badge.svg)](https://github.com/rosen-group/ngx-onboarding/actions)
 ![GitHub](https://img.shields.io/github/license/mashape/apistatus.svg)
 
 # ngx-onboarding
