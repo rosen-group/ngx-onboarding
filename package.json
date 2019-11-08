@@ -50,7 +50,7 @@
     "@types/jasminewd2": "^2.0.6",
     "@types/lodash": "^4.14.119",
     "@types/node": "~8.9.4",
-    "codelyzer": "~4.2.1",
+    "codelyzer": "~5.2.0",
     "copyfiles": "^2.1.0",
     "jasmine-core": "~2.99.1",
     "jasmine-spec-reporter": "~4.2.1",
@@ -63,7 +63,7 @@
     "ng-packagr": "^5.7.0",
     "protractor": "^5.4.2",
     "ts-node": "~5.0.1",
-    "tsickle": "^0.33.1",
+    "tsickle": "~0.37.1",
     "tslib": "^1.9.0",
     "tslint": "~5.9.1",
     "typescript": "~3.4.5"
