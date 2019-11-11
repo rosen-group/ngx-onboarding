@@ -1,11 +1,12 @@
 {
     "compileOnSave": false,
     "compilerOptions": {
+        "rootDir": ".",
         "baseUrl": "./",
         "outDir": "./dist/out-tsc",
         "sourceMap": true,
         "declaration": false,
-        "module": "es2015",
+        "module": "esnext",
         "moduleResolution": "node",
         "emitDecoratorMetadata": true,
         "experimentalDecorators": true,
@@ -19,10 +20,7 @@
         ],
         "paths": {
             "ngx-onboarding": [
-                "dist/ngx-onboarding"
-            ],
-            "ngx-onboarding/*": [
-                "dist/ngx-onboarding/*"
+                "projects/ngx-onboarding/src/index.ts"
             ],
             "core-js/es7/reflect": ["node_modules/core-js/proposals/reflect-metadata"],
             "core-js/es6/*": ["node_modules/core-js/es/*"]
