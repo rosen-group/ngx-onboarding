@@ -17,9 +17,9 @@ describe('AppComponent', () => {
                 AppComponent
             ]
         });
-        httpClient = TestBed.get(HttpClient);
-        httpTestingController = TestBed.get(HttpTestingController);
-        errorHandler = TestBed.get(ErrorHandler);
+        httpClient = TestBed.inject(HttpClient);
+        httpTestingController = TestBed.inject(HttpTestingController);
+        errorHandler = TestBed.inject(ErrorHandler);
     });
     afterEach(() => {
         httpTestingController.verify();

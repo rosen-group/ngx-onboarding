@@ -11,8 +11,8 @@ describe('LocalStorageEnabledStatusService', () => {
                 LocalStorageEnabledStatusService,
             ],
         });
-        errorHandler = TestBed.get(ErrorHandler);
-        service = TestBed.get(LocalStorageEnabledStatusService);
+        errorHandler = TestBed.inject(ErrorHandler);
+        service = TestBed.inject(LocalStorageEnabledStatusService);
     }));
 
     it('should be created', () => {

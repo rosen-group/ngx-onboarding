@@ -11,8 +11,8 @@ describe('LocalStorageSeenSelectorsService', () => {
                 LocalStorageSeenSelectorsService,
             ],
         });
-        errorHandler = TestBed.get(ErrorHandler);
-        service = TestBed.get(LocalStorageSeenSelectorsService);
+        errorHandler = TestBed.inject(ErrorHandler);
+        service = TestBed.inject(LocalStorageSeenSelectorsService);
     }));
 
     it('should be created', () => {
