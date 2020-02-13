@@ -1,6 +1,5 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { OnboardingComponent } from './onboarding.component';
-import { MatBadgeModule, MatButtonModule, MatIconModule, MatMenuModule } from '@angular/material';
 import { OnboardingItemComponent } from './onboarding-item.component';
 import { OnboardingServiceMock } from './services/onboarding.service.mock';
 import { of } from 'rxjs';
@@ -12,6 +11,10 @@ import {BrowserDOMSelectorService} from './services/browser-dom-selector.service
 import {OnboardingHtmlElementHelper} from './models/onboarding-html-element-helper';
 import {VisibleOnboardingItem} from './models/visible-onboarding-item.model';
 import {OnboardingItem} from './models/onboarding-item.model';
+import {MatButtonModule} from '@angular/material/button';
+import {MatBadgeModule} from '@angular/material/badge';
+import {MatMenuModule} from '@angular/material/menu';
+import {MatIconModule} from '@angular/material/icon';
 
 describe('OnboardingComponent', () => {
     beforeEach(async(() => {
