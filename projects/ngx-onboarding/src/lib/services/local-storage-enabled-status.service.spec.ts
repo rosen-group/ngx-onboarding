@@ -1,11 +1,11 @@
-import { async, TestBed } from '@angular/core/testing';
+import { TestBed, waitForAsync} from '@angular/core/testing';
 import { LocalStorageEnabledStatusService } from './local-storage-enabled-status.service';
 import { ErrorHandler } from '@angular/core';
 
 describe('LocalStorageEnabledStatusService', () => {
     let errorHandler: ErrorHandler;
     let service: LocalStorageEnabledStatusService;
-    beforeEach(async(() => {
+    beforeEach(waitForAsync(() => {
         TestBed.configureTestingModule({
             providers: [
                 LocalStorageEnabledStatusService,

@@ -1,4 +1,4 @@
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { ComponentFixture, TestBed, waitForAsync} from '@angular/core/testing';
 import { OnboardingComponent } from './onboarding.component';
 import { OnboardingItemComponent } from './onboarding-item.component';
 import { OnboardingServiceMock } from './services/onboarding.service.mock';
@@ -17,7 +17,7 @@ import {MatMenuModule} from '@angular/material/menu';
 import {MatIconModule} from '@angular/material/icon';
 
 describe('OnboardingComponent', () => {
-    beforeEach(async(() => {
+    beforeEach(waitForAsync(() => {
         TestBed.configureTestingModule({
             imports: [
                 MatButtonModule,
@@ -45,7 +45,7 @@ describe('OnboardingComponent', () => {
         component = fixture.debugElement.componentInstance;
     });
 
-    it('should create the component', async(() => {
+    it('should create the component', waitForAsync(() => {
         expect(component).toBeTruthy();
     }));
 

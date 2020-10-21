@@ -1,4 +1,4 @@
-import { async, ComponentFixture, inject, TestBed } from '@angular/core/testing';
+import { ComponentFixture, inject, TestBed, waitForAsync} from '@angular/core/testing';
 import { OnboardingItemComponent } from './onboarding-item.component';
 import { OnboardingServiceMock } from './services/onboarding.service.mock';
 import { MockLocalStorageSeenSelectorsService } from './services/local-storage-seen-selectors.service.mock';
@@ -12,7 +12,7 @@ import {VisibleOnboardingItem} from './models/visible-onboarding-item.model';
 import {OnboardingItem} from './models/onboarding-item.model';
 
 describe('OnboardingItemComponent', () => {
-    beforeEach(async(() => {
+    beforeEach(waitForAsync(() => {
         TestBed.configureTestingModule({
             declarations: [
                 OnboardingItemComponent
