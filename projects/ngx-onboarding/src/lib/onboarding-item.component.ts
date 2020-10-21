@@ -1,9 +1,9 @@
-import { Component, ElementRef, Input, ViewChild, ViewEncapsulation } from '@angular/core';
-import * as _ from 'lodash';
 import {VisibleOnboardingItem} from './models/visible-onboarding-item.model';
 import {TranslatorBaseService} from './services/translator-base.service';
 import {WindowRef} from './services/window-ref.service';
 import {OnboardingHtmlElementHelper} from './models/onboarding-html-element-helper';
+import {isEmpty, find} from 'lodash-es';
+import {Component, ElementRef, Input, ViewChild, ViewEncapsulation} from '@angular/core';
 
 const topPadding = 25;
 const rightPadding = 25;
@@ -107,17 +107,17 @@ export class OnboardingItemComponent {
     }
 
     public getHeadline(): string {
-        const description = _.find(this.item.item.descriptions, d => d.language === this.translatorService.currentLang);
+        const description = find(this.item.item.descriptions, d => d.language === this.translatorService.currentLang);
         return description ? description.headline : this.item.item.headline;
     }
 
     public getDetails(): string {
-        const description = _.find(this.item.item.descriptions, d => d.language === this.translatorService.currentLang);
+        const description = find(this.item.item.descriptions, d => d.language === this.translatorService.currentLang);
         return description ? description.details : this.item.item.details;
     }
 
     public getTextAlignClass(): string {
-        if (_.isEmpty(this.item.item.textAlign) || this.item.item.textAlign === 'center') {
+        if (isEmpty(this.item.item.textAlign) || this.item.item.textAlign === 'center') {
             return ''; // ==> center
         }
         return `align-${this.item.item.textAlign}`;
@@ -138,6 +138,5 @@ export class OnboardingItemComponent {
     private getWindowScreenHeight(): number {
         return this.windowRef.nativeWindow ? this.windowRef.nativeWindow.screen.height : 768;
     }
-
 
 }

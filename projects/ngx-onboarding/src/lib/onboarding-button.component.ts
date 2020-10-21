@@ -1,6 +1,6 @@
-import { Component, ViewEncapsulation } from '@angular/core';
 import {OnboardingIconConfiguration} from './models/onboarding-icon-configuration.interface';
 import {OnboardingService} from './services/onboarding.service';
+import {Component, ViewEncapsulation} from '@angular/core';
 
 
 /**

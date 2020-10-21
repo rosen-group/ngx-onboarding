@@ -1,8 +1,8 @@
+import {EventEmitter} from '@angular/core';
+
 /**
  * Base interface for translatorservice (used for core ngx-onboarding labels)
  */
-import { EventEmitter } from '@angular/core';
-
 export abstract class TranslatorBaseService {
 
     /**

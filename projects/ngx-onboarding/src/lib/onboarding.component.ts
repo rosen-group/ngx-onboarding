@@ -1,5 +1,3 @@
-import {AfterViewInit, Component, OnDestroy, OnInit, ViewEncapsulation} from '@angular/core';
-import {Subscription} from 'rxjs';
 import {DomSanitizer, SafeStyle} from '@angular/platform-browser';
 import {OnboardingButtonsPosition} from './models/onboarding-buttons-position.enum';
 import {OnboardingButtonsConfiguration} from './models/onboarding-buttons-configuration.interface';
@@ -9,6 +7,8 @@ import {OnboardingItemContainer} from './models/onboarding-item-container.model'
 import {OnboardingService} from './services/onboarding.service';
 import {OnboardingHtmlElementHelper} from './models/onboarding-html-element-helper';
 import {OnboardingItem} from './models/onboarding-item.model';
+import {AfterViewInit, Component, OnDestroy, OnInit, ViewEncapsulation} from '@angular/core';
+import {Subscription} from 'rxjs';
 
 /**
  * Main component of the onboarding module.

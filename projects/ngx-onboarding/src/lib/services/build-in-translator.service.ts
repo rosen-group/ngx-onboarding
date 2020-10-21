@@ -1,6 +1,5 @@
-import { EventEmitter, Injectable } from '@angular/core';
 import { TranslatorBaseService } from './translator-base.service';
-
+import {EventEmitter, Injectable} from '@angular/core';
 
 /**
  * Service for the translations of internal text
