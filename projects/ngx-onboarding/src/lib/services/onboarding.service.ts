@@ -1,6 +1,5 @@
 import {interval, Subscription, timer} from 'rxjs';
 import {ErrorHandler, EventEmitter, Injectable, NgZone} from '@angular/core';
-import * as _ from 'lodash';
 import {BrowserDOMSelectorService} from './browser-dom-selector.service';
 import {OnboardingItemContainer} from '../models/onboarding-item-container.model';
 import {OnboardingConfiguration} from '../models/onboarding-configuration.model';
@@ -10,6 +9,7 @@ import {OnboardingItem} from '../models/onboarding-item.model';
 import {EnabledStatusBaseService} from './enabled-status-base.service';
 import {OnboardingButtonsPosition} from '../models/onboarding-buttons-position.enum';
 import {SeenSelectorsBaseService} from './seen-selectors-base.service';
+import {each, filter, find,  some} from 'lodash-es';
 
 const addSeenSelectorDebounceTime = 1000;
 const enabledChangedDebounceTime = 1000;
@@ -137,7 +137,7 @@ export class OnboardingService {
     public register(items: Array<OnboardingItem>): Function {
         this.items.push(...items);
         return () => {
-            this.items = _.filter(this.items, thisItem => !_.some(items, item => thisItem.selector === item.selector));
+            this.items = filter(this.items, thisItem => !some(items, item => thisItem.selector === item.selector));
         };
     }
 
@@ -153,10 +153,10 @@ export class OnboardingService {
             const matches: Array<VisibleOnboardingItem> = [];
             const notSeenItems = this.getNotSeenItems();
             if (notSeenItems) {
-                _.each(notSeenItems, item => {
+                each(notSeenItems, item => {
                     const elements = this.browserDomSelectorService.querySelectorAll(item.selector);
                     if (elements && elements.length > 0) {
-                        let element: HTMLElement = _.find(
+                        let element: HTMLElement = find(
                             elements, (e: HTMLElement) => OnboardingHtmlElementHelper.isVisibleInViewWithParents(e)
                         );
                         if (element) {
@@ -188,7 +188,7 @@ export class OnboardingService {
      */
     public hide() {
 
-        _.each(this.visibleItems.allItems, i => {
+        each(this.visibleItems.allItems, i => {
             this.addToSeenSelectors(i.item.selector);
         });
 
@@ -270,7 +270,7 @@ export class OnboardingService {
     }
 
     private getNotSeenItems(): Array<OnboardingItem> {
-        return _.filter(this.items, i => !_.some(this.seenSelectors, seen => seen === i.selector));
+        return filter(this.items, i => !some(this.seenSelectors, seen => seen === i.selector));
     }
 
     private startRefreshTimer() {

@@ -1,4 +1,4 @@
-import { async, inject, TestBed } from '@angular/core/testing';
+import { inject, TestBed, waitForAsync} from '@angular/core/testing';
 import { OnboardingService } from './onboarding.service';
 import { BrowserDOMSelectorService } from './browser-dom-selector.service';
 import { SeenSelectorsBaseService } from './seen-selectors-base.service';
@@ -9,7 +9,7 @@ import {OnboardingHtmlElementHelper} from '../models/onboarding-html-element-hel
 import {OnboardingItem} from '../..';
 
 describe('OnboardingService', () => {
-    beforeEach(async(() => {
+    beforeEach(waitForAsync(() => {
         TestBed.configureTestingModule({
             providers: [
                 BrowserDOMSelectorService,

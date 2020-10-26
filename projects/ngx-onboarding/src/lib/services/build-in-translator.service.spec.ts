@@ -1,9 +1,9 @@
-import { async, inject, TestBed } from '@angular/core/testing';
+import { inject, TestBed, waitForAsync} from '@angular/core/testing';
 import { BuildInTranslatorService } from './build-in-translator.service';
 
 
 describe('BuildInTranslatorService', () => {
-    beforeEach(async(() => {
+    beforeEach(waitForAsync(() => {
         TestBed.configureTestingModule({
             providers: [
                 BuildInTranslatorService

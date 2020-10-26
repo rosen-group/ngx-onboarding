@@ -1,11 +1,11 @@
-import { async, TestBed } from '@angular/core/testing';
+import { TestBed, waitForAsync} from '@angular/core/testing';
 import { LocalStorageSeenSelectorsService } from './local-storage-seen-selectors.service';
 import { ErrorHandler } from '@angular/core';
 
 describe('LocalStorageSeenSelectorsService', () => {
     let errorHandler: ErrorHandler;
     let service: LocalStorageSeenSelectorsService;
-    beforeEach(async(() => {
+    beforeEach(waitForAsync(() => {
         TestBed.configureTestingModule({
             providers: [
                 LocalStorageSeenSelectorsService,

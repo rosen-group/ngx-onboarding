@@ -1,7 +1,7 @@
 import { SeenSelectorsBaseService } from './seen-selectors-base.service';
+import {isEmpty} from 'lodash-es';
 import {ErrorHandler, Injectable} from '@angular/core';
 import {Observable, of} from 'rxjs';
-import * as _ from 'lodash';
 
 /**
  * Unique key to identify the seen onboarding items in the local storage
@@ -28,7 +28,7 @@ export class LocalStorageSeenSelectorsService extends SeenSelectorsBaseService {
      */
     public load(): Observable<Array<string>> {
         const seenSelectorsString = localStorage.getItem(seenSelectorsLocalStorageKey);
-        if (!_.isEmpty(seenSelectorsString)) {
+        if (!isEmpty(seenSelectorsString)) {
             try {
                 return of(JSON.parse(seenSelectorsString));
             } catch (error) {

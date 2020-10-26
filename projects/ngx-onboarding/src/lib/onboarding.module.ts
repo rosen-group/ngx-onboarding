@@ -10,13 +10,13 @@ import {TranslatorBaseService} from './services/translator-base.service';
 import {LocalStorageSeenSelectorsService} from './services/local-storage-seen-selectors.service';
 import {LocalStorageEnabledStatusService} from './services/local-storage-enabled-status.service';
 import {BuildInTranslatorService} from './services/build-in-translator.service';
-import {NgModule} from '@angular/core';
-import {CommonModule} from '@angular/common';
 import {MatButtonModule} from '@angular/material/button';
 import {MatBadgeModule} from '@angular/material/badge';
+import {NgModule} from '@angular/core';
+import {CommonModule} from '@angular/common';
+import {HttpClientModule} from '@angular/common/http';
 import {MatIconModule} from '@angular/material/icon';
 import {MatMenuModule} from '@angular/material/menu';
-import {HttpClientModule} from '@angular/common/http';
 
 /**
  * Module for ngx-onboarding.
