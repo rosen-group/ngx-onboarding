@@ -33,8 +33,15 @@ The library is published as a [scoped NPM package](https://docs.npmjs.com/misc/s
 npm install --save @rosen-group/ngx-onboarding
 ```
 
+If your app is not already using the packages listed below as peer dependencies please install them to your application.
+
 ### Peer Dependencies
 
+Besides the default angular dependencies this module requires following packages as peer dependencies:
+
+- [lodash-es](https://www.npmjs.com/package/lodash-es)
+- [rxjs](https://www.npmjs.com/package/rxjs)
+- [zone.js](https://www.npmjs.com/package/zone.js)
 - [angular-material](https://www.npmjs.com/package/angular-material)
 - [@angular/cdk](https://www.npmjs.com/package/@angular/cdk)
 
