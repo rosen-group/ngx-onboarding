@@ -137,5 +137,4 @@ export class OnboardingItemComponent {
     private getWindowScreenHeight(): number {
         return this.windowRef.nativeWindow ? this.windowRef.nativeWindow.screen.height : 768;
     }
-
 }

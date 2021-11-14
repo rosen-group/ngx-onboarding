@@ -9,7 +9,6 @@ import {OnboardingItem} from '../models/onboarding-item.model';
 import {EnabledStatusBaseService} from './enabled-status-base.service';
 import {OnboardingButtonsPosition} from '../models/onboarding-buttons-position.enum';
 import {SeenSelectorsBaseService} from './seen-selectors-base.service';
-import { some } from './some.function';
 
 const addSeenSelectorDebounceTime = 1000;
 const enabledChangedDebounceTime = 1000;
@@ -138,7 +137,7 @@ export class OnboardingService {
         this.items.push(...items);
         return () => {
             // this.items = filter(this.items, thisItem => !some(items, item => thisItem.selector === item.selector));
-            this.items = this.items.filter(thisItem => !some(items, item => thisItem.selector === item.selector));
+            this.items = this.items.filter(thisItem => !items.some( item => thisItem.selector === item.selector));
         };
     }
 
@@ -271,7 +270,7 @@ export class OnboardingService {
     }
 
     private getNotSeenItems(): Array<OnboardingItem> {
-        return this.items.filter(i => !some(this.seenSelectors, seen => seen === i.selector));
+        return this.items.filter(i => !this.seenSelectors.some( seen => seen === i.selector));
     }
 
     private startRefreshTimer() {
