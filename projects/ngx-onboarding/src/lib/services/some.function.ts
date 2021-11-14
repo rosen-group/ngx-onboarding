@@ -1,6 +1,6 @@
-export function some(array, predicate) {
+export function some(array: Array<any>, predicate: Function): boolean {
     let index = -1;
-    const length = array == null ? 0 : array.length;
+    const length =  array?.length ?? 0;
 
     while (++index < length) {
         if (predicate(array[index], index, array)) {
