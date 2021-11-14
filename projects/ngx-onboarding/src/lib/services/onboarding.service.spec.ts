@@ -60,11 +60,27 @@ describe('OnboardingService', () => {
                 expect(onboardingService.visibleItems.isEmpty).toBeFalsy();
             }));
 
-    it('call register expects items.lenght to be 6', inject([OnboardingService], (onboardingService: OnboardingService) => {
+    it('call register expects items.length to be 6', inject([OnboardingService], (onboardingService: OnboardingService) => {
+        onboardingService.register(getOnboardingItems());
+        expect(onboardingService['items'].length).toBe(6);
+    }));
+
+    it('call unregister clears all 6 registered items', inject([OnboardingService], (onboardingService: OnboardingService) => {
         const unregister = onboardingService.register(getOnboardingItems());
         expect(onboardingService['items'].length).toBe(6);
         unregister();
         expect(onboardingService['items'].length).toBe(0);
+    }));
+
+    it('call unregister clears only items that were registered before', inject([OnboardingService],
+        (onboardingService: OnboardingService) => {
+        const unregister = onboardingService.register(getOnboardingItems());
+        onboardingService.register(getOtherOnboardingItems());
+        expect(onboardingService['items'].length).toBe(
+            getOnboardingItems().length + getOtherOnboardingItems().length
+        );
+        unregister();
+        expect(onboardingService['items'].length).toBe(getOtherOnboardingItems().length);
     }));
 
     it('call disable expects isEnabled to be false and enableChanged to have been called',
@@ -204,6 +220,48 @@ describe('OnboardingService', () => {
                         'language': 'de',
                         'headline': 'headline 6 de',
                         'details': 'details 6 de'
+                    }
+                ]
+            } as OnboardingItem
+        ];
+    };
+
+    const getOtherOnboardingItems: () => Array<OnboardingItem> = () => {
+        return [
+            {
+                'selector': '.other-css-class-1',
+                'position': 'top',
+                'headline': 'headline 1',
+                'details': 'details 1',
+                'descriptions': [
+                    {
+                        'language': 'de',
+                        'headline': 'headline 1 de',
+                        'details': 'details 1 de'
+                    }
+                ]
+            } as OnboardingItem, {
+                'selector': '.other-css-class-2',
+                'position': 'bottom',
+                'headline': 'headline 2',
+                'details': 'details 2',
+                'descriptions': [
+                    {
+                        'language': 'de',
+                        'headline': 'headline 2 de',
+                        'details': 'details 2 de'
+                    }
+                ]
+            } as OnboardingItem, {
+                'selector': '.other-css-class-3',
+                'position': 'left',
+                'headline': 'headline 3',
+                'details': 'details 3',
+                'descriptions': [
+                    {
+                        'language': 'de',
+                        'headline': 'headline 3 de',
+                        'details': 'details 3 de'
                     }
                 ]
             } as OnboardingItem

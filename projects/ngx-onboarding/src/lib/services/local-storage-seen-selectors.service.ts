@@ -1,5 +1,4 @@
 import { SeenSelectorsBaseService } from './seen-selectors-base.service';
-import {isEmpty} from 'lodash-es';
 import {ErrorHandler, Injectable} from '@angular/core';
 import {Observable, of} from 'rxjs';
 
@@ -28,7 +27,7 @@ export class LocalStorageSeenSelectorsService extends SeenSelectorsBaseService {
      */
     public load(): Observable<Array<string>> {
         const seenSelectorsString = localStorage.getItem(seenSelectorsLocalStorageKey);
-        if (!isEmpty(seenSelectorsString)) {
+        if (seenSelectorsString?.length > 0) {
             try {
                 return of(JSON.parse(seenSelectorsString));
             } catch (error) {

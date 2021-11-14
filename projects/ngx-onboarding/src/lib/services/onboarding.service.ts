@@ -9,7 +9,7 @@ import {OnboardingItem} from '../models/onboarding-item.model';
 import {EnabledStatusBaseService} from './enabled-status-base.service';
 import {OnboardingButtonsPosition} from '../models/onboarding-buttons-position.enum';
 import {SeenSelectorsBaseService} from './seen-selectors-base.service';
-import {each, filter, find,  some} from 'lodash-es';
+import { some } from './some.function';
 
 const addSeenSelectorDebounceTime = 1000;
 const enabledChangedDebounceTime = 1000;
@@ -137,7 +137,8 @@ export class OnboardingService {
     public register(items: Array<OnboardingItem>): Function {
         this.items.push(...items);
         return () => {
-            this.items = filter(this.items, thisItem => !some(items, item => thisItem.selector === item.selector));
+            // this.items = filter(this.items, thisItem => !some(items, item => thisItem.selector === item.selector));
+            this.items = this.items.filter(thisItem => !some(items, item => thisItem.selector === item.selector));
         };
     }
 
@@ -153,11 +154,11 @@ export class OnboardingService {
             const matches: Array<VisibleOnboardingItem> = [];
             const notSeenItems = this.getNotSeenItems();
             if (notSeenItems) {
-                each(notSeenItems, item => {
+                notSeenItems.forEach( item => {
                     const elements = this.browserDomSelectorService.querySelectorAll(item.selector);
                     if (elements && elements.length > 0) {
-                        let element: HTMLElement = find(
-                            elements, (e: HTMLElement) => OnboardingHtmlElementHelper.isVisibleInViewWithParents(e)
+                        let element: HTMLElement = elements.find(
+                            (e: HTMLElement) => OnboardingHtmlElementHelper.isVisibleInViewWithParents(e)
                         );
                         if (element) {
                             if (item.toParent && element.offsetParent) {
@@ -188,7 +189,7 @@ export class OnboardingService {
      */
     public hide() {
 
-        each(this.visibleItems.allItems, i => {
+        this.visibleItems.allItems.forEach( i => {
             this.addToSeenSelectors(i.item.selector);
         });
 
@@ -270,7 +271,7 @@ export class OnboardingService {
     }
 
     private getNotSeenItems(): Array<OnboardingItem> {
-        return filter(this.items, i => !some(this.seenSelectors, seen => seen === i.selector));
+        return this.items.filter(i => !some(this.seenSelectors, seen => seen === i.selector));
     }
 
     private startRefreshTimer() {
