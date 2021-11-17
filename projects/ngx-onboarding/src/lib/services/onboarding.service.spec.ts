@@ -5,8 +5,8 @@ import { SeenSelectorsBaseService } from './seen-selectors-base.service';
 import { MockLocalStorageSeenSelectorsService } from './local-storage-seen-selectors.service.mock';
 import { MockLocalStorageEnabledStatusService } from './local-storage-enabled-status.service.mock';
 import { EnabledStatusBaseService } from './enabled-status-base.service';
-import {OnboardingHtmlElementHelper} from '../models/onboarding-html-element-helper';
-import {OnboardingItem} from '../..';
+import { OnboardingHtmlElementHelper } from '../models/onboarding-html-element-helper';
+import { OnboardingItem } from '../models/onboarding-item.model';
 
 describe('OnboardingService', () => {
     beforeEach(waitForAsync(() => {
@@ -141,12 +141,10 @@ describe('OnboardingService', () => {
         })();
     });
 
-    it('registeredItemsCount expect to be 6', () => {
-        inject([OnboardingService], (onboardingService: OnboardingService) => {
-            onboardingService.register(getOnboardingItems());
-            expect(onboardingService.registeredItemsCount).toBe(6);
-        });
-    });
+    it('registeredItemsCount expect to be 6', inject([OnboardingService], (onboardingService: OnboardingService) => {
+        onboardingService.register(getOnboardingItems());
+        expect(onboardingService.registeredItemsCount).toBe(6);
+    }));
 
     const getOnboardingItems: () => Array<OnboardingItem> = () => {
         return [
