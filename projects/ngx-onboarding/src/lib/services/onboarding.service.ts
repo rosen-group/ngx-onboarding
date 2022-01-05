@@ -154,7 +154,7 @@ export class OnboardingService {
             const notSeenItems = this.getNotSeenItems();
             if (notSeenItems) {
                 notSeenItems.forEach( item => {
-                    const elements = this.browserDomSelectorService.querySelectorAll(item.selector);
+                    const elements = Array.from(this.browserDomSelectorService.querySelectorAll(item.selector));
                     if (elements && elements.length > 0) {
                         let element: HTMLElement = elements.find(
                             (e: HTMLElement) => OnboardingHtmlElementHelper.isVisibleInViewWithParents(e)
