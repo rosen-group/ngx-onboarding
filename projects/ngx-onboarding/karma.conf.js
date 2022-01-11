@@ -21,7 +21,7 @@ module.exports = function (config) {
             reports: ['html', 'lcovonly', 'cobertura'],
             fixWebpackSourcePaths: true
         },
-        reporters: ['progress', 'kjhtml', 'junit'],
+        reporters: ['progress', 'kjhtml', 'junit', 'coverage-istanbul'],
         junitReporter: {
             outputDir: require('path').join(__dirname, '../../reports'),
             outputFile: 'junit.xml',
