@@ -7,9 +7,9 @@ import {BrowserDOMSelectorService} from './services/browser-dom-selector.service
 import {BuildInTranslatorService} from './services/build-in-translator.service';
 import {TranslatorBaseService} from './services/translator-base.service';
 import {VisibleOnboardingItem} from './models/visible-onboarding-item.model';
-import {MatButtonModule} from '@angular/material/button';
+import {MatLegacyButtonModule as MatButtonModule} from '@angular/material/legacy-button';
 import {MatBadgeModule} from '@angular/material/badge';
-import {MatMenuModule} from '@angular/material/menu';
+import {MatLegacyMenuModule as MatMenuModule} from '@angular/material/legacy-menu';
 import {MatIconModule} from '@angular/material/icon';
 
 describe('OnboardingButtonComponent', () => {

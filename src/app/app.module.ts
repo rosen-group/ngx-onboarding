@@ -5,7 +5,7 @@ import {OnboardingButtonsPosition, OnboardingModule, OnboardingService} from '..
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import {HttpClientModule} from '@angular/common/http';
 import {MatIconModule, MatIconRegistry} from '@angular/material/icon';
-import {MatButtonModule} from '@angular/material/button';
+import {MatLegacyButtonModule as MatButtonModule} from '@angular/material/legacy-button';
 
 /**
  * Example module to test the onboarding component

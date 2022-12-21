@@ -1,29 +1,34 @@
 {
     "compileOnSave": false,
     "compilerOptions": {
-        "rootDir": ".",
-        "baseUrl": "./",
-        "outDir": "./dist/out-tsc",
-        "sourceMap": true,
-        "declaration": false,
-        "module": "es2020",
-        "moduleResolution": "node",
-        "emitDecoratorMetadata": true,
-        "experimentalDecorators": true,
-        "target": "es2020",
-        "typeRoots": [
-            "node_modules/@types"
+      "rootDir": ".",
+      "baseUrl": "./",
+      "outDir": "./dist/out-tsc",
+      "sourceMap": true,
+      "declaration": false,
+      "module": "es2020",
+      "moduleResolution": "node",
+      "emitDecoratorMetadata": true,
+      "experimentalDecorators": true,
+      "target": "ES2022",
+      "typeRoots": [
+        "node_modules/@types"
+      ],
+      "lib": [
+        "es2017",
+        "dom"
+      ],
+      "paths": {
+        "ngx-onboarding": [
+          "projects/ngx-onboarding/src/index.ts"
         ],
-        "lib": [
-            "es2017",
-            "dom"
+        "core-js/es7/reflect": [
+          "node_modules/core-js/proposals/reflect-metadata"
         ],
-        "paths": {
-            "ngx-onboarding": [
-                "projects/ngx-onboarding/src/index.ts"
-            ],
-            "core-js/es7/reflect": ["node_modules/core-js/proposals/reflect-metadata"],
-            "core-js/es6/*": ["node_modules/core-js/es/*"]
-        }
+        "core-js/es6/*": [
+          "node_modules/core-js/es/*"
+        ]
+      },
+      "useDefineForClassFields": false
     }
 }
