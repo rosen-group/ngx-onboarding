@@ -1,6 +1,6 @@
 {
   "name": "ngx-onboarding-app",
-  "version": "1.11.1",
+  "version": "1.11.2",
   "engines": {
     "node": "14.20.x"
   },
