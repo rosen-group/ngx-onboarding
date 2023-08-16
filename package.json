@@ -1,6 +1,6 @@
 {
   "name": "ngx-onboarding-app",
-  "version": "1.12.0",
+  "version": "1.12.1",
   "engines": {
     "node": "16.20.x || 18.x"
   },
@@ -41,7 +41,6 @@
   },
   "devDependencies": {
     "@angular-devkit/build-angular": "^16.2.0",
-    "ng-packagr": "^16.2.0",
     "@angular/cli": "^16.2.0",
     "@angular/compiler-cli": "^16.2.0",
     "@angular/language-service": "^16.2.0",

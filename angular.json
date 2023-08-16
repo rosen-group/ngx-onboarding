@@ -125,7 +125,7 @@
             "prefix": "rosen",
             "architect": {
                 "build": {
-                    "builder": "@angular-devkit/build-ng-packagr:build",
+                    "builder": "@angular-devkit/build-angular:ng-packagr",
                     "options": {
                         "tsConfig": "projects/ngx-onboarding/tsconfig.lib.json",
                         "project": "projects/ngx-onboarding/ng-package.json"
