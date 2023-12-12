@@ -11,9 +11,9 @@ import {BrowserDOMSelectorService} from './services/browser-dom-selector.service
 import {OnboardingHtmlElementHelper} from './models/onboarding-html-element-helper';
 import {VisibleOnboardingItem} from './models/visible-onboarding-item.model';
 import {OnboardingItem} from './models/onboarding-item.model';
-import {MatLegacyButtonModule as MatButtonModule} from '@angular/material/legacy-button';
+import {MatButtonModule} from '@angular/material/button';
 import {MatBadgeModule} from '@angular/material/badge';
-import {MatLegacyMenuModule as MatMenuModule} from '@angular/material/legacy-menu';
+import {MatMenuModule} from '@angular/material/menu';
 import {MatIconModule} from '@angular/material/icon';
 
 describe('OnboardingComponent', () => {
