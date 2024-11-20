@@ -1,8 +1,8 @@
 import { TestBed } from '@angular/core/testing';
 import { AppComponent } from './app.component';
 import { OnboardingModule } from '../../projects/ngx-onboarding/src';
-import { HttpClientTestingModule, HttpTestingController } from '@angular/common/http/testing';
-import { HttpClient } from '@angular/common/http';
+import { HttpTestingController, provideHttpClientTesting } from '@angular/common/http/testing';
+import { HttpClient, provideHttpClient, withInterceptorsFromDi } from '@angular/common/http';
 import { ErrorHandler } from '@angular/core';
 
 
@@ -12,11 +12,12 @@ describe('AppComponent', () => {
     let errorHandler: ErrorHandler;
     beforeEach(() => {
         TestBed.configureTestingModule({
-            imports: [OnboardingModule, HttpClientTestingModule],
-            declarations: [
-                AppComponent
-            ]
-        });
+    declarations: [
+        AppComponent
+    ],
+    imports: [OnboardingModule],
+    providers: [provideHttpClient(withInterceptorsFromDi()), provideHttpClientTesting()]
+});
         httpClient = TestBed.inject(HttpClient);
         httpTestingController = TestBed.inject(HttpTestingController);
         errorHandler = TestBed.inject(ErrorHandler);

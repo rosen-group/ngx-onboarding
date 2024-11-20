@@ -14,7 +14,7 @@ import {MatButtonModule} from '@angular/material/button';
 import {MatBadgeModule} from '@angular/material/badge';
 import {NgModule} from '@angular/core';
 import {CommonModule} from '@angular/common';
-import {HttpClientModule} from '@angular/common/http';
+import { provideHttpClient, withInterceptorsFromDi } from '@angular/common/http';
 import {MatIconModule} from '@angular/material/icon';
 import {MatMenuModule} from '@angular/material/menu';
 
@@ -22,16 +22,7 @@ import {MatMenuModule} from '@angular/material/menu';
  * Module for ngx-onboarding.
  * Import this into your "main" module e.g. AppModule
  */
-@NgModule({
-    imports: [
-        CommonModule,
-        MatButtonModule,
-        MatBadgeModule,
-        MatIconModule,
-        MatMenuModule,
-        HttpClientModule
-    ],
-    declarations: [
+@NgModule({ declarations: [
         OnboardingComponent,
         OnboardingItemComponent,
         OnboardingButtonComponent,
@@ -40,8 +31,11 @@ import {MatMenuModule} from '@angular/material/menu';
     exports: [
         OnboardingComponent,
         OnboardingButtonComponent
-    ],
-    providers: [
+    ], imports: [CommonModule,
+        MatButtonModule,
+        MatBadgeModule,
+        MatIconModule,
+        MatMenuModule], providers: [
         BrowserDOMSelectorService,
         WindowRef,
         {
@@ -52,9 +46,8 @@ import {MatMenuModule} from '@angular/material/menu';
         },
         {
             provide: TranslatorBaseService, useClass: BuildInTranslatorService
-        }
-
-    ]
-})
+        },
+        provideHttpClient(withInterceptorsFromDi())
+    ] })
 export class OnboardingModule {
 }
