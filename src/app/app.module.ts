@@ -3,28 +3,21 @@ import {NgModule} from '@angular/core';
 import {AppComponent} from './app.component';
 import {OnboardingButtonsPosition, OnboardingModule, OnboardingService} from '../../projects/ngx-onboarding/src';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
-import {HttpClientModule} from '@angular/common/http';
+import { provideHttpClient, withInterceptorsFromDi } from '@angular/common/http';
 import {MatIconModule, MatIconRegistry} from '@angular/material/icon';
 import {MatButtonModule} from '@angular/material/button';
 
 /**
  * Example module to test the onboarding component
  */
-@NgModule({
-    declarations: [
+@NgModule({ declarations: [
         AppComponent
     ],
-    imports: [
-        BrowserModule,
+    bootstrap: [AppComponent], imports: [BrowserModule,
         BrowserAnimationsModule,
         OnboardingModule,
         MatIconModule,
-        MatButtonModule,
-        HttpClientModule
-    ],
-    providers: [],
-    bootstrap: [AppComponent]
-})
+        MatButtonModule], providers: [provideHttpClient(withInterceptorsFromDi())] })
 export class AppModule {
     constructor(onboardingService: OnboardingService, sanitizer: DomSanitizer, iconRegistry: MatIconRegistry) {
         iconRegistry.addSvgIcon('onboarding_icon',
