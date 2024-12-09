@@ -9,7 +9,8 @@ import { HttpClient } from '@angular/common/http';
     selector: 'app-root',
     templateUrl: './app.component.html',
     encapsulation: ViewEncapsulation.None,
-    styleUrls: ['./app.component.css']
+    styleUrls: ['./app.component.css'],
+    standalone: false
 })
 export class AppComponent implements OnInit, OnDestroy {
     title = 'ngx-onboarding-app';

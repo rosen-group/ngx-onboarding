@@ -14,11 +14,11 @@
                     "builder": "@angular-devkit/build-angular:application",
                     "options": {
                         "outputPath": {
-                          "base": "dist/ngx-onboarding-app"
+                            "base": "dist/ngx-onboarding-app"
                         },
                         "index": "src/index.html",
                         "polyfills": [
-                          "src/polyfills.ts"
+                            "src/polyfills.ts"
                         ],
                         "tsConfig": "src/tsconfig.app.json",
                         "assets": [
@@ -40,12 +40,12 @@
                     },
                     "configurations": {
                         "production": {
-              "budgets": [
-                {
-                  "type": "anyComponentStyle",
-                  "maximumWarning": "6kb"
-                }
-              ],
+                            "budgets": [
+                                {
+                                    "type": "anyComponentStyle",
+                                    "maximumWarning": "6kb"
+                                }
+                            ],
                             "fileReplacements": [
                                 {
                                     "replace": "src/environments/environment.ts",
@@ -63,18 +63,18 @@
                 "serve": {
                     "builder": "@angular-devkit/build-angular:dev-server",
                     "options": {
-                      "buildTarget": "ngx-onboarding-app:build"
+                        "buildTarget": "ngx-onboarding-app:build"
                     },
                     "configurations": {
                         "production": {
-                          "buildTarget": "ngx-onboarding-app:build:production"
+                            "buildTarget": "ngx-onboarding-app:build:production"
                         }
                     }
                 },
                 "extract-i18n": {
                     "builder": "@angular-devkit/build-angular:extract-i18n",
                     "options": {
-                      "buildTarget": "ngx-onboarding-app:build"
+                        "buildTarget": "ngx-onboarding-app:build"
                     }
                 },
                 "test": {
@@ -132,9 +132,9 @@
                     },
                     "configurations": {
                         "production": {
-                            "project": "projects/ngx-onboarding/ng-package.prod.json"
-                        ,              "tsConfig": "projects/ngx-onboarding/tsconfig.lib.prod.json"
-}
+                            "project": "projects/ngx-onboarding/ng-package.prod.json",
+                            "tsConfig": "projects/ngx-onboarding/tsconfig.lib.prod.json"
+                        }
                     }
                 },
                 "test": {
@@ -149,6 +149,6 @@
         }
     },
     "cli": {
-      "analytics": false
+        "analytics": false
     }
 }
