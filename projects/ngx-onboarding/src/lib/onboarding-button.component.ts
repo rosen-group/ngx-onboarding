@@ -10,7 +10,8 @@ import {Component, ViewEncapsulation} from '@angular/core';
     selector: 'rosen-onboarding-button',
     templateUrl: './onboarding-button.component.html',
     styleUrls: ['./onboarding-button.component.less'],
-    encapsulation: ViewEncapsulation.None
+    encapsulation: ViewEncapsulation.None,
+    standalone: false
 })
 export class OnboardingButtonComponent {
 

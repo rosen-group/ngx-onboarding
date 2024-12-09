@@ -18,7 +18,8 @@ import {Subscription} from 'rxjs';
     selector: 'rosen-onboarding',
     templateUrl: './onboarding.component.html',
     styleUrls: ['./onboarding.component.less'],
-    encapsulation: ViewEncapsulation.None
+    encapsulation: ViewEncapsulation.None,
+    standalone: false
 })
 export class OnboardingComponent implements OnInit, AfterViewInit, OnDestroy {
 

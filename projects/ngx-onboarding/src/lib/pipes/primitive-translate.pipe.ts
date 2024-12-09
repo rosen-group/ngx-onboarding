@@ -6,7 +6,8 @@ import {Pipe, PipeTransform} from '@angular/core';
  */
 @Pipe({
     name: 'translate',
-    pure: true
+    pure: true,
+    standalone: false
 })
 export class PrimitiveTranslatePipe implements PipeTransform {
 

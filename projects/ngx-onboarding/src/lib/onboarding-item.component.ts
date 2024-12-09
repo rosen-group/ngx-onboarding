@@ -17,7 +17,8 @@ const leftPadding = 25;
     selector: 'rosen-onboarding-item',
     templateUrl: './onboarding-item.component.html',
     styleUrls: ['./onboarding-item.component.less'],
-    encapsulation: ViewEncapsulation.None
+    encapsulation: ViewEncapsulation.None,
+    standalone: false
 })
 export class OnboardingItemComponent {
 
