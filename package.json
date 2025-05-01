@@ -24,7 +24,7 @@
     "package": "npm run clean-dist && npm run build-lib && npm run npm-pack"
   },
   "dependencies": {
-    "@angular/animations": "^19.0.3",
+    "@angular/animations": "^19.2.6",
     "@angular/cdk": "^19.0.2",
     "@angular/common": "^19.0.3",
     "@angular/compiler": "^19.0.3",
