@@ -31,7 +31,7 @@
     "@angular/core": "^19.0.3",
     "@angular/forms": "^19.2.6",
     "@angular/material": "^19.0.2",
-    "@angular/platform-browser": "^19.0.3",
+    "@angular/platform-browser": "^19.2.6",
     "@angular/platform-browser-dynamic": "^19.0.3",
     "@angular/router": "^19.0.3",
     "core-js": "^3.20.2",
