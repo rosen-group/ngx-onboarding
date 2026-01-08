@@ -1,6 +1,7 @@
 import {Component, ErrorHandler, OnDestroy, OnInit, ViewEncapsulation} from '@angular/core';
-import {OnboardingItem, OnboardingService} from '../../projects/ngx-onboarding/src';
 import { HttpClient } from '@angular/common/http';
+import {OnboardingService} from "../../projects/ngx-onboarding/src/lib/services/onboarding.service";
+import {OnboardingItem} from "../../projects/ngx-onboarding/src/lib/models/onboarding-item.model";
 
 /**
  * Example component to test the onboarding component
@@ -8,8 +9,8 @@ import { HttpClient } from '@angular/common/http';
 @Component({
     selector: 'app-root',
     templateUrl: './app.component.html',
-    encapsulation: ViewEncapsulation.None,
     styleUrls: ['./app.component.css'],
+    encapsulation: ViewEncapsulation.None,
     standalone: false
 })
 export class AppComponent implements OnInit, OnDestroy {

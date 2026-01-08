@@ -3,6 +3,7 @@ import {TranslatorBaseService} from './services/translator-base.service';
 import {WindowRef} from './services/window-ref.service';
 import {OnboardingHtmlElementHelper} from './models/onboarding-html-element-helper';
 import {Component, ElementRef, Input, ViewChild, ViewEncapsulation} from '@angular/core';
+import {NgClass, NgStyle} from "@angular/common";
 
 const topPadding = 25;
 const rightPadding = 25;
@@ -17,8 +18,11 @@ const leftPadding = 25;
     selector: 'rosen-onboarding-item',
     templateUrl: './onboarding-item.component.html',
     styleUrls: ['./onboarding-item.component.less'],
-    encapsulation: ViewEncapsulation.None,
-    standalone: false
+    imports: [
+        NgStyle,
+        NgClass
+    ],
+    encapsulation: ViewEncapsulation.None
 })
 export class OnboardingItemComponent {
 

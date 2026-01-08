@@ -1,23 +1,59 @@
 import {BrowserModule, DomSanitizer} from '@angular/platform-browser';
 import {NgModule} from '@angular/core';
 import {AppComponent} from './app.component';
-import {OnboardingButtonsPosition, OnboardingModule, OnboardingService} from '../../projects/ngx-onboarding/src';
-import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
-import { provideHttpClient, withInterceptorsFromDi } from '@angular/common/http';
+import {provideHttpClient, withInterceptorsFromDi} from '@angular/common/http';
 import {MatIconModule, MatIconRegistry} from '@angular/material/icon';
-import {MatButtonModule} from '@angular/material/button';
+import {MatButton, MatButtonModule} from '@angular/material/button';
+import {OnboardingComponent} from "../../projects/ngx-onboarding/src/lib/onboarding.component";
+import {OnboardingService} from "../../projects/ngx-onboarding/src/lib/services/onboarding.service";
+import { OnboardingButtonsPosition } from "projects/ngx-onboarding/src/lib/models/onboarding-buttons-position.enum";
+import {OnboardingButtonComponent} from "../../projects/ngx-onboarding/src/lib/onboarding-button.component";
+import {CommonModule} from "@angular/common";
+import {OnboardingItemComponent} from "../../projects/ngx-onboarding/src/lib/onboarding-item.component";
+import {SeenSelectorsBaseService} from "../../projects/ngx-onboarding/src/lib/services/seen-selectors-base.service";
+import {
+    LocalStorageSeenSelectorsService
+} from "../../projects/ngx-onboarding/src/lib/services/local-storage-seen-selectors.service";
+import {EnabledStatusBaseService} from "../../projects/ngx-onboarding/src/lib/services/enabled-status-base.service";
+import {
+    LocalStorageEnabledStatusService
+} from "../../projects/ngx-onboarding/src/lib/services/local-storage-enabled-status.service";
+import {BuildInTranslatorService} from "../../projects/ngx-onboarding/src/lib/services/build-in-translator.service";
+import {TranslatorBaseService} from "../../projects/ngx-onboarding/src/lib/services/translator-base.service";
 
 /**
  * Example module to test the onboarding component
  */
-@NgModule({ declarations: [
+@NgModule({
+    declarations: [
         AppComponent
     ],
-    bootstrap: [AppComponent], imports: [BrowserModule,
-        BrowserAnimationsModule,
-        OnboardingModule,
+    bootstrap: [
+        AppComponent
+    ],
+    imports: [
+        CommonModule,
+        BrowserModule,
+        OnboardingComponent,
+        OnboardingButtonComponent,
+        OnboardingItemComponent,
         MatIconModule,
-        MatButtonModule], providers: [provideHttpClient(withInterceptorsFromDi())] })
+        MatButtonModule,
+        MatButton
+    ],
+    providers: [
+        provideHttpClient(withInterceptorsFromDi()),
+        {
+            provide: SeenSelectorsBaseService, useClass: LocalStorageSeenSelectorsService
+        },
+        {
+            provide: EnabledStatusBaseService, useClass: LocalStorageEnabledStatusService
+        },
+        {
+            provide: TranslatorBaseService, useClass: BuildInTranslatorService
+        },
+    ]
+})
 export class AppModule {
     constructor(onboardingService: OnboardingService, sanitizer: DomSanitizer, iconRegistry: MatIconRegistry) {
         iconRegistry.addSvgIcon('onboarding_icon',
