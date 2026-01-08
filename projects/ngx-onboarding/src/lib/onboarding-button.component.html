@@ -1,32 +1,42 @@
 <div class="onboarding-button-container">
-    <mat-menu #onboardingMenu="matMenu">
-        <button mat-menu-item (click)="enableOnboarding()" *ngIf="!isOnboardingEnabled()"
-                class="onboarding-menu-button">
-            <mat-icon>add_alert</mat-icon>
-            {{'ONBOARDING_ENABLE'|translate}}
-        </button>
-        <button mat-menu-item (click)="disableOnboarding()" *ngIf="isOnboardingEnabled()"
-                class="onboarding-menu-button">
-            <mat-icon>notifications_off</mat-icon>
-            {{'ONBOARDING_DISABLE'|translate}}
-        </button>
-        <button mat-menu-item (click)="clearOnboarding()" class="onboarding-menu-button">
-            <mat-icon>undo</mat-icon>
-            {{'ONBOARDING_CLEAR'|translate}}
-        </button>
-    </mat-menu>
-    <button *ngIf="iconConfig" mat-icon-button [matMenuTriggerFor]="onboardingMenu" class="onboarding-button" [title]="'ONBOARDING'|translate">
-        <mat-icon *ngIf="iconConfig.matIconName && !iconConfig.svgIcon && !iconConfig.fontSet"
-                  [matBadgeColor]="iconConfig.matBadgeColor" [matBadgeHidden]="isOnboardingEnabled()" [matBadge]="onboardingItemCount"
-                  [matBadgePosition]="iconConfig.matBadgePosition" [matBadgeSize]="iconConfig.matBadgeSize"
-                  [matBadgeOverlap]="true">{{iconConfig.matIconName}}
-        </mat-icon>
-        <mat-icon *ngIf="iconConfig.svgIcon || iconConfig.fontSet"
-                  [svgIcon]="iconConfig.svgIcon"
-                  [fontSet]="iconConfig.fontSet" [fontIcon]="iconConfig.fontIcon"
-                  [matBadgeColor]="iconConfig.matBadgeColor" [matBadgeHidden]="isOnboardingEnabled()" [matBadge]="onboardingItemCount"
-                  [matBadgePosition]="iconConfig.matBadgePosition" [matBadgeSize]="iconConfig.matBadgeSize"
-                  [matBadgeOverlap]="true">
-        </mat-icon>
+  <mat-menu #onboardingMenu="matMenu">
+    @if (!isOnboardingEnabled()) {
+      <button mat-menu-item (click)="enableOnboarding()"
+        class="onboarding-menu-button">
+        <mat-icon>add_alert</mat-icon>
+        {{'ONBOARDING_ENABLE'|translate}}
+      </button>
+    }
+    @if (isOnboardingEnabled()) {
+      <button mat-menu-item (click)="disableOnboarding()"
+        class="onboarding-menu-button">
+        <mat-icon>notifications_off</mat-icon>
+        {{'ONBOARDING_DISABLE'|translate}}
+      </button>
+    }
+    <button mat-menu-item (click)="clearOnboarding()" class="onboarding-menu-button">
+      <mat-icon>undo</mat-icon>
+      {{'ONBOARDING_CLEAR'|translate}}
     </button>
+  </mat-menu>
+  @if (iconConfig) {
+    <button mat-icon-button [matMenuTriggerFor]="onboardingMenu" class="onboarding-button" [title]="'ONBOARDING'|translate">
+      @if (iconConfig.matIconName && !iconConfig.svgIcon && !iconConfig.fontSet) {
+        <mat-icon
+          [matBadgeColor]="iconConfig.matBadgeColor" [matBadgeHidden]="isOnboardingEnabled()" [matBadge]="onboardingItemCount"
+          [matBadgePosition]="iconConfig.matBadgePosition" [matBadgeSize]="iconConfig.matBadgeSize"
+          [matBadgeOverlap]="true">{{iconConfig.matIconName}}
+        </mat-icon>
+      }
+      @if (iconConfig.svgIcon || iconConfig.fontSet) {
+        <mat-icon
+          [svgIcon]="iconConfig.svgIcon"
+          [fontSet]="iconConfig.fontSet" [fontIcon]="iconConfig.fontIcon"
+          [matBadgeColor]="iconConfig.matBadgeColor" [matBadgeHidden]="isOnboardingEnabled()" [matBadge]="onboardingItemCount"
+          [matBadgePosition]="iconConfig.matBadgePosition" [matBadgeSize]="iconConfig.matBadgeSize"
+          [matBadgeOverlap]="true">
+        </mat-icon>
+      }
+    </button>
+  }
 </div>

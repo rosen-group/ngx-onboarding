@@ -1,5 +1,5 @@
-import {Inject, Injectable} from '@angular/core';
-import {DOCUMENT} from '@angular/common';
+import {Inject, Injectable, DOCUMENT} from '@angular/core';
+
 
 /**
  * Wrapper for native implementations of querySelector from window.document
