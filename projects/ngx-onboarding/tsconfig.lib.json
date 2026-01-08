@@ -11,11 +11,7 @@
       "emitDecoratorMetadata": true,
       "experimentalDecorators": true,
       "importHelpers": true,
-      "types": [],
-      "lib": [
-        "dom",
-        "es2015"
-      ]
+      "types": []
     },
     "angularCompilerOptions": {
         "skipTemplateCodegen": true,
