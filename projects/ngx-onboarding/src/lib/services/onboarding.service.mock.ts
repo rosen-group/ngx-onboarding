@@ -1,7 +1,7 @@
 import { EventEmitter } from '@angular/core';
 import {OnboardingItemContainer} from '../models/onboarding-item-container.model';
 import {OnboardingConfiguration} from '../models/onboarding-configuration.model';
-import {OnboardingItem} from '../..';
+import {OnboardingItem} from "../models/onboarding-item.model";
 
 /**
  * Mock implementation for OnboardingService

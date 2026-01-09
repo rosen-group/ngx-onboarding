@@ -1,29 +1,45 @@
 <span [innerHtml]="dynamicCss"></span>
 
-<div class="onboarding-component-container" *ngIf="onboardingService.isEnabled() && visibleItem">
-    <div class="onboarding-header script-font" *ngIf="onboardingService.isEnabled() && visibleItem">
-        <mat-icon *ngIf="matIconName && !svgIcon && !fontSet">{{matIconName}}</mat-icon>
-        <mat-icon *ngIf="svgIcon || fontSet" [svgIcon]="svgIcon" [fontSet]="fontSet" [fontIcon]="fontIcon"></mat-icon>
-        {{'ONBOARDING' |translate|uppercase}}
-    </div>
-    <div class="onboarding-shadow"
-         [ngStyle]="getPositionStyle(visibleItem.element)"></div>
-    <div class="onboarding-spotlight"
-         [class.onboarding-spotlight-transparent]="isSpotlightTransparent(visibleItem.item)"
-         [ngStyle]="getPositionStyle(visibleItem.element)"></div>
-    <div class="onboarding-items">
-        <div *ngFor="let currentItem of onboardingService.visibleItems.allItems">
-            <rosen-onboarding-item [item]="currentItem" *ngIf="currentItem === visibleItem"></rosen-onboarding-item>
+@if (onboardingService.isEnabled() && visibleItem) {
+    <div class="onboarding-component-container">
+        @if (onboardingService.isEnabled() && visibleItem) {
+            <div class="onboarding-header script-font">
+                @if (matIconName && !svgIcon && !fontSet) {
+                    <mat-icon>{{ matIconName }}</mat-icon>
+                }
+                @if (svgIcon || fontSet) {
+                    <mat-icon [svgIcon]="svgIcon" [fontSet]="fontSet" [fontIcon]="fontIcon"></mat-icon>
+                }
+                {{ 'ONBOARDING' | translate | uppercase }}
+            </div>
+        }
+        <div class="onboarding-shadow"
+             [ngStyle]="getPositionStyle(visibleItem.element)"></div>
+        <div class="onboarding-spotlight"
+             [class.onboarding-spotlight-transparent]="isSpotlightTransparent(visibleItem.item)"
+             [ngStyle]="getPositionStyle(visibleItem.element)"></div>
+        <div class="onboarding-items">
+            @for (currentItem of onboardingService.visibleItems.allItems; track currentItem) {
+                <div>
+                    @if (currentItem === visibleItem) {
+                        <rosen-onboarding-item [item]="currentItem"></rosen-onboarding-item>
+                    }
+                </div>
+            }
+        </div>
+        <div class="onboarding-overlay" (click)="hide()"></div>
+        <div class="onboarding-buttons" [ngStyle]="buttonsPositionStyle()">
+            <button mat-flat-button color="warn" (click)="disable()">
+                <span>{{ 'ONBOARDING_DO_NOT_SHOW_AGAIN_MSG' | translate }}</span>
+            </button>
+            <button mat-flat-button color="primary" (click)="hide()">
+                @if (!hasNext) {
+                    <span>{{ 'ONBOARDING_GOT_IT_MSG' | translate }}</span>
+                }
+                @if (hasNext) {
+                    <span>{{ 'ONBOARDING_NEXT_MSG' | translate }}</span>
+                }
+            </button>
         </div>
     </div>
-    <div class="onboarding-overlay" (click)="hide()"></div>
-    <div class="onboarding-buttons" [ngStyle]="buttonsPositionStyle()">
-        <button mat-flat-button color="warn" (click)="disable()">
-            <span>{{'ONBOARDING_DO_NOT_SHOW_AGAIN_MSG' |translate}}</span>
-        </button>
-        <button mat-flat-button color="primary" (click)="hide()">
-            <span *ngIf="!hasNext">{{'ONBOARDING_GOT_IT_MSG' |translate}}</span>
-            <span *ngIf="hasNext">{{'ONBOARDING_NEXT_MSG' | translate}}</span>
-        </button>
-    </div>
-</div>
+}

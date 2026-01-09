@@ -3,12 +3,16 @@ import {OnboardingButtonsPosition} from './models/onboarding-buttons-position.en
 import {OnboardingButtonsConfiguration} from './models/onboarding-buttons-configuration.interface';
 import {VisibleOnboardingItem} from './models/visible-onboarding-item.model';
 import {OnboardingTextConfiguration} from './models/onboarding-text-configuration.interface';
-import {OnboardingItemContainer} from './models/onboarding-item-container.model';
 import {OnboardingService} from './services/onboarding.service';
 import {OnboardingHtmlElementHelper} from './models/onboarding-html-element-helper';
 import {OnboardingItem} from './models/onboarding-item.model';
 import {AfterViewInit, Component, OnDestroy, OnInit, ViewEncapsulation} from '@angular/core';
 import {Subscription} from 'rxjs';
+import {NgStyle, UpperCasePipe} from "@angular/common";
+import {OnboardingItemComponent} from "./onboarding-item.component";
+import {MatButton} from "@angular/material/button";
+import {MatIcon} from "@angular/material/icon";
+import {PrimitiveTranslatePipe} from "./pipes/primitive-translate.pipe";
 
 /**
  * Main component of the onboarding module.
@@ -18,8 +22,15 @@ import {Subscription} from 'rxjs';
     selector: 'rosen-onboarding',
     templateUrl: './onboarding.component.html',
     styleUrls: ['./onboarding.component.less'],
-    encapsulation: ViewEncapsulation.None,
-    standalone: false
+    imports: [
+        PrimitiveTranslatePipe,
+        NgStyle,
+        OnboardingItemComponent,
+        MatButton,
+        MatIcon,
+        UpperCasePipe
+    ],
+    encapsulation: ViewEncapsulation.None
 })
 export class OnboardingComponent implements OnInit, AfterViewInit, OnDestroy {
 

@@ -1,10 +1,11 @@
 import {Inject, Injectable} from '@angular/core';
-import {DOCUMENT} from '@angular/common';
+import {DOCUMENT} from "@angular/common";
+
 
 /**
  * Wrapper for native implementations of querySelector from window.document
  */
-@Injectable()
+@Injectable({providedIn: 'root'})
 export class BrowserDOMSelectorService {
 
     constructor(@Inject(DOCUMENT) private doc: any) {

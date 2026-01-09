@@ -5,9 +5,7 @@ import {Pipe, PipeTransform} from '@angular/core';
  * Pipe for internal usage to translate the text on the onboarding component like disable, enable
  */
 @Pipe({
-    name: 'translate',
-    pure: true,
-    standalone: false
+    name: 'translate'
 })
 export class PrimitiveTranslatePipe implements PipeTransform {
 

@@ -14,7 +14,7 @@ const seenSelectorsLocalStorageKey = '894ae732-b4bd-45c9-b543-6f9c5c5a86b6';
  * your own service from theSeenSelectorsBaseService and use the provide feature in your app.module with
  * {provide: SeenSelectorsBaseService, useClass: YourOwnSeenSelectorsService}
  */
-@Injectable()
+@Injectable({providedIn: 'root'})
 export class LocalStorageSeenSelectorsService extends SeenSelectorsBaseService {
 
     constructor(private errorHandler: ErrorHandler) {

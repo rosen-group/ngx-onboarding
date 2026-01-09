@@ -1,17 +1,31 @@
 import {OnboardingIconConfiguration} from './models/onboarding-icon-configuration.interface';
 import {OnboardingService} from './services/onboarding.service';
 import {Component, ViewEncapsulation} from '@angular/core';
+import {MatMenu, MatMenuItem, MatMenuTrigger} from "@angular/material/menu";
+import {MatIcon} from "@angular/material/icon";
+import {MatIconButton} from "@angular/material/button";
+import {TranslatorBaseService} from "./services/translator-base.service";
+import {PrimitiveTranslatePipe} from "./pipes/primitive-translate.pipe";
+import {MatBadge} from "@angular/material/badge";
 
 
 /**
- * onboarding button including context menu (see header.component in rolib/navigation)
+ * onboarding button including context menu
  */
 @Component({
     selector: 'rosen-onboarding-button',
     templateUrl: './onboarding-button.component.html',
     styleUrls: ['./onboarding-button.component.less'],
-    encapsulation: ViewEncapsulation.None,
-    standalone: false
+    imports: [
+        MatMenu,
+        MatMenuItem,
+        MatIcon,
+        MatIconButton,
+        MatMenuTrigger,
+        PrimitiveTranslatePipe,
+        MatBadge
+    ],
+    encapsulation: ViewEncapsulation.None
 })
 export class OnboardingButtonComponent {
 
