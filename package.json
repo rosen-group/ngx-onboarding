@@ -17,11 +17,11 @@
     "build": "ng build --configuration production",
     "test": "ng test ngx-onboarding --watch=false --browsers=ChromeHeadless --code-coverage",
     "test-app": "ng test --watch=false --browsers=ChromeHeadless --code-coverage",
-    "e2e": "ng e2e",
     "clean-dist": "rimraf dist",
     "build-lib": "ng build --configuration production ngx-onboarding && copyfiles *.md LICENSE.txt onboarding-demo.png dist/ngx-onboarding",
     "npm-pack": "cd dist/ngx-onboarding && npm pack",
-    "package": "npm run clean-dist && npm run build-lib && npm run npm-pack"
+    "package": "npm run clean-dist && npm run build-lib && npm run npm-pack",
+    "lint": "ng lint"
   },
   "dependencies": {
     "@angular/animations": "^21.2.11",
@@ -44,11 +44,13 @@
     "@angular/cli": "^21.2.9",
     "@angular/compiler-cli": "^21.2.11",
     "@angular/language-service": "^21.2.11",
+    "@eslint/js": "^10.0.1",
     "@types/jasmine": "^2.8.14",
     "@types/jasminewd2": "^2.0.6",
     "@types/node": "^12.11.1",
-    "codelyzer": "^6.0.2",
+    "angular-eslint": "21.3.1",
     "copyfiles": "^2.1.0",
+    "eslint": "^10.0.3",
     "jasmine-core": "~5.1.0",
     "jasmine-spec-reporter": "~5.0.0",
     "karma": "^6.3.16",
@@ -58,10 +60,10 @@
     "karma-jasmine-html-reporter": "^2.1.0",
     "karma-junit-reporter": "^2.0.1",
     "ng-packagr": "^21.0.1",
-    "protractor": "~7.0.0",
     "ts-node": "~5.0.1",
     "tslib": "^2.3.1",
-    "typescript": "~5.9.3"
+    "typescript": "~5.9.3",
+    "typescript-eslint": "8.56.1"
   },
   "repository": {
     "type": "git",
