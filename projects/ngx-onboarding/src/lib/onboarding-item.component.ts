@@ -31,14 +31,14 @@ export class OnboardingItemComponent {
      * the onboarding item with headline and text and the target html element
      */
     @Input()
-    public item: VisibleOnboardingItem;
+    public item!: VisibleOnboardingItem;
 
     /**
      * the onboarding item container
      * used to calculate the position
      */
     @ViewChild('container', { static: true })
-    private container: ElementRef;
+    private container!: ElementRef;
 
     constructor(private translatorService: TranslatorBaseService, private windowRef: WindowRef) {
     }
@@ -47,12 +47,15 @@ export class OnboardingItemComponent {
      * calculates the position of the OnboardingItemComponent
      */
     public getStyle() {
-        const pos = OnboardingHtmlElementHelper.getPosition(this.item.element);
+        if (!this.item?.element) {
+            return {};
+        }
+        const pos = OnboardingHtmlElementHelper.getPosition(this.item.element!);
         let transform = 'none';
 
-        switch (this.item.item.position) {
+        switch (this.item.item!.position) {
             case 'top':
-                pos.x += this.item.element.offsetWidth / 2;
+                pos.x += this.item.element!.offsetWidth / 2;
                 if (pos.x < this.getContainerWidth() / 2) {
                     pos.x = this.getContainerWidth() / 2;
                 } else if (pos.x > this.getWindowScreenWidth() - this.getContainerWidth()) {
@@ -62,8 +65,8 @@ export class OnboardingItemComponent {
                 transform = 'translate(-50%,-100%)';
                 break;
             case 'right':
-                pos.x += Math.min(this.item.element.offsetWidth + rightPadding, this.getWindowScreenWidth() - this.getContainerWidth() / 2);
-                pos.y += this.item.element.offsetHeight / 2;
+                pos.x += Math.min(this.item.element!.offsetWidth + rightPadding, this.getWindowScreenWidth() - this.getContainerWidth() / 2);
+                pos.y += this.item.element!.offsetHeight / 2;
                 if (pos.y < 0) {
                     pos.y = 0;
                 } else if (pos.y > this.getWindowScreenHeight() - this.getContainerHeight() / 2) {
@@ -73,7 +76,7 @@ export class OnboardingItemComponent {
                 break;
             case 'left':
                 pos.x -= leftPadding;
-                pos.y += this.item.element.offsetHeight / 2;
+                pos.y += this.item.element!.offsetHeight / 2;
                 if (pos.y < 0) {
                     pos.y = 0;
                 } else if (pos.y > this.getWindowScreenHeight() - this.getContainerHeight() / 2) {
@@ -94,13 +97,13 @@ export class OnboardingItemComponent {
 
             case 'bottom':
             default:
-                pos.x += this.item.element.offsetWidth / 2;
+                pos.x += this.item.element!.offsetWidth / 2;
                 if (pos.x < this.getContainerWidth() / 2) {
                     pos.x = this.getContainerWidth() / 2;
                 } else if (pos.x > this.getWindowScreenWidth() - this.getContainerWidth()) {
                     pos.x = this.getWindowScreenWidth() - this.getContainerWidth();
                 }
-                pos.y += this.item.element.offsetHeight;
+                pos.y += this.item.element!.offsetHeight;
                 transform = 'translate(-50%,25%)';
                 break;
         }
@@ -112,16 +115,19 @@ export class OnboardingItemComponent {
     }
 
     public getHeadline(): string {
+        if (!this.item?.item) { return ''; }
         const description = this.item.item.descriptions?.find( d => d.language === this.translatorService.currentLang);
         return description ? description.headline : this.item.item.headline;
     }
 
     public getDetails(): string {
+        if (!this.item?.item) { return ''; }
         const description = this.item.item.descriptions?.find( d => d.language === this.translatorService.currentLang);
         return description ? description.details : this.item.item.details;
     }
 
     public getTextAlignClass(): string {
+        if (!this.item?.item) { return ''; }
         if ((this.item.item.textAlign == null) || this.item.item.textAlign === 'center') {
             return ''; // ==> center
         }

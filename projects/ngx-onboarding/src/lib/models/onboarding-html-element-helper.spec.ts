@@ -169,7 +169,7 @@ describe('OnboardingHtmlElementHelper', () => {
         const element = document.createElement('div');
         const parent = document.createElement('div');
         spyOnProperty(element, 'offsetParent').and.returnValue(parent);
-        spyOn(window, 'getComputedStyle').and.callFake((htmlElement) => {
+        spyOn(window, 'getComputedStyle').and.callFake((htmlElement: Element) => {
             if (htmlElement === element) {
                 return {
                     position: 'static'

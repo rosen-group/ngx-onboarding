@@ -28,7 +28,7 @@ export class OnboardingItemContainer {
     /**
      * Return current group of visible onboarding items
      */
-    public get currentItem(): VisibleOnboardingItem {
+    public get currentItem(): VisibleOnboardingItem | null {
         if (this.items && this.currentGroupIndex < this.items.length) {
             return this.items[this.currentGroupIndex];
         }
@@ -52,7 +52,7 @@ export class OnboardingItemContainer {
     /**
      * Return next group of visible onboarding items
      */
-    public nextItem(): VisibleOnboardingItem {
+    public nextItem(): VisibleOnboardingItem | null {
         if (this.hasNext) {
             this.currentGroupIndex++;
             return this.currentItem;

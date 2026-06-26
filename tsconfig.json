@@ -27,6 +27,8 @@
                 "node_modules/core-js/es/*"
             ]
         },
-        "useDefineForClassFields": false
+        "useDefineForClassFields": false,
+        "ignoreDeprecations": "6.0",
+        "strictNullChecks": false
     }
 }

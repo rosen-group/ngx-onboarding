@@ -21,7 +21,14 @@ export class OnboardingServiceMock {
     }
 
     public getConfiguration() {
-        return {};
+        return {
+            textConfiguration: {
+                scriptFontFamily: '',
+                regularFontFamily: ''
+            },
+            buttonsConfiguration: {},
+            iconConfiguration: {}
+        };
     }
 
     public register(items: Array<OnboardingItem>): Function {

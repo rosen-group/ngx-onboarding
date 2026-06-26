@@ -120,6 +120,9 @@ export class OnboardingComponent implements OnInit, AfterViewInit, OnDestroy {
      * used by template to set the position of the spotlight
      */
     public getPositionStyle(ele: HTMLElement) {
+        if (!ele) {
+            return {};
+        }
         const pos = OnboardingHtmlElementHelper.getPosition(ele);
         const style: any = {
             position: 'fixed',
@@ -135,7 +138,7 @@ export class OnboardingComponent implements OnInit, AfterViewInit, OnDestroy {
     }
 
     public isSpotlightTransparent(item: OnboardingItem) {
-        return item.transparentSpotlight;
+        return item?.transparentSpotlight ?? false;
     }
 
     /**

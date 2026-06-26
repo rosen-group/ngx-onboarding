@@ -14,7 +14,7 @@ export class BuildInTranslatorService extends TranslatorBaseService {
      *  A LangChangeEvent is an object with the minimium properties lang: string (where lang is the new language code)
      */
     public onLangChange: EventEmitter<{ lang: string }> = new EventEmitter<{ lang: string }>();
-    private translations = {
+    private translations: { [key: string]: string } = {
         'ONBOARDING': 'Onboarding',
         'ONBOARDING_FAILED_TO_LOAD_USER_SETTINGS': 'Failed to load onboarding settings.',
         'ONBOARDING_FAILED_TO_SAVE_USER_SETTINGS': 'Failed to save onboarding settings.',

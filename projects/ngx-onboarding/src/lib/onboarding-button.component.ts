@@ -31,7 +31,7 @@ import {MatBadge} from "@angular/material/badge";
 export class OnboardingButtonComponent {
 
     /** used by template to apply the customizations on icons */
-    public iconConfig: OnboardingIconConfiguration;
+    public iconConfig?: OnboardingIconConfiguration;
 
     constructor(private onboardingService: OnboardingService) {
         const config = onboardingService.getConfiguration();

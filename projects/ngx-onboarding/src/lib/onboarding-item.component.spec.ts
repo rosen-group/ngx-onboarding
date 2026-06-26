@@ -14,7 +14,7 @@ import {OnboardingItem} from './models/onboarding-item.model';
 describe('OnboardingItemComponent', () => {
     beforeEach(waitForAsync(() => {
         TestBed.configureTestingModule({
-            declarations: [
+            imports: [
                 OnboardingItemComponent
             ],
             providers: [
@@ -46,7 +46,7 @@ describe('OnboardingItemComponent', () => {
             height: 60
         });
         component.item = new VisibleOnboardingItem(new OnboardingItem(), document.createElement('div'));
-        component.item.item.position = 'top';
+        component.item.item!.position = 'top';
 
         const value = component.getStyle();
 
@@ -63,7 +63,7 @@ describe('OnboardingItemComponent', () => {
             height: 60
         });
         component.item = new VisibleOnboardingItem(new OnboardingItem(), document.createElement('div'));
-        component.item.item.position = 'right';
+        component.item.item!.position = 'right';
 
         const value = component.getStyle();
 
@@ -80,7 +80,7 @@ describe('OnboardingItemComponent', () => {
             height: 60
         });
         component.item = new VisibleOnboardingItem(new OnboardingItem(), document.createElement('div'));
-        component.item.item.position = 'left';
+        component.item.item!.position = 'left';
 
         const value = component.getStyle();
 
@@ -97,7 +97,7 @@ describe('OnboardingItemComponent', () => {
             height: 60
         });
         component.item = new VisibleOnboardingItem(new OnboardingItem(), document.createElement('div'));
-        component.item.item.position = 'bottom';
+        component.item.item!.position = 'bottom';
 
         const value = component.getStyle();
 
@@ -109,8 +109,8 @@ describe('OnboardingItemComponent', () => {
     it('getHeadline with locale a expect return value to be testHeadlineA',
         inject([TranslatorBaseService], (translatorService: TranslatorBaseService) => {
             spyOnProperty(translatorService, 'currentLang').and.returnValue('a');
-            component.item = new VisibleOnboardingItem(new OnboardingItem(), null);
-            component.item.item.descriptions = [
+            component.item = new VisibleOnboardingItem(new OnboardingItem(), undefined);
+            component.item.item!.descriptions = [
                 {
                     language: 'a',
                     details: 'testDetailsA',
@@ -131,8 +131,8 @@ describe('OnboardingItemComponent', () => {
     it('getDetails with locale b expect return value to be testDetailsB',
         inject([TranslatorBaseService], (translatorService: TranslatorBaseService) => {
             spyOnProperty(translatorService, 'currentLang').and.returnValue('b');
-            component.item = new VisibleOnboardingItem(new OnboardingItem(), null);
-            component.item.item.descriptions = [
+            component.item = new VisibleOnboardingItem(new OnboardingItem(), undefined);
+            component.item.item!.descriptions = [
                 {
                     language: 'a',
                     details: 'testDetailsA',
@@ -151,7 +151,7 @@ describe('OnboardingItemComponent', () => {
     );
 
     it('getTextAlignClass expect return value to be empty', () => {
-        component.item = new VisibleOnboardingItem(new OnboardingItem(), null);
+        component.item = new VisibleOnboardingItem(new OnboardingItem(), undefined);
 
         const value = component.getTextAlignClass();
 
@@ -159,8 +159,8 @@ describe('OnboardingItemComponent', () => {
     });
 
     it('getTextAlignClass with center expect return value to be empty', () => {
-        component.item = new VisibleOnboardingItem(new OnboardingItem(), null);
-        component.item.item.textAlign = 'center';
+        component.item = new VisibleOnboardingItem(new OnboardingItem(), undefined);
+        component.item.item!.textAlign = 'center';
 
         const value = component.getTextAlignClass();
 
@@ -168,8 +168,8 @@ describe('OnboardingItemComponent', () => {
     });
 
     it('getTextAlignClass with left expect return value to be align-left', () => {
-        component.item = new VisibleOnboardingItem(new OnboardingItem(), null);
-        component.item.item.textAlign = 'left';
+        component.item = new VisibleOnboardingItem(new OnboardingItem(), undefined);
+        component.item.item!.textAlign = 'left';
 
         const value = component.getTextAlignClass();
 
@@ -177,8 +177,8 @@ describe('OnboardingItemComponent', () => {
     });
 
     it('getTextAlignClass with right expect return value to be align-right', () => {
-        component.item = new VisibleOnboardingItem(new OnboardingItem(), null);
-        component.item.item.textAlign = 'right';
+        component.item = new VisibleOnboardingItem(new OnboardingItem(), undefined);
+        component.item.item!.textAlign = 'right';
 
         const value = component.getTextAlignClass();
 
