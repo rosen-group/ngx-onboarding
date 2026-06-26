@@ -1,4 +1,4 @@
-import {Component, ErrorHandler, OnDestroy, OnInit, ViewEncapsulation} from '@angular/core';
+import {Component, ErrorHandler, OnDestroy, OnInit, ViewEncapsulation, ChangeDetectionStrategy} from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import {OnboardingService} from "../../projects/ngx-onboarding/src/lib/services/onboarding.service";
 import {OnboardingItem} from "../../projects/ngx-onboarding/src/lib/models/onboarding-item.model";
@@ -11,6 +11,7 @@ import {OnboardingItem} from "../../projects/ngx-onboarding/src/lib/models/onboa
     templateUrl: './app.component.html',
     styleUrls: ['./app.component.css'],
     encapsulation: ViewEncapsulation.None,
+    changeDetection: ChangeDetectionStrategy.Eager,
     standalone: false
 })
 export class AppComponent implements OnInit, OnDestroy {

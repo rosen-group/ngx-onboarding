@@ -2,7 +2,7 @@ import {VisibleOnboardingItem} from './models/visible-onboarding-item.model';
 import {TranslatorBaseService} from './services/translator-base.service';
 import {WindowRef} from './services/window-ref.service';
 import {OnboardingHtmlElementHelper} from './models/onboarding-html-element-helper';
-import {Component, ElementRef, Input, ViewChild, ViewEncapsulation} from '@angular/core';
+import {Component, ElementRef, Input, ViewChild, ViewEncapsulation, ChangeDetectionStrategy} from '@angular/core';
 import {NgClass, NgStyle} from "@angular/common";
 
 const topPadding = 25;
@@ -22,6 +22,7 @@ const leftPadding = 25;
         NgStyle,
         NgClass
     ],
+    changeDetection: ChangeDetectionStrategy.Eager,
     encapsulation: ViewEncapsulation.None
 })
 export class OnboardingItemComponent {
