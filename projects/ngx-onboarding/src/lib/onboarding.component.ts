@@ -119,7 +119,7 @@ export class OnboardingComponent implements OnInit, AfterViewInit, OnDestroy {
      * gets the fixed position of the html element
      * used by template to set the position of the spotlight
      */
-    public getPositionStyle(ele: HTMLElement) {
+    public getPositionStyle(ele?: HTMLElement | null) {
         if (!ele) {
             return {};
         }
