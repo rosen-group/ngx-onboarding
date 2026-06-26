@@ -47,15 +47,15 @@ export class OnboardingItemComponent {
      * calculates the position of the OnboardingItemComponent
      */
     public getStyle() {
-        if (!this.item?.element) {
+        if (!this.item?.element || !this.item?.item) {
             return {};
         }
-        const pos = OnboardingHtmlElementHelper.getPosition(this.item.element!);
+        const pos = OnboardingHtmlElementHelper.getPosition(this.item.element);
         let transform = 'none';
 
-        switch (this.item.item!.position) {
+        switch (this.item.item.position) {
             case 'top':
-                pos.x += this.item.element!.offsetWidth / 2;
+                pos.x += this.item.element.offsetWidth / 2;
                 if (pos.x < this.getContainerWidth() / 2) {
                     pos.x = this.getContainerWidth() / 2;
                 } else if (pos.x > this.getWindowScreenWidth() - this.getContainerWidth()) {
@@ -65,8 +65,8 @@ export class OnboardingItemComponent {
                 transform = 'translate(-50%,-100%)';
                 break;
             case 'right':
-                pos.x += Math.min(this.item.element!.offsetWidth + rightPadding, this.getWindowScreenWidth() - this.getContainerWidth() / 2);
-                pos.y += this.item.element!.offsetHeight / 2;
+                pos.x += Math.min(this.item.element.offsetWidth + rightPadding, this.getWindowScreenWidth() - this.getContainerWidth() / 2);
+                pos.y += this.item.element.offsetHeight / 2;
                 if (pos.y < 0) {
                     pos.y = 0;
                 } else if (pos.y > this.getWindowScreenHeight() - this.getContainerHeight() / 2) {
@@ -76,7 +76,7 @@ export class OnboardingItemComponent {
                 break;
             case 'left':
                 pos.x -= leftPadding;
-                pos.y += this.item.element!.offsetHeight / 2;
+                pos.y += this.item.element.offsetHeight / 2;
                 if (pos.y < 0) {
                     pos.y = 0;
                 } else if (pos.y > this.getWindowScreenHeight() - this.getContainerHeight() / 2) {
@@ -97,13 +97,13 @@ export class OnboardingItemComponent {
 
             case 'bottom':
             default:
-                pos.x += this.item.element!.offsetWidth / 2;
+                pos.x += this.item.element.offsetWidth / 2;
                 if (pos.x < this.getContainerWidth() / 2) {
                     pos.x = this.getContainerWidth() / 2;
                 } else if (pos.x > this.getWindowScreenWidth() - this.getContainerWidth()) {
                     pos.x = this.getWindowScreenWidth() - this.getContainerWidth();
                 }
-                pos.y += this.item.element!.offsetHeight;
+                pos.y += this.item.element.offsetHeight;
                 transform = 'translate(-50%,25%)';
                 break;
         }
