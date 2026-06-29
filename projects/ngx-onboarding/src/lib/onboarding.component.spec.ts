@@ -23,8 +23,7 @@ describe('OnboardingComponent', () => {
                 MatButtonModule,
                 MatBadgeModule,
                 MatMenuModule,
-                MatIconModule],
-            declarations: [
+                MatIconModule,
                 OnboardingItemComponent,
                 PrimitiveTranslatePipe,
                 OnboardingComponent
@@ -50,7 +49,7 @@ describe('OnboardingComponent', () => {
     }));
 
     it('ngOnInit expect dynamicCss to be not empty', () => {
-        component.dynamicCss = null;
+        component.dynamicCss = null as any;
         (component as any).textConfig = {
             scriptFontFamily: 'testScriptFontFamily',
             regularFontFamily: 'testRegularFontFamily'
@@ -88,7 +87,7 @@ describe('OnboardingComponent', () => {
             height: 200,
             fixed: false
         });
-        const value = component.getPositionStyle(null);
+        const value = component.getPositionStyle(document.createElement('div'));
 
         expect(value.position).toBe('fixed');
         expect(value.left).toBe('1px');
@@ -106,7 +105,7 @@ describe('OnboardingComponent', () => {
             height: 200,
             fixed: true
         });
-        const value = component.getPositionStyle(null);
+        const value = component.getPositionStyle(document.createElement('div'));
 
         expect(value.position).toBe('fixed');
         expect(value.left).toBe('1px');

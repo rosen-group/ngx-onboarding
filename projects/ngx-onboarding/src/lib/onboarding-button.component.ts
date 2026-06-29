@@ -1,6 +1,6 @@
 import {OnboardingIconConfiguration} from './models/onboarding-icon-configuration.interface';
 import {OnboardingService} from './services/onboarding.service';
-import {Component, ViewEncapsulation} from '@angular/core';
+import {Component, ViewEncapsulation, ChangeDetectionStrategy} from '@angular/core';
 import {MatMenu, MatMenuItem, MatMenuTrigger} from "@angular/material/menu";
 import {MatIcon} from "@angular/material/icon";
 import {MatIconButton} from "@angular/material/button";
@@ -25,12 +25,13 @@ import {MatBadge} from "@angular/material/badge";
         PrimitiveTranslatePipe,
         MatBadge
     ],
+    changeDetection: ChangeDetectionStrategy.Eager,
     encapsulation: ViewEncapsulation.None
 })
 export class OnboardingButtonComponent {
 
     /** used by template to apply the customizations on icons */
-    public iconConfig: OnboardingIconConfiguration;
+    public iconConfig?: OnboardingIconConfiguration;
 
     constructor(private onboardingService: OnboardingService) {
         const config = onboardingService.getConfiguration();

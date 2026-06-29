@@ -7,7 +7,7 @@ import {LocalStorageSeenSelectorsService} from './services/local-storage-seen-se
 import {LocalStorageEnabledStatusService} from './services/local-storage-enabled-status.service';
 import {BuildInTranslatorService} from './services/build-in-translator.service';
 import {NgModule} from '@angular/core';
-import {provideHttpClient, withInterceptorsFromDi} from '@angular/common/http';
+import {provideHttpClient, withInterceptorsFromDi, withXhr} from '@angular/common/http';
 
 /**
  * Module for ngx-onboarding.
@@ -15,7 +15,7 @@ import {provideHttpClient, withInterceptorsFromDi} from '@angular/common/http';
  */
 @NgModule({
     providers: [
-        provideHttpClient(withInterceptorsFromDi())
+        provideHttpClient(withXhr(), withInterceptorsFromDi())
     ]
 })
 export class OnboardingModule {

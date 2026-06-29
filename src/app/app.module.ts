@@ -1,7 +1,7 @@
 import {BrowserModule, DomSanitizer} from '@angular/platform-browser';
 import {NgModule} from '@angular/core';
 import {AppComponent} from './app.component';
-import {provideHttpClient, withInterceptorsFromDi} from '@angular/common/http';
+import {provideHttpClient, withInterceptorsFromDi, withXhr} from '@angular/common/http';
 import {MatIconModule, MatIconRegistry} from '@angular/material/icon';
 import {MatButton, MatButtonModule} from '@angular/material/button';
 import {OnboardingComponent} from "../../projects/ngx-onboarding/src/lib/onboarding.component";
@@ -42,7 +42,7 @@ import {TranslatorBaseService} from "../../projects/ngx-onboarding/src/lib/servi
         MatButton
     ],
     providers: [
-        provideHttpClient(withInterceptorsFromDi()),
+        provideHttpClient(withXhr(), withInterceptorsFromDi()),
         {
             provide: SeenSelectorsBaseService, useClass: LocalStorageSeenSelectorsService
         },

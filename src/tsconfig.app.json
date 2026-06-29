@@ -9,7 +9,13 @@
         }
     },
     "angularCompilerOptions": {
-        "enableIvy": true
+        "enableIvy": true,
+        "extendedDiagnostics": {
+          "checks": {
+            "nullishCoalescingNotNullable": "suppress",
+            "optionalChainNotNullable": "suppress"
+          }
+        }
     },
   "files": [
     "main.ts",

@@ -19,8 +19,7 @@ describe('OnboardingButtonComponent', () => {
                 MatButtonModule,
                 MatBadgeModule,
                 MatMenuModule,
-                MatIconModule],
-            declarations: [
+                MatIconModule,
                 PrimitiveTranslatePipe,
                 OnboardingButtonComponent
             ],

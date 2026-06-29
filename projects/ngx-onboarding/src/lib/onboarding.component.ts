@@ -6,7 +6,7 @@ import {OnboardingTextConfiguration} from './models/onboarding-text-configuratio
 import {OnboardingService} from './services/onboarding.service';
 import {OnboardingHtmlElementHelper} from './models/onboarding-html-element-helper';
 import {OnboardingItem} from './models/onboarding-item.model';
-import {AfterViewInit, Component, OnDestroy, OnInit, ViewEncapsulation} from '@angular/core';
+import {AfterViewInit, Component, OnDestroy, OnInit, ViewEncapsulation, ChangeDetectionStrategy} from '@angular/core';
 import {Subscription} from 'rxjs';
 import {NgStyle, UpperCasePipe} from "@angular/common";
 import {OnboardingItemComponent} from "./onboarding-item.component";
@@ -30,6 +30,7 @@ import {PrimitiveTranslatePipe} from "./pipes/primitive-translate.pipe";
         MatIcon,
         UpperCasePipe
     ],
+    changeDetection: ChangeDetectionStrategy.Eager,
     encapsulation: ViewEncapsulation.None
 })
 export class OnboardingComponent implements OnInit, AfterViewInit, OnDestroy {
@@ -118,7 +119,10 @@ export class OnboardingComponent implements OnInit, AfterViewInit, OnDestroy {
      * gets the fixed position of the html element
      * used by template to set the position of the spotlight
      */
-    public getPositionStyle(ele: HTMLElement) {
+    public getPositionStyle(ele?: HTMLElement | null) {
+        if (!ele) {
+            return {};
+        }
         const pos = OnboardingHtmlElementHelper.getPosition(ele);
         const style: any = {
             position: 'fixed',
@@ -134,7 +138,7 @@ export class OnboardingComponent implements OnInit, AfterViewInit, OnDestroy {
     }
 
     public isSpotlightTransparent(item: OnboardingItem) {
-        return item.transparentSpotlight;
+        return item?.transparentSpotlight ?? false;
     }
 
     /**

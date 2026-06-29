@@ -77,7 +77,7 @@ export class OnboardingHtmlElementHelper {
         };
     }
 
-    private static isFixed(htmlElement: HTMLElement) {
+    private static isFixed(htmlElement: HTMLElement): boolean {
         if (!htmlElement || typeof getComputedStyle !== 'function') {
             return false;
         }
