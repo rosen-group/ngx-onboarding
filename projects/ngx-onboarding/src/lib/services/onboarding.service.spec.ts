@@ -1,4 +1,4 @@
-import { inject, TestBed, waitForAsync} from '@angular/core/testing';
+import { inject, TestBed } from '@angular/core/testing';
 import { OnboardingService } from './onboarding.service';
 import { BrowserDOMSelectorService } from './browser-dom-selector.service';
 import { SeenSelectorsBaseService } from './seen-selectors-base.service';
@@ -9,56 +9,52 @@ import { OnboardingHtmlElementHelper } from '../models/onboarding-html-element-h
 import { OnboardingItem } from '../models/onboarding-item.model';
 
 describe('OnboardingService', () => {
-    beforeEach(waitForAsync(() => {
+    beforeEach(async () => {
         TestBed.configureTestingModule({
             providers: [
                 BrowserDOMSelectorService,
                 OnboardingService,
-                {provide: SeenSelectorsBaseService, useClass: MockLocalStorageSeenSelectorsService},
-                {provide: EnabledStatusBaseService, useClass: MockLocalStorageEnabledStatusService}
+                { provide: SeenSelectorsBaseService, useClass: MockLocalStorageSeenSelectorsService },
+                { provide: EnabledStatusBaseService, useClass: MockLocalStorageEnabledStatusService }
             ],
         });
-    }));
+    });
 
     it('should be created', inject([OnboardingService], (service: OnboardingService) => {
         expect(service).toBeTruthy();
     }));
 
-    it('call check expects visibleItems.length to be 0',
-        inject([OnboardingService, BrowserDOMSelectorService],
-            (onboardingService: OnboardingService, browserDomSelectorService: BrowserDOMSelectorService) => {
-                spyOn(browserDomSelectorService, 'querySelectorAll').and.returnValue([]);
-                spyOn(onboardingService.visibleItemsChanged, 'emit');
-                onboardingService.register(getOnboardingItems());
-                onboardingService.visibleItems.clear();
-                onboardingService['enabled'] = true;
+    it('call check expects visibleItems.length to be 0', inject([OnboardingService, BrowserDOMSelectorService], (onboardingService: OnboardingService, browserDomSelectorService: BrowserDOMSelectorService) => {
+        vi.spyOn(browserDomSelectorService, 'querySelectorAll').mockReturnValue([]);
+        vi.spyOn(onboardingService.visibleItemsChanged, 'emit').mockReturnValue(undefined);
+        onboardingService.register(getOnboardingItems());
+        onboardingService.visibleItems.clear();
+        onboardingService['enabled'] = true;
 
-                onboardingService.check();
+        onboardingService.check();
 
-                expect(browserDomSelectorService.querySelectorAll).toHaveBeenCalledTimes(6);
-                expect(onboardingService.visibleItemsChanged.emit).toHaveBeenCalled();
-                expect(onboardingService.visibleItems.totalLength).toBe(0);
-            }));
+        expect(browserDomSelectorService.querySelectorAll).toHaveBeenCalledTimes(6);
+        expect(onboardingService.visibleItemsChanged.emit).toHaveBeenCalled();
+        expect(onboardingService.visibleItems.totalLength).toBe(0);
+    }));
 
-    it('call check expects visibleItems.length to be 6',
-        inject([OnboardingService, BrowserDOMSelectorService],
-            (onboardingService: OnboardingService, browserDomSelectorService: BrowserDOMSelectorService) => {
-                spyOn(browserDomSelectorService, 'querySelectorAll').and.callFake(() => {
-                    return getHtmlElements(6);
-                });
-                spyOn(OnboardingHtmlElementHelper, 'isVisibleInViewWithParents').and.returnValue(true);
-                onboardingService['items'] = getOnboardingItems();
-                onboardingService.visibleItems.clear();
-                expect(onboardingService.visibleItems.isEmpty).toBeTruthy();
-                onboardingService['seenSelectors'] = [];
-                onboardingService['enabled'] = true;
+    it('call check expects visibleItems.length to be 6', inject([OnboardingService, BrowserDOMSelectorService], (onboardingService: OnboardingService, browserDomSelectorService: BrowserDOMSelectorService) => {
+        vi.spyOn(browserDomSelectorService, 'querySelectorAll').mockImplementation(() => {
+            return getHtmlElements(6);
+        });
+        vi.spyOn(OnboardingHtmlElementHelper, 'isVisibleInViewWithParents').mockReturnValue(true);
+        onboardingService['items'] = getOnboardingItems();
+        onboardingService.visibleItems.clear();
+        expect(onboardingService.visibleItems.isEmpty).toBeTruthy();
+        onboardingService['seenSelectors'] = [];
+        onboardingService['enabled'] = true;
 
-                onboardingService.check();
+        onboardingService.check();
 
-                expect(browserDomSelectorService.querySelectorAll).toHaveBeenCalledTimes(6);
-                expect(onboardingService.visibleItems.totalLength).toBe(6);
-                expect(onboardingService.visibleItems.isEmpty).toBeFalsy();
-            }));
+        expect(browserDomSelectorService.querySelectorAll).toHaveBeenCalledTimes(6);
+        expect(onboardingService.visibleItems.totalLength).toBe(6);
+        expect(onboardingService.visibleItems.isEmpty).toBeFalsy();
+    }));
 
     it('call register expects items.length to be 6', inject([OnboardingService], (onboardingService: OnboardingService) => {
         onboardingService.register(getOnboardingItems());
@@ -72,70 +68,64 @@ describe('OnboardingService', () => {
         expect(onboardingService['items'].length).toBe(0);
     }));
 
-    it('call unregister clears only items that were registered before', inject([OnboardingService],
-        (onboardingService: OnboardingService) => {
+    it('call unregister clears only items that were registered before', inject([OnboardingService], (onboardingService: OnboardingService) => {
         const unregister = onboardingService.register(getOnboardingItems());
         onboardingService.register(getOtherOnboardingItems());
-        expect(onboardingService['items'].length).toBe(
-            getOnboardingItems().length + getOtherOnboardingItems().length
-        );
+        expect(onboardingService['items'].length).toBe(getOnboardingItems().length + getOtherOnboardingItems().length);
         unregister();
         expect(onboardingService['items'].length).toBe(getOtherOnboardingItems().length);
     }));
 
-    it('call disable expects isEnabled to be false and enableChanged to have been called',
+    it('call disable expects isEnabled to be false and enableChanged to have been called', inject([OnboardingService], (onboardingService: OnboardingService) => {
+        vi.spyOn(onboardingService as any, 'enabledChanged').mockReturnValue(undefined);
+        onboardingService['enabled'] = true;
+
+        onboardingService.disable();
+
+        expect(onboardingService.isEnabled()).toBe(false);
+        expect(onboardingService['enabledChanged']).toHaveBeenCalled();
+    }));
+
+    it('call enable expects isEnabled to be false and enableChanged to have been called', inject([OnboardingService], (onboardingService: OnboardingService) => {
+        vi.spyOn(onboardingService as any, 'enabledChanged').mockReturnValue(undefined);
+        onboardingService['enabled'] = false;
+
+        onboardingService.enable();
+
+        expect(onboardingService.isEnabled()).toBe(true);
+        expect(onboardingService['enabledChanged']).toHaveBeenCalled();
+    }));
+
+    it('call clearSeenSelectors expects seenSelectors.lenght to be 0 and seenSelectorsChanged to have been called', inject([OnboardingService], (onboardingService: OnboardingService) => {
+        vi.spyOn(onboardingService as any, 'seenSelectorsChanged').mockReturnValue(undefined);
+        onboardingService['seenSelectors'] = ['.a', '.b'];
+
+        onboardingService.clearSeenSelectors();
+
+        expect(onboardingService['seenSelectors'].length).toBe(0);
+        expect(onboardingService['seenSelectorsChanged']).toHaveBeenCalled();
+    }));
+
+    it('call addToSeenSelectors expects seenSelectors.lenght to be 3 and seenSelectorsChanged to have been called', inject([OnboardingService], (onboardingService: OnboardingService) => {
+        vi.spyOn(onboardingService as any, 'seenSelectorsChanged').mockReturnValue(undefined);
+        onboardingService['seenSelectors'] = ['.a', '.b'];
+
+        onboardingService['addToSeenSelectors']('.test-selector');
+
+        expect(onboardingService['seenSelectors'].length).toBe(3);
+        expect(onboardingService['seenSelectorsChanged']).toHaveBeenCalled();
+    }));
+
+    it('call seenSelectorsChanged expects saveSeenSelectorsToUserSettings to have been called', async () => {
         inject([OnboardingService], (onboardingService: OnboardingService) => {
-            spyOn(onboardingService as any, 'enabledChanged');
-            onboardingService['enabled'] = true;
-
-            onboardingService.disable();
-
-            expect(onboardingService.isEnabled()).toBe(false);
-            expect(onboardingService['enabledChanged']).toHaveBeenCalled();
-        }));
-
-    it('call enable expects isEnabled to be false and enableChanged to have been called',
-        inject([OnboardingService], (onboardingService: OnboardingService) => {
-            spyOn(onboardingService as any, 'enabledChanged');
-            onboardingService['enabled'] = false;
-
-            onboardingService.enable();
-
-            expect(onboardingService.isEnabled()).toBe(true);
-            expect(onboardingService['enabledChanged']).toHaveBeenCalled();
-        }));
-
-    it('call clearSeenSelectors expects seenSelectors.lenght to be 0 and seenSelectorsChanged to have been called',
-        inject([OnboardingService], (onboardingService: OnboardingService) => {
-            spyOn(onboardingService as any, 'seenSelectorsChanged');
-            onboardingService['seenSelectors'] = ['.a', '.b'];
-
-            onboardingService.clearSeenSelectors();
-
-            expect(onboardingService['seenSelectors'].length).toBe(0);
-            expect(onboardingService['seenSelectorsChanged']).toHaveBeenCalled();
-        }));
-
-    it('call addToSeenSelectors expects seenSelectors.lenght to be 3 and seenSelectorsChanged to have been called',
-        inject([OnboardingService], (onboardingService: OnboardingService) => {
-            spyOn(onboardingService as any, 'seenSelectorsChanged');
-            onboardingService['seenSelectors'] = ['.a', '.b'];
-
-            onboardingService['addToSeenSelectors']('.test-selector');
-
-            expect(onboardingService['seenSelectors'].length).toBe(3);
-            expect(onboardingService['seenSelectorsChanged']).toHaveBeenCalled();
-        }));
-
-    it('call seenSelectorsChanged expects saveSeenSelectorsToUserSettings to have been called', done => {
-        inject([OnboardingService], (onboardingService: OnboardingService) => {
-            const spy = spyOn(onboardingService as any, 'saveSeenSelectors').and.stub();
+            const spy = vi.spyOn(onboardingService as any, 'saveSeenSelectors').mockImplementation(() => {
+            });
 
             onboardingService['seenSelectorsChanged']();
 
             setTimeout(() => {
                 expect(spy).toHaveBeenCalled();
-                done();
+                ;
             }, 1001);
 
         })();

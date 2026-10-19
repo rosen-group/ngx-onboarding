@@ -1,11 +1,11 @@
-import { TestBed, waitForAsync} from '@angular/core/testing';
+import { TestBed } from '@angular/core/testing';
 import { LocalStorageEnabledStatusService } from './local-storage-enabled-status.service';
 import { ErrorHandler } from '@angular/core';
 
 describe('LocalStorageEnabledStatusService', () => {
     let errorHandler: ErrorHandler;
     let service: LocalStorageEnabledStatusService;
-    beforeEach(waitForAsync(() => {
+    beforeEach(async () => {
         TestBed.configureTestingModule({
             providers: [
                 LocalStorageEnabledStatusService,
@@ -13,57 +13,62 @@ describe('LocalStorageEnabledStatusService', () => {
         });
         errorHandler = TestBed.inject(ErrorHandler);
         service = TestBed.inject(LocalStorageEnabledStatusService);
-    }));
+    });
 
     it('should be created', () => {
         expect(service).toBeTruthy();
     });
 
-    it('load with true expect enabled to be true', done => {
-            spyOn(localStorage, 'getItem').and.returnValue('true');
-            service.load().subscribe((enabled: boolean) => {
-                expect(enabled).toEqual(true);
-                done();
-            });
-        }
-    );
+    it('load with true expect enabled to be true', async () => {
+        vi.spyOn(Storage.prototype, 'getItem').mockReturnValue('true');
+        service.load().subscribe((enabled: boolean) => {
+            expect(enabled).toEqual(true);
+            ;
+        });
+    });
 
-    it('load with getItem throws an error expect enabled to be true', done => {
+    it('load with getItem throws an error expect enabled to be true', async () => {
 
-            spyOn(localStorage, 'getItem').and.throwError('getItem failed');
-            const errorSpy = spyOn(errorHandler, 'handleError').and.stub();
-            service.load().subscribe((enabled: boolean) => {
-                expect(enabled).toBe(true);
-                expect(errorSpy).toHaveBeenCalled();
-                done();
-            });
-        }
-    );
+        vi.spyOn(Storage.prototype, 'getItem').mockImplementation(() => {
+            throw new Error('getItem failed');
+        });
+        const errorSpy = vi.spyOn(errorHandler, 'handleError').mockImplementation(() => {
+        });
+        service.load().subscribe((enabled: boolean) => {
+            expect(enabled).toBe(true);
+            expect(errorSpy).toHaveBeenCalled();
+            ;
+        });
+    });
 
     it('save expect setItem to have been called with true', () => {
-            const errorSpy = spyOn(errorHandler, 'handleError').and.stub();
-            const storageSpy = spyOn(localStorage, 'setItem').and.stub();
-            service.save(true);
-            expect(storageSpy).toHaveBeenCalledWith('42cfe10a-c2d3-42ba-9c55-6198545a0c49', 'true');
-            expect(errorSpy).not.toHaveBeenCalled();
-        }
-    );
+        const errorSpy = vi.spyOn(errorHandler, 'handleError').mockImplementation(() => {
+        });
+        const storageSpy = vi.spyOn(Storage.prototype, 'setItem').mockImplementation(() => {
+        });
+        service.save(true);
+        expect(storageSpy).toHaveBeenCalledWith('42cfe10a-c2d3-42ba-9c55-6198545a0c49', 'true');
+        expect(errorSpy).not.toHaveBeenCalled();
+    });
 
     it('save expect setItem to have been called with false', () => {
-            const errorSpy = spyOn(errorHandler, 'handleError').and.stub();
-            const storageSpy = spyOn(localStorage, 'setItem').and.stub();
-            service.save(false);
-            expect(storageSpy).toHaveBeenCalledWith('42cfe10a-c2d3-42ba-9c55-6198545a0c49', 'false');
-            expect(errorSpy).not.toHaveBeenCalled();
-        }
-    );
+        const errorSpy = vi.spyOn(errorHandler, 'handleError').mockImplementation(() => {
+        });
+        const storageSpy = vi.spyOn(Storage.prototype, 'setItem').mockImplementation(() => {
+        });
+        service.save(false);
+        expect(storageSpy).toHaveBeenCalledWith('42cfe10a-c2d3-42ba-9c55-6198545a0c49', 'false');
+        expect(errorSpy).not.toHaveBeenCalled();
+    });
 
     it('save expect setItem to call errorhandler if exception occurs', () => {
-            spyOn(localStorage, 'setItem').and.throwError('setItem failed');
-            const errorSpy = spyOn(errorHandler, 'handleError').and.stub();
-            service.save(false);
-            expect(errorSpy).toHaveBeenCalled();
-        }
-    );
+        vi.spyOn(Storage.prototype, 'setItem').mockImplementation(() => {
+            throw new Error('setItem failed');
+        });
+        const errorSpy = vi.spyOn(errorHandler, 'handleError').mockImplementation(() => {
+        });
+        service.save(false);
+        expect(errorSpy).toHaveBeenCalled();
+    });
 
 });

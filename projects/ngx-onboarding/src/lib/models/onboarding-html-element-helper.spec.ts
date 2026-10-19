@@ -1,11 +1,11 @@
-import {OnboardingHtmlElementHelper} from './onboarding-html-element-helper';
+import { OnboardingHtmlElementHelper } from './onboarding-html-element-helper';
 
 describe('OnboardingHtmlElementHelper', () => {
 
     it('isVisible expect to be true', () => {
         const element = document.createElement('div');
         const parent = document.createElement('div');
-        spyOnProperty(element, 'offsetParent').and.returnValue(parent);
+        vi.spyOn(element, 'offsetParent', 'get').mockReturnValue(parent);
 
         const isVisible = OnboardingHtmlElementHelper.isVisible(element);
 
@@ -15,10 +15,10 @@ describe('OnboardingHtmlElementHelper', () => {
     it('isVisible with opacity 0 expect to be false', () => {
         const element = document.createElement('div');
         const parent = document.createElement('div');
-        spyOnProperty(element, 'offsetParent').and.returnValue(parent);
-        spyOn(window, 'getComputedStyle').and.returnValue({
+        vi.spyOn(element, 'offsetParent', 'get').mockReturnValue(parent);
+        vi.spyOn(window, 'getComputedStyle').mockReturnValue({
             opacity: '0'
-        });
+        } as any);
 
         const isVisible = OnboardingHtmlElementHelper.isVisible(element);
 
@@ -28,11 +28,11 @@ describe('OnboardingHtmlElementHelper', () => {
     it('isVisible with display none expect to be false', () => {
         const element = document.createElement('div');
         const parent = document.createElement('div');
-        spyOnProperty(element, 'offsetParent').and.returnValue(parent);
-        spyOn(window, 'getComputedStyle').and.returnValue({
+        vi.spyOn(element, 'offsetParent', 'get').mockReturnValue(parent);
+        vi.spyOn(window, 'getComputedStyle').mockReturnValue({
             opacity: '1',
             display: 'none'
-        });
+        } as any);
 
         const isVisible = OnboardingHtmlElementHelper.isVisible(element);
 
@@ -42,12 +42,12 @@ describe('OnboardingHtmlElementHelper', () => {
     it('isVisible with visibility hidden expect to be false', () => {
         const element = document.createElement('div');
         const parent = document.createElement('div');
-        spyOnProperty(element, 'offsetParent').and.returnValue(parent);
-        spyOn(window, 'getComputedStyle').and.returnValue({
+        vi.spyOn(element, 'offsetParent', 'get').mockReturnValue(parent);
+        vi.spyOn(window, 'getComputedStyle').mockReturnValue({
             opacity: '1',
             display: 'block',
             visibility: 'hidden'
-        });
+        } as any);
 
         const isVisible = OnboardingHtmlElementHelper.isVisible(element);
 
@@ -57,12 +57,12 @@ describe('OnboardingHtmlElementHelper', () => {
     it('isVisible with visibility collapse expect to be false', () => {
         const element = document.createElement('div');
         const parent = document.createElement('div');
-        spyOnProperty(element, 'offsetParent').and.returnValue(parent);
-        spyOn(window, 'getComputedStyle').and.returnValue({
+        vi.spyOn(element, 'offsetParent', 'get').mockReturnValue(parent);
+        vi.spyOn(window, 'getComputedStyle').mockReturnValue({
             opacity: '1',
             display: 'block',
             visibility: 'collapse'
-        });
+        } as any);
 
         const isVisible = OnboardingHtmlElementHelper.isVisible(element);
 
@@ -71,13 +71,13 @@ describe('OnboardingHtmlElementHelper', () => {
 
     it('expect isNotScrolledOut to be true', () => {
         const element = document.createElement('div');
-        spyOnProperty(element, 'offsetTop').and.returnValue(10);
-        spyOnProperty(element, 'offsetHeight').and.returnValue(100);
+        vi.spyOn(element, 'offsetTop', 'get').mockReturnValue(10);
+        vi.spyOn(element, 'offsetHeight', 'get').mockReturnValue(100);
 
         const parent = <HTMLElement>document.createElement('div');
-        spyOnProperty(parent, 'scrollTop').and.returnValue(0);
-        spyOnProperty(parent, 'offsetHeight').and.returnValue(500);
-        spyOnProperty(element, 'offsetParent').and.returnValue(parent);
+        vi.spyOn(parent, 'scrollTop', 'get').mockReturnValue(0);
+        vi.spyOn(parent, 'offsetHeight', 'get').mockReturnValue(500);
+        vi.spyOn(element, 'offsetParent', 'get').mockReturnValue(parent);
 
         parent.appendChild(element);
 
@@ -88,13 +88,13 @@ describe('OnboardingHtmlElementHelper', () => {
 
     it('expect isNotScrolledOut to be false', () => {
         const element = document.createElement('div');
-        spyOnProperty(element, 'offsetTop').and.returnValue(510);
-        spyOnProperty(element, 'offsetHeight').and.returnValue(100);
+        vi.spyOn(element, 'offsetTop', 'get').mockReturnValue(510);
+        vi.spyOn(element, 'offsetHeight', 'get').mockReturnValue(100);
 
         const parent = <HTMLElement>document.createElement('div');
-        spyOnProperty(parent, 'scrollTop').and.returnValue(0);
-        spyOnProperty(parent, 'offsetHeight').and.returnValue(500);
-        spyOnProperty(element, 'offsetParent').and.returnValue(parent);
+        vi.spyOn(parent, 'scrollTop', 'get').mockReturnValue(0);
+        vi.spyOn(parent, 'offsetHeight', 'get').mockReturnValue(500);
+        vi.spyOn(element, 'offsetParent', 'get').mockReturnValue(parent);
 
         const isNotScrolledOut = OnboardingHtmlElementHelper.isNotScrolledOut(element);
 
@@ -103,21 +103,21 @@ describe('OnboardingHtmlElementHelper', () => {
 
     it('expect isVisibleInViewWithParents to be true', () => {
         const element = document.createElement('div');
-        spyOnProperty(element, 'offsetTop').and.returnValue(0);
-        spyOnProperty(element, 'offsetHeight').and.returnValue(100);
+        vi.spyOn(element, 'offsetTop', 'get').mockReturnValue(0);
+        vi.spyOn(element, 'offsetHeight', 'get').mockReturnValue(100);
 
         const parent = <HTMLElement>document.createElement('div');
-        spyOnProperty(parent, 'scrollTop').and.returnValue(0);
-        spyOnProperty(parent, 'offsetHeight').and.returnValue(500);
-        spyOnProperty(element, 'offsetParent').and.returnValue(parent);
+        vi.spyOn(parent, 'scrollTop', 'get').mockReturnValue(0);
+        vi.spyOn(parent, 'offsetHeight', 'get').mockReturnValue(500);
+        vi.spyOn(element, 'offsetParent', 'get').mockReturnValue(parent);
 
         const parentParent = <HTMLElement>document.createElement('div');
-        spyOnProperty(parentParent, 'scrollTop').and.returnValue(0);
-        spyOnProperty(parentParent, 'offsetHeight').and.returnValue(500);
-        spyOnProperty(parent, 'offsetParent').and.returnValue(parentParent);
+        vi.spyOn(parentParent, 'scrollTop', 'get').mockReturnValue(0);
+        vi.spyOn(parentParent, 'offsetHeight', 'get').mockReturnValue(500);
+        vi.spyOn(parent, 'offsetParent', 'get').mockReturnValue(parentParent);
 
         const body = <HTMLElement>document.createElement('body');
-        spyOnProperty(parentParent, 'offsetParent').and.returnValue(body);
+        vi.spyOn(parentParent, 'offsetParent', 'get').mockReturnValue(body);
 
         const isVisible = OnboardingHtmlElementHelper.isVisibleInViewWithParents(element);
 
@@ -126,18 +126,18 @@ describe('OnboardingHtmlElementHelper', () => {
 
     it('expect isVisibleInViewWithParents to be false', () => {
         const element = document.createElement('div');
-        spyOnProperty(element, 'offsetTop').and.returnValue(0);
-        spyOnProperty(element, 'offsetHeight').and.returnValue(100);
+        vi.spyOn(element, 'offsetTop', 'get').mockReturnValue(0);
+        vi.spyOn(element, 'offsetHeight', 'get').mockReturnValue(100);
 
         const parent = <HTMLElement>document.createElement('div');
-        spyOnProperty(parent, 'scrollTop').and.returnValue(510);
-        spyOnProperty(parent, 'offsetHeight').and.returnValue(500);
-        spyOnProperty(element, 'offsetParent').and.returnValue(parent);
+        vi.spyOn(parent, 'scrollTop', 'get').mockReturnValue(510);
+        vi.spyOn(parent, 'offsetHeight', 'get').mockReturnValue(500);
+        vi.spyOn(element, 'offsetParent', 'get').mockReturnValue(parent);
 
         const parentParent = <HTMLElement>document.createElement('div');
-        spyOnProperty(parentParent, 'scrollTop').and.returnValue(0);
-        spyOnProperty(parentParent, 'offsetHeight').and.returnValue(500);
-        spyOnProperty(parent, 'offsetParent').and.returnValue(parentParent);
+        vi.spyOn(parentParent, 'scrollTop', 'get').mockReturnValue(0);
+        vi.spyOn(parentParent, 'offsetHeight', 'get').mockReturnValue(500);
+        vi.spyOn(parent, 'offsetParent', 'get').mockReturnValue(parentParent);
 
         const isVisible = OnboardingHtmlElementHelper.isVisibleInViewWithParents(element);
 
@@ -146,15 +146,15 @@ describe('OnboardingHtmlElementHelper', () => {
 
     it('expect getPosition to be ...', () => {
         const element = document.createElement('div');
-        spyOn(element, 'getBoundingClientRect').and.returnValue({
+        vi.spyOn(element, 'getBoundingClientRect').mockReturnValue({
             bottom: 10,
             height: 11,
             left: 12,
             right: 13,
             top: 14,
             width: 15
-        });
-        spyOn(OnboardingHtmlElementHelper as any, 'isFixed').and.returnValue(true);
+        } as any);
+        vi.spyOn(OnboardingHtmlElementHelper as any, 'isFixed').mockReturnValue(true);
 
         const position = OnboardingHtmlElementHelper.getPosition(element);
 
@@ -168,13 +168,14 @@ describe('OnboardingHtmlElementHelper', () => {
     it('isFixed expect to be true', () => {
         const element = document.createElement('div');
         const parent = document.createElement('div');
-        spyOnProperty(element, 'offsetParent').and.returnValue(parent);
-        spyOn(window, 'getComputedStyle').and.callFake((htmlElement: Element) => {
+        vi.spyOn(element, 'offsetParent', 'get').mockReturnValue(parent);
+        vi.spyOn(window, 'getComputedStyle').mockImplementation((htmlElement: Element): any => {
             if (htmlElement === element) {
                 return {
                     position: 'static'
                 };
-            } else {
+            }
+            else {
                 return {
                     position: 'fixed'
                 };
@@ -188,10 +189,10 @@ describe('OnboardingHtmlElementHelper', () => {
 
     it('isFixed with parent null expect to be false', () => {
         const element = document.createElement('div');
-        spyOnProperty(element, 'offsetParent').and.returnValue(null);
-        spyOn(window, 'getComputedStyle').and.returnValue({
+        vi.spyOn(element, 'offsetParent', 'get').mockReturnValue(null);
+        vi.spyOn(window, 'getComputedStyle').mockReturnValue({
             position: 'relative'
-        });
+        } as any);
 
         const isFixed = (OnboardingHtmlElementHelper as any).isFixed(element);
 

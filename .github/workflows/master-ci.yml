@@ -23,6 +23,6 @@ jobs:
             - name: Build
               run: npm run package
             - name: Test
-              run: ng test ngx-onboarding --watch=false --browsers=ChromeHeadless --code-coverage
+              run: ng test ngx-onboarding --watch=false --coverage
               env:
                   CI: true
