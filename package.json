@@ -2,7 +2,7 @@
   "name": "ngx-onboarding-app",
   "version": "1.22.0",
   "engines": {
-    "node": "16.20.x || 18.x || 20.x || 22.x || 24.x"
+    "node": "^22.22.3 || ^24.15.0"
   },
   "license": "MIT",
   "author": "ROSEN Group",
