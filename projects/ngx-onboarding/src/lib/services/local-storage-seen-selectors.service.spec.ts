@@ -1,6 +1,7 @@
 import { TestBed } from '@angular/core/testing';
 import { LocalStorageSeenSelectorsService } from './local-storage-seen-selectors.service';
 import { ErrorHandler } from '@angular/core';
+import { firstValueFrom } from 'rxjs';
 
 describe('LocalStorageSeenSelectorsService', () => {
     let errorHandler: ErrorHandler;
@@ -22,11 +23,9 @@ describe('LocalStorageSeenSelectorsService', () => {
     it('load expect seenSelectors.length to be 3', async () => {
         vi.spyOn(Storage.prototype, 'getItem').mockReturnValue('["a","b","c"]');
 
-        service.load().subscribe((seenSelectors: Array<string>) => {
-            expect(seenSelectors.length).toEqual(3);
-            expect(seenSelectors[1]).toEqual('b');
-            ;
-        });
+        const seenSelectors = await firstValueFrom(service.load());
+        expect(seenSelectors.length).toEqual(3);
+        expect(seenSelectors[1]).toEqual('b');
     });
 
     it('load with localStorage.getItem returns invalid json string expect seenSelectors.length to be 0 ', async () => {
@@ -35,11 +34,9 @@ describe('LocalStorageSeenSelectorsService', () => {
         const spy = vi.spyOn(errorHandler, 'handleError').mockImplementation(() => {
         });
 
-        service.load().subscribe(seenSelectors => {
-            expect(seenSelectors.length).toBe(0);
-            expect(spy).toHaveBeenCalled();
-            ;
-        });
+        const seenSelectors = await firstValueFrom(service.load());
+        expect(seenSelectors.length).toBe(0);
+        expect(spy).toHaveBeenCalled();
     });
 
     it('save expect localStorage.setItem to have been called', () => {

@@ -1,6 +1,7 @@
 import { TestBed } from '@angular/core/testing';
 import { LocalStorageEnabledStatusService } from './local-storage-enabled-status.service';
 import { ErrorHandler } from '@angular/core';
+import { firstValueFrom } from 'rxjs';
 
 describe('LocalStorageEnabledStatusService', () => {
     let errorHandler: ErrorHandler;
@@ -21,10 +22,8 @@ describe('LocalStorageEnabledStatusService', () => {
 
     it('load with true expect enabled to be true', async () => {
         vi.spyOn(Storage.prototype, 'getItem').mockReturnValue('true');
-        service.load().subscribe((enabled: boolean) => {
-            expect(enabled).toEqual(true);
-            ;
-        });
+        const enabled = await firstValueFrom(service.load());
+        expect(enabled).toEqual(true);
     });
 
     it('load with getItem throws an error expect enabled to be true', async () => {
@@ -34,11 +33,9 @@ describe('LocalStorageEnabledStatusService', () => {
         });
         const errorSpy = vi.spyOn(errorHandler, 'handleError').mockImplementation(() => {
         });
-        service.load().subscribe((enabled: boolean) => {
-            expect(enabled).toBe(true);
-            expect(errorSpy).toHaveBeenCalled();
-            ;
-        });
+        const enabled = await firstValueFrom(service.load());
+        expect(enabled).toBe(true);
+        expect(errorSpy).toHaveBeenCalled();
     });
 
     it('save expect setItem to have been called with true', () => {
