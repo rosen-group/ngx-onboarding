@@ -116,19 +116,22 @@ describe('OnboardingService', () => {
         expect(onboardingService['seenSelectorsChanged']).toHaveBeenCalled();
     }));
 
-    it('call seenSelectorsChanged expects saveSeenSelectorsToUserSettings to have been called', async () => {
-        inject([OnboardingService], (onboardingService: OnboardingService) => {
+    it('call seenSelectorsChanged expects saveSeenSelectorsToUserSettings to have been called', () => {
+        vi.useFakeTimers();
+        try {
+            const onboardingService = TestBed.inject(OnboardingService);
             const spy = vi.spyOn(onboardingService as any, 'saveSeenSelectors').mockImplementation(() => {
             });
 
             onboardingService['seenSelectorsChanged']();
+            expect(spy).not.toHaveBeenCalled();
 
-            setTimeout(() => {
-                expect(spy).toHaveBeenCalled();
-                ;
-            }, 1001);
+            vi.advanceTimersByTime(1001);
 
-        })();
+            expect(spy).toHaveBeenCalledTimes(1);
+        } finally {
+            vi.useRealTimers();
+        }
     });
 
     it('registeredItemsCount expect to be 6', inject([OnboardingService], (onboardingService: OnboardingService) => {

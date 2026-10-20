@@ -121,6 +121,11 @@
           "options": {
             "buildTarget": "ngx-onboarding:build",
             "tsConfig": "projects/ngx-onboarding/tsconfig.spec.json",
+            "reporters": [
+              "default",
+              ["junit", { "outputFile": "reports/junit.xml" }]
+            ],
+            "coverageReporters": ["text", "html", "cobertura"],
             "setupFiles": ["projects/ngx-onboarding/src/test-setup.ts"]
           }
         },

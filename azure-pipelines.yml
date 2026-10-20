@@ -28,6 +28,6 @@ steps:
 - task: PublishCodeCoverageResults@1
   inputs:
       codeCoverageTool: Cobertura
-      summaryFileLocation: '$(System.DefaultWorkingDirectory)/**/reports/coverage/cobertura-coverage.xml'
-      reportDirectory: '$(System.DefaultWorkingDirectory)/**/reports/coverage'
+      summaryFileLocation: '$(System.DefaultWorkingDirectory)/coverage/ngx-onboarding/cobertura-coverage.xml'
+      reportDirectory: '$(System.DefaultWorkingDirectory)/coverage/ngx-onboarding'
   displayName: 'Publish test coverage'
