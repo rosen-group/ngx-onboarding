@@ -1,24 +1,24 @@
-import { ComponentFixture, TestBed, waitForAsync} from '@angular/core/testing';
+import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { OnboardingComponent } from './onboarding.component';
 import { OnboardingItemComponent } from './onboarding-item.component';
 import { OnboardingServiceMock } from './services/onboarding.service.mock';
 import { of } from 'rxjs';
-import {PrimitiveTranslatePipe} from './pipes/primitive-translate.pipe';
-import {OnboardingService} from './services/onboarding.service';
-import {TranslatorBaseService} from './services/translator-base.service';
-import {BuildInTranslatorService} from './services/build-in-translator.service';
-import {BrowserDOMSelectorService} from './services/browser-dom-selector.service';
-import {OnboardingHtmlElementHelper} from './models/onboarding-html-element-helper';
-import {VisibleOnboardingItem} from './models/visible-onboarding-item.model';
-import {OnboardingItem} from './models/onboarding-item.model';
-import {MatButtonModule} from '@angular/material/button';
-import {MatBadgeModule} from '@angular/material/badge';
-import {MatMenuModule} from '@angular/material/menu';
-import {MatIconModule} from '@angular/material/icon';
+import { PrimitiveTranslatePipe } from './pipes/primitive-translate.pipe';
+import { OnboardingService } from './services/onboarding.service';
+import { TranslatorBaseService } from './services/translator-base.service';
+import { BuildInTranslatorService } from './services/build-in-translator.service';
+import { BrowserDOMSelectorService } from './services/browser-dom-selector.service';
+import { OnboardingHtmlElementHelper } from './models/onboarding-html-element-helper';
+import { VisibleOnboardingItem } from './models/visible-onboarding-item.model';
+import { OnboardingItem } from './models/onboarding-item.model';
+import { MatButtonModule } from '@angular/material/button';
+import { MatBadgeModule } from '@angular/material/badge';
+import { MatMenuModule } from '@angular/material/menu';
+import { MatIconModule } from '@angular/material/icon';
 
 describe('OnboardingComponent', () => {
-    beforeEach(waitForAsync(() => {
-        TestBed.configureTestingModule({
+    beforeEach(async () => {
+        await TestBed.configureTestingModule({
             imports: [
                 MatButtonModule,
                 MatBadgeModule,
@@ -29,12 +29,12 @@ describe('OnboardingComponent', () => {
                 OnboardingComponent
             ],
             providers: [
-                {provide: OnboardingService, useClass: OnboardingServiceMock},
+                { provide: OnboardingService, useClass: OnboardingServiceMock },
                 BrowserDOMSelectorService,
-                {provide: TranslatorBaseService, useClass: BuildInTranslatorService}
+                { provide: TranslatorBaseService, useClass: BuildInTranslatorService }
             ]
         }).compileComponents();
-    }));
+    });
 
     let fixture: ComponentFixture<OnboardingComponent>;
     let component: OnboardingComponent;
@@ -44,9 +44,9 @@ describe('OnboardingComponent', () => {
         component = fixture.debugElement.componentInstance;
     });
 
-    it('should create the component', waitForAsync(() => {
+    it('should create the component', () => {
         expect(component).toBeTruthy();
-    }));
+    });
 
     it('ngOnInit expect dynamicCss to be not empty', () => {
         component.dynamicCss = null as any;
@@ -72,7 +72,7 @@ describe('OnboardingComponent', () => {
 
     it('ngOnDestroy expect visibleItemsChangedSubscription.unsubscribe to have been called', () => {
         (component as any).visibleItemsChangedSubscription = of(true).subscribe();
-        const spy = spyOn((component as any).visibleItemsChangedSubscription, 'unsubscribe');
+        const spy = vi.spyOn((component as any).visibleItemsChangedSubscription, 'unsubscribe').mockReturnValue(undefined);
 
         component.ngOnDestroy();
 
@@ -80,13 +80,13 @@ describe('OnboardingComponent', () => {
     });
 
     it('getPositionStyle expect return value.position to be fixed, ...', () => {
-        spyOn(OnboardingHtmlElementHelper, 'getPosition').and.returnValue({
+        vi.spyOn(OnboardingHtmlElementHelper, 'getPosition').mockReturnValue({
             x: 1,
             y: 2,
             width: 100,
             height: 200,
             fixed: false
-        });
+        } as any);
         const value = component.getPositionStyle(document.createElement('div'));
 
         expect(value.position).toBe('fixed');
@@ -98,13 +98,13 @@ describe('OnboardingComponent', () => {
     });
 
     it('getPositionStyle expect return value.background to be transparent, ...', () => {
-        spyOn(OnboardingHtmlElementHelper, 'getPosition').and.returnValue({
+        vi.spyOn(OnboardingHtmlElementHelper, 'getPosition').mockReturnValue({
             x: 1,
             y: 2,
             width: 100,
             height: 200,
             fixed: true
-        });
+        } as any);
         const value = component.getPositionStyle(document.createElement('div'));
 
         expect(value.position).toBe('fixed');
@@ -151,8 +151,8 @@ describe('OnboardingComponent', () => {
 
     it('disable expect hideItem called with each item and disabled called on onboardingService', () => {
         component.visibleItem = new VisibleOnboardingItem();
-        const hideSpy = spyOn(component as any, 'hideItem');
-        const disableSpy = spyOn(component.onboardingService, 'disable');
+        const hideSpy = vi.spyOn(component as any, 'hideItem').mockReturnValue(undefined);
+        const disableSpy = vi.spyOn(component.onboardingService, 'disable').mockReturnValue(undefined);
 
         component.disable();
 
@@ -161,7 +161,7 @@ describe('OnboardingComponent', () => {
     });
 
     it('showItem expect css class onboarding-highlighted and onboarding-highlighted-on-static to be set', () => {
-        spyOn(component.onboardingService, 'isEnabled').and.returnValue(true);
+        vi.spyOn(component.onboardingService, 'isEnabled').mockReturnValue(true);
 
         const item = new VisibleOnboardingItem(new OnboardingItem(), document.createElement('div'));
 
@@ -172,7 +172,7 @@ describe('OnboardingComponent', () => {
     });
 
     it('showItem with position static expect css class onboarding-highlighted and onboarding-highlighted-on-static to be set', () => {
-        spyOn(component.onboardingService, 'isEnabled').and.returnValue(true);
+        vi.spyOn(component.onboardingService, 'isEnabled').mockReturnValue(true);
 
         const item = new VisibleOnboardingItem(new OnboardingItem(), document.createElement('div'));
         item.element.style.position = 'static';
@@ -184,7 +184,7 @@ describe('OnboardingComponent', () => {
     });
 
     it('showItem with position relative expect css class onboarding-highlighted to be set', () => {
-        spyOn(component.onboardingService, 'isEnabled').and.returnValue(true);
+        vi.spyOn(component.onboardingService, 'isEnabled').mockReturnValue(true);
 
         const item = new VisibleOnboardingItem(new OnboardingItem(), document.createElement('div'));
         item.element.style.position = 'relative';
@@ -198,7 +198,7 @@ describe('OnboardingComponent', () => {
     it('hideItem expext classList.remove to be called twice', () => {
         const item = new VisibleOnboardingItem(new OnboardingItem(), document.createElement('div'));
 
-        const spy = spyOn(item.element.classList, 'remove');
+        const spy = vi.spyOn(item.element.classList, 'remove').mockReturnValue(undefined);
 
         (component as any).hideItem(item);
 

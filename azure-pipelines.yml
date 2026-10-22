@@ -4,18 +4,18 @@
 # https://docs.microsoft.com/azure/devops/pipelines/languages/javascript
 
 pool:
-  vmImage: 'Ubuntu 20.04'
+  vmImage: 'ubuntu-latest'
 
 steps:
 - task: NodeTool@0
   inputs:
-    versionSpec: '14.20.x'
+    versionSpec: '24.15.x'
   displayName: 'Install Node.js'
 
 - script: |
     npm install -g @angular/cli
     npm install
-    ng test ngx-onboarding --watch=false --browsers=ChromeHeadless --code-coverage
+    ng test ngx-onboarding --watch=false --coverage
     npm run package
   displayName: 'test, build & package'
 
@@ -28,6 +28,6 @@ steps:
 - task: PublishCodeCoverageResults@1
   inputs:
       codeCoverageTool: Cobertura
-      summaryFileLocation: '$(System.DefaultWorkingDirectory)/**/reports/coverage/cobertura-coverage.xml'
-      reportDirectory: '$(System.DefaultWorkingDirectory)/**/reports/coverage'
+      summaryFileLocation: '$(System.DefaultWorkingDirectory)/coverage/ngx-onboarding/cobertura-coverage.xml'
+      reportDirectory: '$(System.DefaultWorkingDirectory)/coverage/ngx-onboarding'
   displayName: 'Publish test coverage'

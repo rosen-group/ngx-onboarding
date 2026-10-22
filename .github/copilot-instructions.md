@@ -25,7 +25,7 @@ npm run build-lib
 npm run package
 ```
 
-**To run/focus a single test**, use Jasmine's `fdescribe` / `fit` in the spec file — there is no CLI flag for it.
+**To run/focus a single test**, use Vitest's `describe.only` / `it.only` in the spec file, or filter by name with `ng test --filter "<name>"`. Tests run on Vitest with jsdom (no browser required).
 
 ## Architecture
 

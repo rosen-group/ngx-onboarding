@@ -1,20 +1,20 @@
-import { ComponentFixture, TestBed, waitForAsync} from '@angular/core/testing';
+import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { OnboardingButtonComponent } from './onboarding-button.component';
 import { OnboardingServiceMock } from './services/onboarding.service.mock';
-import {PrimitiveTranslatePipe} from './pipes/primitive-translate.pipe';
-import {OnboardingService} from './services/onboarding.service';
-import {BrowserDOMSelectorService} from './services/browser-dom-selector.service';
-import {BuildInTranslatorService} from './services/build-in-translator.service';
-import {TranslatorBaseService} from './services/translator-base.service';
-import {VisibleOnboardingItem} from './models/visible-onboarding-item.model';
-import {MatButtonModule} from '@angular/material/button';
-import {MatBadgeModule} from '@angular/material/badge';
-import {MatMenuModule} from '@angular/material/menu';
-import {MatIconModule} from '@angular/material/icon';
+import { PrimitiveTranslatePipe } from './pipes/primitive-translate.pipe';
+import { OnboardingService } from './services/onboarding.service';
+import { BrowserDOMSelectorService } from './services/browser-dom-selector.service';
+import { BuildInTranslatorService } from './services/build-in-translator.service';
+import { TranslatorBaseService } from './services/translator-base.service';
+import { VisibleOnboardingItem } from './models/visible-onboarding-item.model';
+import { MatButtonModule } from '@angular/material/button';
+import { MatBadgeModule } from '@angular/material/badge';
+import { MatMenuModule } from '@angular/material/menu';
+import { MatIconModule } from '@angular/material/icon';
 
 describe('OnboardingButtonComponent', () => {
-    beforeEach(waitForAsync(() => {
-        TestBed.configureTestingModule({
+    beforeEach(async () => {
+        await TestBed.configureTestingModule({
             imports: [
                 MatButtonModule,
                 MatBadgeModule,
@@ -24,12 +24,12 @@ describe('OnboardingButtonComponent', () => {
                 OnboardingButtonComponent
             ],
             providers: [
-                {provide: OnboardingService, useClass: OnboardingServiceMock},
+                { provide: OnboardingService, useClass: OnboardingServiceMock },
                 BrowserDOMSelectorService,
-                {provide: TranslatorBaseService, useClass: BuildInTranslatorService}
+                { provide: TranslatorBaseService, useClass: BuildInTranslatorService }
             ]
         }).compileComponents();
-    }));
+    });
 
     let fixture: ComponentFixture<OnboardingButtonComponent>;
     let component: OnboardingButtonComponent;
@@ -44,7 +44,7 @@ describe('OnboardingButtonComponent', () => {
     });
 
     it('showOnboardingItemCount returns true', () => {
-        spyOn((component as any).onboardingService, 'isEnabled').and.returnValue(false);
+        vi.spyOn((component as any).onboardingService, 'isEnabled').mockReturnValue(false);
         (component as any).onboardingService.visibleItems.add([
             new VisibleOnboardingItem()
         ]);
@@ -53,7 +53,7 @@ describe('OnboardingButtonComponent', () => {
     });
 
     it('showOnboardingItemCount returns true', () => {
-        spyOn((component as any).onboardingService, 'isEnabled').and.returnValue(true);
+        vi.spyOn((component as any).onboardingService, 'isEnabled').mockReturnValue(true);
         (component as any).onboardingService.visibleItems.add([
             new VisibleOnboardingItem()
         ]);
@@ -62,7 +62,7 @@ describe('OnboardingButtonComponent', () => {
     });
 
     it('showOnboardingItemCount returns false', () => {
-        spyOn((component as any).onboardingService, 'isEnabled').and.returnValue(false);
+        vi.spyOn((component as any).onboardingService, 'isEnabled').mockReturnValue(false);
 
         expect(component.showOnboardingItemCount).toBeFalsy();
     });
@@ -78,7 +78,7 @@ describe('OnboardingButtonComponent', () => {
     });
 
     it('enableOnboarding expect onboardingService.enable to have been called', () => {
-        const spy = spyOn((component as any).onboardingService, 'enable');
+        const spy = vi.spyOn((component as any).onboardingService, 'enable').mockReturnValue(undefined);
 
         component.enableOnboarding();
 
@@ -86,7 +86,7 @@ describe('OnboardingButtonComponent', () => {
     });
 
     it('disableOnboarding expect onboardingService.disable to have been called', () => {
-        const spy = spyOn((component as any).onboardingService, 'disable');
+        const spy = vi.spyOn((component as any).onboardingService, 'disable').mockReturnValue(undefined);
 
         component.disableOnboarding();
 
@@ -94,7 +94,7 @@ describe('OnboardingButtonComponent', () => {
     });
 
     it('clearOnboarding expect onboardingService.clearSeenSelectors to have been called', () => {
-        const spy = spyOn((component as any).onboardingService, 'clearSeenSelectors');
+        const spy = vi.spyOn((component as any).onboardingService, 'clearSeenSelectors').mockReturnValue(undefined);
 
         component.clearOnboarding();
 
@@ -102,13 +102,13 @@ describe('OnboardingButtonComponent', () => {
     });
 
     it('isOnboardingEnabled expect to be true', () => {
-        spyOn((component as any).onboardingService, 'isEnabled').and.returnValue(true);
+        vi.spyOn((component as any).onboardingService, 'isEnabled').mockReturnValue(true);
 
         expect(component.isOnboardingEnabled()).toBe(true);
     });
 
     it('isOnboardingEnabled expect to be false', () => {
-        spyOn((component as any).onboardingService, 'isEnabled').and.returnValue(false);
+        vi.spyOn((component as any).onboardingService, 'isEnabled').mockReturnValue(false);
 
         expect(component.isOnboardingEnabled()).toBe(false);
     });

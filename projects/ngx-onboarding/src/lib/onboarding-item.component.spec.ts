@@ -1,30 +1,30 @@
-import { ComponentFixture, inject, TestBed, waitForAsync} from '@angular/core/testing';
+import { ComponentFixture, inject, TestBed } from '@angular/core/testing';
 import { OnboardingItemComponent } from './onboarding-item.component';
 import { OnboardingServiceMock } from './services/onboarding.service.mock';
 import { MockLocalStorageSeenSelectorsService } from './services/local-storage-seen-selectors.service.mock';
-import {OnboardingService} from './services/onboarding.service';
-import {SeenSelectorsBaseService} from './services/seen-selectors-base.service';
-import {TranslatorBaseService} from './services/translator-base.service';
-import {BuildInTranslatorService} from './services/build-in-translator.service';
-import {WindowRef} from './services/window-ref.service';
-import {OnboardingHtmlElementHelper} from './models/onboarding-html-element-helper';
-import {VisibleOnboardingItem} from './models/visible-onboarding-item.model';
-import {OnboardingItem} from './models/onboarding-item.model';
+import { OnboardingService } from './services/onboarding.service';
+import { SeenSelectorsBaseService } from './services/seen-selectors-base.service';
+import { TranslatorBaseService } from './services/translator-base.service';
+import { BuildInTranslatorService } from './services/build-in-translator.service';
+import { WindowRef } from './services/window-ref.service';
+import { OnboardingHtmlElementHelper } from './models/onboarding-html-element-helper';
+import { VisibleOnboardingItem } from './models/visible-onboarding-item.model';
+import { OnboardingItem } from './models/onboarding-item.model';
 
 describe('OnboardingItemComponent', () => {
-    beforeEach(waitForAsync(() => {
-        TestBed.configureTestingModule({
+    beforeEach(async () => {
+        await TestBed.configureTestingModule({
             imports: [
                 OnboardingItemComponent
             ],
             providers: [
-                {provide: OnboardingService, useClass: OnboardingServiceMock},
-                {provide: SeenSelectorsBaseService, useClass: MockLocalStorageSeenSelectorsService},
-                {provide: TranslatorBaseService, useClass: BuildInTranslatorService},
-                WindowRef
+                { provide: OnboardingService, useClass: OnboardingServiceMock },
+                { provide: SeenSelectorsBaseService, useClass: MockLocalStorageSeenSelectorsService },
+                { provide: TranslatorBaseService, useClass: BuildInTranslatorService },
+                { provide: WindowRef, useValue: { nativeWindow: { screen: { width: 1024, height: 768 } } } }
             ]
         }).compileComponents();
-    }));
+    });
 
     let fixture: ComponentFixture<OnboardingItemComponent>;
     let component: OnboardingItemComponent;
@@ -39,12 +39,12 @@ describe('OnboardingItemComponent', () => {
     });
 
     it('getStyle with top', () => {
-        spyOn(OnboardingHtmlElementHelper, 'getPosition').and.returnValue({
+        vi.spyOn(OnboardingHtmlElementHelper, 'getPosition').mockReturnValue({
             x: 100,
             y: 200,
             width: 120,
             height: 60
-        });
+        } as any);
         component.item = new VisibleOnboardingItem(new OnboardingItem(), document.createElement('div'));
         component.item.item!.position = 'top';
 
@@ -56,12 +56,12 @@ describe('OnboardingItemComponent', () => {
     });
 
     it('getStyle with right', () => {
-        spyOn(OnboardingHtmlElementHelper, 'getPosition').and.returnValue({
+        vi.spyOn(OnboardingHtmlElementHelper, 'getPosition').mockReturnValue({
             x: 100,
             y: 200,
             width: 120,
             height: 60
-        });
+        } as any);
         component.item = new VisibleOnboardingItem(new OnboardingItem(), document.createElement('div'));
         component.item.item!.position = 'right';
 
@@ -73,12 +73,12 @@ describe('OnboardingItemComponent', () => {
     });
 
     it('getStyle with left', () => {
-        spyOn(OnboardingHtmlElementHelper, 'getPosition').and.returnValue({
+        vi.spyOn(OnboardingHtmlElementHelper, 'getPosition').mockReturnValue({
             x: 100,
             y: 200,
             width: 120,
             height: 60
-        });
+        } as any);
         component.item = new VisibleOnboardingItem(new OnboardingItem(), document.createElement('div'));
         component.item.item!.position = 'left';
 
@@ -90,12 +90,12 @@ describe('OnboardingItemComponent', () => {
     });
 
     it('getStyle with bottom', () => {
-        spyOn(OnboardingHtmlElementHelper, 'getPosition').and.returnValue({
+        vi.spyOn(OnboardingHtmlElementHelper, 'getPosition').mockReturnValue({
             x: 100,
             y: 200,
             width: 120,
             height: 60
-        });
+        } as any);
         component.item = new VisibleOnboardingItem(new OnboardingItem(), document.createElement('div'));
         component.item.item!.position = 'bottom';
 
@@ -106,49 +106,45 @@ describe('OnboardingItemComponent', () => {
         expect(value.transform).toBe('translate(-50%,25%)');
     });
 
-    it('getHeadline with locale a expect return value to be testHeadlineA',
-        inject([TranslatorBaseService], (translatorService: TranslatorBaseService) => {
-            spyOnProperty(translatorService, 'currentLang').and.returnValue('a');
-            component.item = new VisibleOnboardingItem(new OnboardingItem(), undefined);
-            component.item.item!.descriptions = [
-                {
-                    language: 'a',
-                    details: 'testDetailsA',
-                    headline: 'testHeadlineA'
-                },
-                {
-                    language: 'b',
-                    details: 'testDetailsB',
-                    headline: 'testHeadlineB'
-                }
-            ];
-            const headline = component.getHeadline();
+    it('getHeadline with locale a expect return value to be testHeadlineA', inject([TranslatorBaseService], (translatorService: TranslatorBaseService) => {
+        vi.spyOn(translatorService, 'currentLang', 'get').mockReturnValue('a');
+        component.item = new VisibleOnboardingItem(new OnboardingItem(), undefined);
+        component.item.item!.descriptions = [
+            {
+                language: 'a',
+                details: 'testDetailsA',
+                headline: 'testHeadlineA'
+            },
+            {
+                language: 'b',
+                details: 'testDetailsB',
+                headline: 'testHeadlineB'
+            }
+        ];
+        const headline = component.getHeadline();
 
-            expect(headline).toBe('testHeadlineA');
-        })
-    );
+        expect(headline).toBe('testHeadlineA');
+    }));
 
-    it('getDetails with locale b expect return value to be testDetailsB',
-        inject([TranslatorBaseService], (translatorService: TranslatorBaseService) => {
-            spyOnProperty(translatorService, 'currentLang').and.returnValue('b');
-            component.item = new VisibleOnboardingItem(new OnboardingItem(), undefined);
-            component.item.item!.descriptions = [
-                {
-                    language: 'a',
-                    details: 'testDetailsA',
-                    headline: 'testHeadlineA'
-                },
-                {
-                    language: 'b',
-                    details: 'testDetailsB',
-                    headline: 'testHeadlineB'
-                }
-            ];
-            const headline = component.getDetails();
+    it('getDetails with locale b expect return value to be testDetailsB', inject([TranslatorBaseService], (translatorService: TranslatorBaseService) => {
+        vi.spyOn(translatorService, 'currentLang', 'get').mockReturnValue('b');
+        component.item = new VisibleOnboardingItem(new OnboardingItem(), undefined);
+        component.item.item!.descriptions = [
+            {
+                language: 'a',
+                details: 'testDetailsA',
+                headline: 'testHeadlineA'
+            },
+            {
+                language: 'b',
+                details: 'testDetailsB',
+                headline: 'testHeadlineB'
+            }
+        ];
+        const headline = component.getDetails();
 
-            expect(headline).toBe('testDetailsB');
-        })
-    );
+        expect(headline).toBe('testDetailsB');
+    }));
 
     it('getTextAlignClass expect return value to be empty', () => {
         component.item = new VisibleOnboardingItem(new OnboardingItem(), undefined);

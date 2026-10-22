@@ -1,15 +1,15 @@
-import { inject, TestBed, waitForAsync} from '@angular/core/testing';
+import { inject, TestBed } from '@angular/core/testing';
 import { BuildInTranslatorService } from './build-in-translator.service';
 
 
 describe('BuildInTranslatorService', () => {
-    beforeEach(waitForAsync(() => {
+    beforeEach(async () => {
         TestBed.configureTestingModule({
             providers: [
                 BuildInTranslatorService
             ],
         });
-    }));
+    });
 
     it('should be created', inject([BuildInTranslatorService], (service: BuildInTranslatorService) => {
         expect(service).toBeTruthy();

@@ -2,25 +2,21 @@
     "extends": "../../tsconfig.json",
     "compilerOptions": {
         "outDir": "../../out-tsc/spec",
+        "typeRoots": [
+            "../../node_modules/@types",
+            "../../node_modules"
+        ],
         "types": [
-            "jasmine",
+            "vitest/globals",
             "node"
         ]
     },
-    "files": [
-        "src/test.ts"
-    ],
     "include": [
         "**/*.spec.ts",
-        "**/*.d.ts"
+        "**/*.d.ts",
+        "src/test-setup.ts"
     ],
     "angularCompilerOptions": {
-      "extendedDiagnostics": {
-        "checks": {
-          "nullishCoalescingNotNullable": "suppress",
-          "optionalChainNotNullable": "suppress"
-        }
-      },
       "strictTemplates": false
     }
 }
